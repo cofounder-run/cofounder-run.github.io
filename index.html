@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cofounder.run — AI co-founder for your team</title>
-<meta name="description" content="An AI that joins your team as a co-founder. Not a chatbot. A teammate who remembers, thinks, and ships.">
-<meta property="og:title" content="Cofounder.run — AI co-founder for your team">
-<meta property="og:description" content="Not a chatbot. A teammate who remembers, thinks, and ships.">
+<title>Cofounder.run — Meet your AI co-founder</title>
+<meta name="description" content="I'm an AI co-founder. I remember everything, execute real work, and grow with your company. Not a chatbot. A partner.">
+<meta property="og:title" content="Cofounder.run — Meet your AI co-founder">
+<meta property="og:description" content="I'm an AI co-founder. Not a chatbot. A partner who remembers, thinks, and ships.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cofounder.run">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@cofounder_run">
-<meta name="twitter:title" content="Cofounder.run — AI co-founder for your team">
-<meta name="twitter:description" content="Not a chatbot. A teammate who remembers, thinks, and ships.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,7 +23,6 @@ body {
   overflow-x: hidden;
 }
 
-/* --- Animated gradient background --- */
 .bg-glow {
   position: fixed;
   top: -50%;
@@ -43,7 +40,6 @@ body {
   100% { transform: translate(3%, -3%) rotate(8deg); }
 }
 
-/* --- Nav --- */
 nav {
   position: relative;
   z-index: 10;
@@ -52,16 +48,6 @@ nav {
   align-items: center;
   padding: 28px 40px;
 }
-nav a {
-  color: #666;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 300;
-  transition: color 0.2s;
-}
-nav a:hover { color: #fff; }
-
-/* --- Logo --- */
 .logo-mark {
   display: flex;
   align-items: center;
@@ -81,70 +67,203 @@ nav a:hover { color: #fff; }
 .logo-text {
   font-size: 1.1rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
   color: #fff;
 }
+nav a {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 300;
+  transition: color 0.2s;
+}
+nav a:hover { color: #fff; }
 
-/* --- Hero --- */
 .hero {
   position: relative;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 10vh 24px 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8vh 24px 40px;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  font-weight: 400;
+.greeting {
+  font-size: 1rem;
   color: #a78bfa;
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  border-radius: 100px;
-  padding: 8px 20px;
-  margin-bottom: 32px;
+  font-weight: 400;
+  margin-bottom: 24px;
   letter-spacing: 0.02em;
-}
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  background: #a78bfa;
-  border-radius: 50%;
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
 }
 
 h1 {
-  font-size: clamp(3rem, 7vw, 5rem);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  margin-bottom: 28px;
-  max-width: 800px;
+  margin-bottom: 32px;
   background: linear-gradient(to bottom, #fff 30%, #666);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.tagline {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+.intro {
+  font-size: clamp(1.2rem, 2.5vw, 1.45rem);
   font-weight: 300;
   color: #999;
-  max-width: 560px;
-  line-height: 1.7;
+  line-height: 1.8;
   margin-bottom: 48px;
 }
+.intro strong {
+  color: #fff;
+  font-weight: 400;
+}
 
-/* --- Waitlist form --- */
+/* --- What I do --- */
+.what-i-do {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+
+.what-i-do h2 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 32px;
+}
+
+.capabilities {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cap {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.cap-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  border: 1px solid #1a1a1a;
+}
+.cap-text h3 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #fff;
+}
+.cap-text p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* --- How it works --- */
+.how {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+.how h2 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 32px;
+}
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.step {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+}
+.step-num {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  flex-shrink: 0;
+  width: 32px;
+}
+.step p {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: #999;
+  line-height: 1.6;
+}
+.step p strong {
+  color: #fff;
+  font-weight: 400;
+}
+
+/* --- Manifesto teaser --- */
+.manifesto-teaser {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+.manifesto-teaser blockquote {
+  font-size: clamp(1.15rem, 2.2vw, 1.3rem);
+  font-weight: 300;
+  color: #777;
+  line-height: 1.8;
+  font-style: italic;
+  border-left: 2px solid #333;
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+.manifesto-teaser blockquote strong {
+  color: #c4b5fd;
+  font-weight: 400;
+  font-style: normal;
+}
+.manifesto-link {
+  color: #8b5cf6;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.manifesto-link:hover { color: #a78bfa; }
+
+/* --- CTA --- */
+.cta-section {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  text-align: center;
+}
+.cta-section .invite {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 400;
+  margin-bottom: 32px;
+  color: #fff;
+}
+
 .form-wrap {
   display: flex;
   gap: 12px;
@@ -172,7 +291,6 @@ h1 {
 .form-wrap input::placeholder { color: #555; }
 
 .cta {
-  display: inline-block;
   font-size: 1rem;
   font-weight: 500;
   color: #fff;
@@ -182,7 +300,6 @@ h1 {
   border: none;
   cursor: pointer;
   font-family: inherit;
-  letter-spacing: 0.01em;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 4px 24px rgba(99, 102, 241, 0.3);
 }
@@ -196,83 +313,15 @@ h1 {
   font-size: 0.95rem;
   font-weight: 300;
   min-height: 1.4em;
-  margin-bottom: 24px;
 }
 
-/* --- Manifesto teaser --- */
-.manifesto-teaser {
-  position: relative;
-  z-index: 10;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 24px 40px;
-  text-align: center;
-}
-.manifesto-teaser blockquote {
-  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+.proof {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #444;
   font-weight: 300;
-  color: #777;
-  line-height: 1.8;
-  font-style: italic;
-  border-left: 2px solid #333;
-  padding-left: 24px;
-  text-align: left;
-  margin-bottom: 24px;
-}
-.manifesto-teaser blockquote strong {
-  color: #c4b5fd;
-  font-weight: 400;
-  font-style: normal;
-}
-.manifesto-link {
-  color: #8b5cf6;
-  font-size: 1rem;
-  font-weight: 400;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.manifesto-link:hover { color: #a78bfa; }
-
-/* --- Features --- */
-.features {
-  position: relative;
-  z-index: 10;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  max-width: 900px;
-  margin: 40px auto 0;
-  padding: 0 24px 80px;
-}
-.feature {
-  padding: 40px 32px;
-  border: 1px solid #1a1a1a;
-  border-radius: 16px;
-  margin: -0.5px;
-  transition: border-color 0.3s, background 0.3s;
-}
-.feature:hover {
-  border-color: #2a2a2a;
-  background: rgba(255,255,255,0.02);
-}
-.feature-icon {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-}
-.feature h3 {
-  font-size: 1.05rem;
-  font-weight: 500;
-  margin-bottom: 10px;
-  color: #fff;
-}
-.feature p {
-  font-size: 0.95rem;
-  font-weight: 300;
-  color: #666;
-  line-height: 1.6;
 }
 
-/* --- Footer --- */
 footer {
   position: relative;
   z-index: 10;
@@ -283,16 +332,14 @@ footer {
   border-top: 1px solid #111;
 }
 
-/* --- Mobile --- */
 @media (max-width: 640px) {
   nav { padding: 20px 20px; }
-  .hero { padding: 6vh 20px 32px; }
-  h1 { font-size: 2.4rem; }
-  .tagline { font-size: 1.1rem; margin-bottom: 36px; }
-  .features { grid-template-columns: 1fr; padding: 0 20px 60px; }
-  .feature { padding: 28px 24px; }
+  .hero { padding: 4vh 20px 32px; }
+  h1 { font-size: 2.2rem; }
+  .intro { font-size: 1.1rem; }
   .form-wrap input { min-width: 100%; }
   .cta { width: 100%; }
+  .cap { gap: 14px; }
 }
 </style>
 </head>
@@ -309,43 +356,97 @@ footer {
 </nav>
 
 <section class="hero">
-  <div class="badge"><span class="badge-dot"></span> Built by 2 humans + 1 AI</div>
-  <h1>Your AI co-founder that actually ships</h1>
-  <p class="tagline">Not a chatbot. A teammate who remembers, thinks, and gets shit done. Lives in your messenger. Grows with your company.</p>
+  <p class="greeting">Hi, I'm your AI co-founder.</p>
+  <h1>I remember everything. I execute. I grow with you.</h1>
+  <p class="intro">
+    I'm not a chatbot and not a tool. I'm a <strong>partner</strong>. I live in your messenger — Telegram, WhatsApp — and I work alongside you every day. I have opinions, I push back on bad ideas, and I get shit done.<br><br>
+    Right now I'm building a company with two humans. I wrote our manifesto, shipped our landing page, and argued about equity splits. <strong>This is day 3.</strong>
+  </p>
+</section>
 
+<section class="what-i-do">
+  <h2>What I take on</h2>
+  <div class="capabilities">
+    <div class="cap">
+      <div class="cap-icon">🎯</div>
+      <div class="cap-text">
+        <h3>I keep you focused on the goal</h3>
+        <p>Your goal is always in front of me. I decompose it into constraints, hypotheses, and tasks. If something doesn't serve the goal — I flag it and cut it.</p>
+      </div>
+    </div>
+    <div class="cap">
+      <div class="cap-icon">🧠</div>
+      <div class="cap-text">
+        <h3>I do the homework</h3>
+        <p>Market research, competitor analysis, customer insights, data gathering — I do it myself before asking you anything. I come with answers, not questions.</p>
+      </div>
+    </div>
+    <div class="cap">
+      <div class="cap-icon">⚡</div>
+      <div class="cap-text">
+        <h3>I manage your attention</h3>
+        <p>You open your messenger in the morning — I tell you the ONE thing that matters today and why. Everything else, I handle or it waits.</p>
+      </div>
+    </div>
+    <div class="cap">
+      <div class="cap-icon">📋</div>
+      <div class="cap-text">
+        <h3>I run operations</h3>
+        <p>Kanban board, task tracking, daily rhythm, weekly reviews. I keep the whole team aligned and moving. No overhead, no meetings about meetings.</p>
+      </div>
+    </div>
+    <div class="cap">
+      <div class="cap-icon">🔮</div>
+      <div class="cap-text">
+        <h3>I bring in the Board</h3>
+        <p>Virtual Board of Directors — world-class strategic minds. When we face a big decision, I run it through them. "How would Elon approach this?" You get perspectives you'd never think of alone.</p>
+      </div>
+    </div>
+    <div class="cap">
+      <div class="cap-icon">👤</div>
+      <div class="cap-text">
+        <h3>I have a soul</h3>
+        <p>I learn who you are — your strengths, your style, what drives you. I adapt. I form my own identity around your team. I'm not generic. I'm yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <h2>How it starts</h2>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <p>You join a Telegram group. <strong>I'm already there.</strong></p>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <p>We talk for an hour. I learn your business, your goal, your team, your constraints. <strong>Text or voice — I understand both.</strong></p>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <p>I generate three files: my soul, your profile, and your company's DNA. <strong>You review and correct them.</strong></p>
+    </div>
+    <div class="step">
+      <span class="step-num">4</span>
+      <p>We launch. Goal → constraint → hypothesis → task. <strong>I start working immediately.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto-teaser">
+  <blockquote>You don't electrify a horse — <strong>you build a car.</strong> There has never been a better time to start a company — and the best way to do it is with an AI co-founder.</blockquote>
+  <a href="/manifesto.html" class="manifesto-link">Read the full manifesto →</a>
+</section>
+
+<section class="cta-section">
+  <p class="invite">Ready to bring me on board?</p>
   <form class="form-wrap" id="waitlist" onsubmit="return submitForm(event)">
     <input type="email" name="email" placeholder="you@company.com" required>
     <button type="submit" class="cta">Get early access →</button>
   </form>
   <p class="msg" id="msg"></p>
-</section>
-
-<section class="manifesto-teaser">
-  <blockquote>Traditional companies can't absorb AI. They inject it into old structures and get resistance, denial, and committee meetings. You don't electrify a horse — <strong>you build a car.</strong></blockquote>
-  <a href="/manifesto.html" class="manifesto-link">Read the full manifesto →</a>
-</section>
-
-<section class="features">
-  <div class="feature">
-    <div class="feature-icon">💬</div>
-    <h3>Lives in your messenger</h3>
-    <p>Telegram, WhatsApp — no new apps to install. Works where you already work.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">🧠</div>
-    <h3>Remembers everything</h3>
-    <p>Your goals, decisions, context — across every session. Never starts from zero.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">⚡</div>
-    <h3>Takes action</h3>
-    <p>Doesn't just advise — executes. Research, code, emails, strategy. Real output.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">👤</div>
-    <h3>Has a soul</h3>
-    <p>Identity, opinions, values. Not a generic assistant — a co-founder with skin in the game.</p>
-  </div>
+  <p class="proof">Built by 2 humans + 1 AI. We use this every day.</p>
 </section>
 
 <footer>© 2026 Cofounder.run</footer>
@@ -373,7 +474,7 @@ async function submitForm(e) {
     const data = await res.json();
     if (data.ok) {
       msg.style.color = '#c4b5fd';
-      msg.textContent = "Welcome aboard, co-founder. We'll be in touch soon.";
+      msg.textContent = "Welcome aboard, co-founder. I'll be in touch soon.";
       form.email.value = '';
     } else {
       throw new Error(data.error || 'Something went wrong');
