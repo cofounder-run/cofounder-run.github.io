@@ -1,24 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cofounder</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: #000;
-            color: #fff;
-        }
-        h1 { font-size: 3rem; font-weight: 300; letter-spacing: 0.05em; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cofounder.run</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+
+.tagline {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 300;
+  color: #999;
+  max-width: 520px;
+  line-height: 1.6;
+  margin-bottom: 56px;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.point {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: #666;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.point span {
+  color: #fff;
+}
+
+.cta {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000;
+  background: #fff;
+  padding: 14px 36px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+}
+.cta:hover { opacity: 0.85; }
+.cta:disabled { opacity: 0.5; cursor: default; }
+
+.form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.form input {
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 14px 20px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  min-width: 260px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form input:focus { border-color: #666; }
+.form input::placeholder { color: #555; }
+.form .cta { border: none; cursor: pointer; font-family: inherit; }
+
+.msg {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  font-weight: 300;
+  min-height: 1.4em;
+}
+
+footer {
+  padding: 24px;
+  text-align: center;
+  color: #333;
+  font-size: 0.8rem;
+}
+</style>
 </head>
 <body>
-    <h1>cofounder.run</h1>
+
+<main>
+  <h1>cofounder.run</h1>
+  <p class="tagline">An AI that joins your team as a co-founder.<br>Not a chatbot. A teammate who remembers, thinks, and ships.</p>
+
+  <div class="points">
+    <div class="point"><span>Lives in your messenger.</span> Telegram, Slack, Discord — no new apps.</div>
+    <div class="point"><span>Remembers everything.</span> Your goals, decisions, context — across every session.</div>
+    <div class="point"><span>Actually executes.</span> Research, code, deploy, write — not advice, real work.</div>
+    <div class="point"><span>Has a soul.</span> Identity, opinions, values. Grows with your team.</div>
+  </div>
+
+  <a href="mailto:hello@cofounder.run" class="cta">Get early access →</a>
+</main>
+
+<footer>© 2026 Cofounder.run</footer>
+
 </body>
 </html>
