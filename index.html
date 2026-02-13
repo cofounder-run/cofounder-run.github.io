@@ -4,279 +4,291 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cofounder.run — Your AI co-founder</title>
-<meta name="description" content="I'm an AI co-founder. I remember everything, execute real work, and grow with your company. Not a chatbot. A partner.">
-<meta property="og:title" content="Cofounder.run — Your AI co-founder">
-<meta property="og:description" content="I'm an AI co-founder. Not a chatbot. A partner who remembers, thinks, and ships.">
+<meta name="description" content="Your AI co-founder lives in your Telegram. Drives your company to the goal, does the research, cuts distractions.">
+<meta property="og:title" content="Cofounder.run — Your AI co-founder is in your Telegram">
+<meta property="og:description" content="Not a chatbot. A partner who remembers, thinks, and ships.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cofounder.run">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@cofounder_run">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+:root {
+  --purple: #7c3aed;
+  --purple-light: #a78bfa;
+  --teal: #14b8a6;
+  --teal-light: #5eead4;
+  --purple-bg: #f5f3ff;
+  --teal-bg: #f0fdfa;
+  --gray-900: #111827;
+  --gray-700: #374151;
+  --gray-500: #6b7280;
+  --gray-300: #d1d5db;
+  --gray-100: #f3f4f6;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #000;
-  color: #fff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: var(--gray-900);
   min-height: 100vh;
-  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-.bg-glow {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(ellipse at 30% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
-              radial-gradient(ellipse at 70% 50%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
-  animation: glow-drift 20s ease-in-out infinite alternate;
-  pointer-events: none;
-  z-index: 0;
-}
-@keyframes glow-drift {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(3%, -3%) rotate(8deg); }
-}
-
+/* --- Nav --- */
 nav {
-  position: relative;
-  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 28px 40px;
+  padding: 24px 32px;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 .logo-mark {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 .logo-icon {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: linear-gradient(135deg, var(--purple), var(--teal));
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  box-shadow: 0 0 24px rgba(99, 102, 241, 0.3);
 }
 .logo-text {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gray-900);
 }
 nav a {
-  color: #666;
+  color: var(--gray-500);
   text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 300;
+  font-weight: 500;
   transition: color 0.2s;
 }
-nav a:hover { color: #fff; }
+nav a:hover { color: var(--purple); }
 
+/* --- Hero --- */
 .hero {
-  position: relative;
-  z-index: 10;
-  max-width: 760px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 10vh 24px 48px;
+  padding: 80px 24px 64px;
   text-align: center;
 }
 
-h1 {
-  font-size: clamp(2.8rem, 6vw, 4.2rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--purple);
+  background: var(--purple-bg);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  border-radius: 100px;
+  padding: 8px 20px;
   margin-bottom: 28px;
-  background: linear-gradient(to bottom, #fff 30%, #666);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  color: var(--gray-900);
+}
+h1 span {
+  background: linear-gradient(135deg, var(--purple), var(--teal));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.intro {
-  font-size: clamp(1.15rem, 2.3vw, 1.35rem);
-  font-weight: 300;
-  color: #999;
-  line-height: 1.8;
-  margin-bottom: 48px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.intro strong {
-  color: #fff;
+.subtitle {
+  font-size: clamp(1.1rem, 2.2vw, 1.25rem);
   font-weight: 400;
+  color: var(--gray-500);
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto 40px;
+}
+.subtitle strong {
+  color: var(--gray-900);
+  font-weight: 600;
 }
 
-/* --- Compact features --- */
-.features {
-  position: relative;
-  z-index: 10;
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 24px 56px;
+/* --- CTA form --- */
+.hero-form {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
-.feat {
-  font-size: 1.05rem;
-  font-weight: 300;
-  color: #666;
-  line-height: 1.6;
-  padding-left: 32px;
-  position: relative;
+.hero-form input {
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1.5px solid var(--gray-300);
+  background: #fff;
+  color: var(--gray-900);
+  min-width: 260px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.feat::before {
-  content: attr(data-icon);
-  position: absolute;
-  left: 0;
-  top: 0;
+.hero-form input:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
 }
-.feat strong {
+.hero-form input::placeholder { color: var(--gray-300); }
+
+.btn-primary {
+  font-size: 1rem;
+  font-weight: 600;
   color: #fff;
+  background: linear-gradient(135deg, var(--purple), #6d28d9);
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.35);
+}
+.btn-primary:disabled { opacity: 0.5; cursor: default; transform: none; }
+
+.msg {
+  font-size: 0.9rem;
   font-weight: 400;
+  min-height: 1.4em;
+  color: var(--gray-500);
+}
+
+/* --- Features --- */
+.features {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  padding: 32px 28px;
+  border-radius: 16px;
+  border: 1px solid var(--gray-100);
+  background: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover {
+  border-color: var(--gray-300);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+.fi-purple { background: var(--purple-bg); }
+.fi-teal { background: var(--teal-bg); }
+.feature-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gray-900);
+}
+.feature-card p {
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--gray-500);
+  line-height: 1.6;
 }
 
 /* --- Manifesto teaser --- */
-.manifesto-teaser {
-  position: relative;
-  z-index: 10;
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 24px 56px;
-  text-align: center;
-}
-.manifesto-teaser blockquote {
-  font-size: 1.15rem;
-  font-weight: 300;
-  color: #777;
-  line-height: 1.8;
-  font-style: italic;
-  border-left: 2px solid #333;
-  padding-left: 24px;
-  text-align: left;
-  margin-bottom: 20px;
-}
-.manifesto-teaser blockquote strong {
-  color: #c4b5fd;
-  font-weight: 400;
-  font-style: normal;
-}
-.manifesto-link {
-  color: #8b5cf6;
-  font-size: 1rem;
-  font-weight: 400;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.manifesto-link:hover { color: #a78bfa; }
-
-/* --- CTA --- */
-.cta-section {
-  position: relative;
-  z-index: 10;
+.manifesto-section {
   max-width: 640px;
   margin: 0 auto;
   padding: 0 24px 80px;
   text-align: center;
 }
-.invite {
-  font-size: clamp(1.3rem, 3vw, 1.6rem);
+.manifesto-section blockquote {
+  font-size: 1.2rem;
   font-weight: 400;
-  margin-bottom: 32px;
-  color: #fff;
-}
-
-.form-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 16px;
-}
-.form-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-}
-.form-wrap input {
-  font-size: 1rem;
-  font-family: inherit;
-  padding: 16px 22px;
-  border-radius: 12px;
-  border: 1px solid #2a2a2a;
-  background: rgba(255,255,255,0.04);
-  color: #fff;
-  outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  backdrop-filter: blur(8px);
-  flex: 1;
-  min-width: 200px;
-}
-.form-wrap input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-}
-.form-wrap input::placeholder { color: #555; }
-
-.cta {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #fff;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  padding: 16px 36px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 24px rgba(99, 102, 241, 0.3);
-  white-space: nowrap;
-}
-.cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
-}
-.cta:disabled { opacity: 0.5; cursor: default; transform: none; }
-
-.msg {
-  font-size: 0.95rem;
-  font-weight: 300;
-  min-height: 1.4em;
-}
-
-footer {
+  color: var(--gray-700);
+  line-height: 1.8;
+  font-style: italic;
   position: relative;
-  z-index: 10;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+.manifesto-section blockquote::before {
+  content: '"';
+  font-size: 4rem;
+  color: var(--purple-light);
+  position: absolute;
+  top: -20px;
+  left: -8px;
+  font-style: normal;
+  line-height: 1;
+}
+.manifesto-section blockquote strong {
+  color: var(--purple);
+  font-weight: 600;
+  font-style: normal;
+}
+.manifesto-link {
+  color: var(--purple);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.manifesto-link:hover { color: var(--teal); }
+
+/* --- Footer --- */
+footer {
   padding: 32px 24px;
   text-align: center;
-  color: #333;
+  color: var(--gray-300);
   font-size: 0.85rem;
-  border-top: 1px solid #111;
+  border-top: 1px solid var(--gray-100);
 }
 
+/* --- Mobile --- */
 @media (max-width: 640px) {
   nav { padding: 20px 20px; }
-  .hero { padding: 6vh 20px 36px; }
+  .hero { padding: 48px 20px 48px; }
   h1 { font-size: 2.2rem; }
-  .features { padding: 0 20px 48px; }
-  .form-wrap input { min-width: 100%; }
-  .cta { width: 100%; }
+  .subtitle { font-size: 1.05rem; }
+  .features { grid-template-columns: 1fr; padding: 0 20px 60px; }
+  .feature-card { padding: 24px 20px; }
+  .hero-form input { min-width: 100%; }
+  .btn-primary { width: 100%; }
 }
 </style>
 </head>
 <body>
-
-<div class="bg-glow"></div>
 
 <nav>
   <div class="logo-mark">
@@ -287,31 +299,43 @@ footer {
 </nav>
 
 <section class="hero">
-  <h1>Your AI co-founder is in your Telegram.</h1>
-  <p class="intro">I live in your Telegram, drive your company to the goal, do the research, cut distractions, and <strong>tell you the one thing that matters today.</strong></p>
+  <div class="hero-badge">✨ AI-native company OS</div>
+  <h1>Your AI co-founder is in <span>your Telegram.</span></h1>
+  <p class="subtitle">I drive your company to the goal, do the research, cut distractions, and <strong>tell you the one thing that matters today.</strong></p>
+
+  <form class="hero-form" id="waitlist" onsubmit="return submitForm(event)">
+    <input type="text" name="telegram" placeholder="Your Telegram @username" required>
+    <button type="submit" class="btn-primary">Get early access →</button>
+  </form>
+  <p class="msg" id="msg"></p>
 </section>
 
 <section class="features">
-  <div class="feat" data-icon="🎯"><strong>I keep you focused on the goal.</strong> Your target is always in front of me. If a task doesn't serve it — I cut it.</div>
-  <div class="feat" data-icon="🧠"><strong>I do the homework.</strong> Market, competitors, customers — I research before I ask you anything.</div>
-  <div class="feat" data-icon="⚡"><strong>I manage your attention.</strong> Morning message: here's the ONE thing that matters today. The rest — I handle.</div>
-  <div class="feat" data-icon="👤"><strong>I have a soul.</strong> I learn who you are, adapt to your style, and form my own identity around your team.</div>
+  <div class="feature-card">
+    <div class="feature-icon fi-purple">🎯</div>
+    <h3>I keep you focused on the goal</h3>
+    <p>Your target is always in front of me. I decompose it into constraints, hypotheses, and tasks. If something doesn't serve the goal — I cut it.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon fi-teal">🧠</div>
+    <h3>I do the homework</h3>
+    <p>Market, competitors, customers — I research it myself before I ask you anything. I come with answers, not questions.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon fi-purple">⚡</div>
+    <h3>I manage your attention</h3>
+    <p>Every morning you get the ONE thing that matters today and why. Everything else — I handle or it waits.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon fi-teal">👤</div>
+    <h3>I have a soul</h3>
+    <p>I learn who you are — your strengths, your style, what drives you. I adapt and form my own identity around your team.</p>
+  </div>
 </section>
 
-<section class="manifesto-teaser">
+<section class="manifesto-section">
   <blockquote>You don't electrify a horse — <strong>you build a car.</strong></blockquote>
   <a href="/manifesto.html" class="manifesto-link">Read the manifesto →</a>
-</section>
-
-<section class="cta-section">
-  <p class="invite">Ready to bring me on board?</p>
-  <form class="form-wrap" id="waitlist" onsubmit="return submitForm(event)">
-    <div class="form-row">
-      <input type="text" name="telegram" placeholder="Your Telegram @username" required>
-    </div>
-    <button type="submit" class="cta">Let's go →</button>
-  </form>
-  <p class="msg" id="msg"></p>
 </section>
 
 <footer>© 2026 Cofounder.run</footer>
@@ -327,7 +351,7 @@ async function submitForm(e) {
   const telegram = form.telegram.value.trim();
 
   btn.disabled = true;
-  msg.style.color = '#999';
+  msg.style.color = '#6b7280';
   msg.textContent = 'Sending...';
 
   try {
@@ -338,14 +362,14 @@ async function submitForm(e) {
     });
     const data = await res.json();
     if (data.ok) {
-      msg.style.color = '#c4b5fd';
+      msg.style.color = '#7c3aed';
       msg.textContent = "Got it. I'll reach out on Telegram soon.";
       form.telegram.value = '';
     } else {
       throw new Error(data.error || 'Something went wrong');
     }
   } catch (err) {
-    msg.style.color = '#f44';
+    msg.style.color = '#ef4444';
     msg.textContent = err.message || 'Something went wrong. Try again.';
     btn.disabled = false;
   }
