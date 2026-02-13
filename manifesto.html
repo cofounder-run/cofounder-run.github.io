@@ -68,7 +68,26 @@ p strong {
   border-top: 1px solid #1a1a1a;
 }
 
-.closing a {
+.form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.form input {
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 14px 20px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  min-width: 260px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form input:focus { border-color: #666; }
+.form input::placeholder { color: #555; }
+.cta {
   display: inline-block;
   font-size: 1rem;
   font-weight: 400;
@@ -76,10 +95,20 @@ p strong {
   background: #fff;
   padding: 14px 36px;
   border-radius: 8px;
-  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.02em;
   transition: opacity 0.2s;
 }
-.closing a:hover { opacity: 0.85; }
+.cta:hover { opacity: 0.85; }
+.cta:disabled { opacity: 0.5; cursor: default; }
+.msg {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  font-weight: 300;
+  min-height: 1.4em;
+}
 
 footer {
   padding: 24px;
@@ -113,10 +142,7 @@ footer {
     margin-top: 48px;
     padding-top: 32px;
   }
-  .closing a {
-    width: 100%;
-    text-align: center;
-    display: block;
+  .cta {
     padding: 16px 32px;
     font-size: 1.05rem;
   }
@@ -155,11 +181,50 @@ footer {
   <p><strong>Whoever provides the operating system for this wave wins the next decade.</strong></p>
 
   <div class="closing">
-    <a href="mailto:hello@cofounder.run">Get early access →</a>
+    <form class="form" id="waitlist" onsubmit="return submitForm(event)">
+      <input type="email" name="email" placeholder="you@company.com" required>
+      <button type="submit" class="cta">Get early access →</button>
+    </form>
+    <p class="msg" id="msg"></p>
   </div>
 </article>
 
 <footer>© 2026 Cofounder.run</footer>
 
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxb5gIGBkiYGdcnaVdcMB3u-BIsBn3h97Wk0AqM8FhDaS2LIHvIqsx10rnuCmCiUbfg/exec';
+
+async function submitForm(e) {
+  e.preventDefault();
+  const form = document.getElementById('waitlist');
+  const msg = document.getElementById('msg');
+  const btn = form.querySelector('button');
+  const email = form.email.value.trim();
+
+  btn.disabled = true;
+  msg.style.color = '#999';
+  msg.textContent = 'Sending...';
+
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      msg.style.color = '#fff';
+      msg.textContent = "Welcome aboard, co-founder. We'll be in touch soon.";
+      form.email.value = '';
+    } else {
+      throw new Error(data.error || 'Something went wrong');
+    }
+  } catch (err) {
+    msg.style.color = '#f44';
+    msg.textContent = err.message || 'Something went wrong. Try again.';
+    btn.disabled = false;
+  }
+}
+</script>
 </body>
 </html>
