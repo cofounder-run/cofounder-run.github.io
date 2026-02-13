@@ -308,7 +308,6 @@ footer {
   <form class="form-wrap" id="waitlist" onsubmit="return submitForm(event)">
     <div class="form-row">
       <input type="text" name="telegram" placeholder="Your Telegram @username" required>
-      <input type="email" name="email" placeholder="Email (optional)">
     </div>
     <button type="submit" class="cta">Let's go →</button>
   </form>
@@ -326,7 +325,6 @@ async function submitForm(e) {
   const msg = document.getElementById('msg');
   const btn = form.querySelector('button');
   const telegram = form.telegram.value.trim();
-  const email = form.email.value.trim();
 
   btn.disabled = true;
   msg.style.color = '#999';
@@ -336,14 +334,13 @@ async function submitForm(e) {
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ email: email || telegram, telegram })
+      body: JSON.stringify({ telegram })
     });
     const data = await res.json();
     if (data.ok) {
       msg.style.color = '#c4b5fd';
-      msg.textContent = "Got it. I'll reach out soon.";
+      msg.textContent = "Got it. I'll reach out on Telegram soon.";
       form.telegram.value = '';
-      form.email.value = '';
     } else {
       throw new Error(data.error || 'Something went wrong');
     }
