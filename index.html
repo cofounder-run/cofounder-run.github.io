@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cofounder.run</title>
+<title>Cofounder.run — AI co-founder for your team</title>
+<meta name="description" content="An AI that joins your team as a co-founder. Not a chatbot. A teammate who remembers, thinks, and ships.">
+<meta property="og:title" content="Cofounder.run — AI co-founder for your team">
+<meta property="og:description" content="Not a chatbot. A teammate who remembers, thinks, and ships.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cofounder.run">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cofounder.run — AI co-founder for your team">
+<meta name="twitter:description" content="Not a chatbot. A teammate who remembers, thinks, and ships.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,11 +34,22 @@ main {
   text-align: center;
 }
 
+.logo {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #555;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  margin-bottom: 24px;
+}
+
 h1 {
-  font-size: clamp(3rem, 7vw, 4.5rem);
+  font-size: clamp(2.6rem, 6vw, 4rem);
   font-weight: 300;
   letter-spacing: 0.02em;
   margin-bottom: 24px;
+  max-width: 600px;
+  line-height: 1.2;
 }
 
 .tagline {
@@ -104,6 +123,13 @@ h1 {
   min-height: 1.4em;
 }
 
+.social-proof {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #444;
+  font-weight: 300;
+}
+
 footer {
   padding: 24px;
   text-align: center;
@@ -117,8 +143,11 @@ footer {
     justify-content: flex-start;
     padding-top: 15vh;
   }
+  .logo {
+    margin-bottom: 16px;
+  }
   h1 {
-    font-size: 2.4rem;
+    font-size: 2rem;
     margin-bottom: 20px;
   }
   .tagline {
@@ -138,8 +167,6 @@ footer {
     line-height: 1.6;
   }
   .cta {
-    width: 100%;
-    text-align: center;
     padding: 16px 32px;
     font-size: 1.05rem;
   }
@@ -149,13 +176,13 @@ footer {
 <body>
 
 <main>
-  <h1>cofounder.run</h1>
-  <p class="tagline">An AI that joins your team as a co-founder. <br>Not a chatbot. A teammate who remembers, thinks, and ships.</p>
+  <h1>An AI co-founder that actually ships</h1>
+  <p class="tagline">Not a chatbot. A teammate who remembers, thinks, and gets shit done.</p>
 
   <div class="points">
     <div class="point"><span>Lives in your messenger.</span> Telegram, WhatsApp — no new apps.</div>
     <div class="point"><span>Remembers everything.</span> Your goals, decisions, context — across every session.</div>
-    <div class="point"><span>Gets things done.</span> Ask "why did sales drop?" — get answers and action.</div>
+    <div class="point"><span>Takes action.</span> Spots a sales drop — finds out why and gets it fixed.</div>
     <div class="point"><span>Has a soul.</span> Identity, opinions, values. Grows with your team.</div>
   </div>
 
@@ -170,7 +197,7 @@ footer {
 <footer>© 2026 Cofounder.run</footer>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHfJVrzZR5wFhnG4XWSUimLYM30KZgF8JeyHsge2FGokm4wRxz0WKy5JYQAS8PXNIk/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxb5gIGBkiYGdcnaVdcMB3u-BIsBn3h97Wk0AqM8FhDaS2LIHvIqsx10rnuCmCiUbfg/exec';
 
 async function submitForm(e) {
   e.preventDefault();
@@ -191,8 +218,8 @@ async function submitForm(e) {
     });
     const data = await res.json();
     if (data.ok) {
-      msg.style.color = '#4f4';
-      msg.textContent = "You're on the list! We'll be in touch.";
+      msg.style.color = '#fff';
+      msg.textContent = "Welcome aboard, co-founder. We'll be in touch soon.";
       form.email.value = '';
     } else {
       throw new Error(data.error || 'Something went wrong');
