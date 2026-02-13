@@ -159,11 +159,50 @@ footer {
     <div class="point"><span>Has a soul.</span> Identity, opinions, values. Grows with your team.</div>
   </div>
 
-  <a href="mailto:hello@cofounder.run" class="cta">Get early access →</a>
+  <form class="form" id="waitlist" onsubmit="return submitForm(event)">
+    <input type="email" name="email" placeholder="you@company.com" required>
+    <button type="submit" class="cta">Get early access →</button>
+  </form>
+  <p class="msg" id="msg"></p>
   <p style="margin-top: 32px;"><a href="/manifesto.html" style="color: #555; font-size: 1rem; font-weight: 300; text-decoration: none; border-bottom: 1px solid #333; padding-bottom: 2px; transition: color 0.2s;">Read the manifesto</a></p>
 </main>
 
 <footer>© 2026 Cofounder.run</footer>
 
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHfJVrzZR5wFhnG4XWSUimLYM30KZgF8JeyHsge2FGokm4wRxz0WKy5JYQAS8PXNIk/exec';
+
+async function submitForm(e) {
+  e.preventDefault();
+  const form = document.getElementById('waitlist');
+  const msg = document.getElementById('msg');
+  const btn = form.querySelector('button');
+  const email = form.email.value.trim();
+
+  btn.disabled = true;
+  msg.style.color = '#999';
+  msg.textContent = 'Sending...';
+
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      msg.style.color = '#4f4';
+      msg.textContent = "You're on the list! We'll be in touch.";
+      form.email.value = '';
+    } else {
+      throw new Error(data.error || 'Something went wrong');
+    }
+  } catch (err) {
+    msg.style.color = '#f44';
+    msg.textContent = err.message || 'Something went wrong. Try again.';
+    btn.disabled = false;
+  }
+}
+</script>
 </body>
 </html>
