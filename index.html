@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cofounder.run — Meet your AI co-founder</title>
+<title>Cofounder.run — Your AI co-founder</title>
 <meta name="description" content="I'm an AI co-founder. I remember everything, execute real work, and grow with your company. Not a chatbot. A partner.">
-<meta property="og:title" content="Cofounder.run — Meet your AI co-founder">
+<meta property="og:title" content="Cofounder.run — Your AI co-founder">
 <meta property="og:description" content="I'm an AI co-founder. Not a chatbot. A partner who remembers, thinks, and ships.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cofounder.run">
@@ -81,25 +81,18 @@ nav a:hover { color: #fff; }
 .hero {
   position: relative;
   z-index: 10;
-  max-width: 800px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 8vh 24px 40px;
-}
-
-.greeting {
-  font-size: 1rem;
-  color: #a78bfa;
-  font-weight: 400;
-  margin-bottom: 24px;
-  letter-spacing: 0.02em;
+  padding: 10vh 24px 48px;
+  text-align: center;
 }
 
 h1 {
-  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   background: linear-gradient(to bottom, #fff 30%, #666);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -107,111 +100,46 @@ h1 {
 }
 
 .intro {
-  font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+  font-size: clamp(1.15rem, 2.3vw, 1.35rem);
   font-weight: 300;
   color: #999;
   line-height: 1.8;
   margin-bottom: 48px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .intro strong {
   color: #fff;
   font-weight: 400;
 }
 
-/* --- What I do --- */
-.what-i-do {
+/* --- Compact features --- */
+.features {
   position: relative;
   z-index: 10;
-  max-width: 800px;
+  max-width: 640px;
   margin: 0 auto;
-  padding: 0 24px 64px;
-}
-
-.what-i-do h2 {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #555;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 32px;
-}
-
-.capabilities {
+  padding: 0 24px 56px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
-
-.cap {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-.cap-icon {
-  font-size: 1.4rem;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.04);
-  border-radius: 10px;
-  border: 1px solid #1a1a1a;
-}
-.cap-text h3 {
+.feat {
   font-size: 1.05rem;
-  font-weight: 500;
-  margin-bottom: 6px;
-  color: #fff;
-}
-.cap-text p {
-  font-size: 0.95rem;
   font-weight: 300;
   color: #666;
   line-height: 1.6;
-}
-
-/* --- How it works --- */
-.how {
+  padding-left: 32px;
   position: relative;
-  z-index: 10;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 24px 64px;
 }
-.how h2 {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #555;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 32px;
+.feat::before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 0;
+  top: 0;
 }
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.step {
-  display: flex;
-  gap: 16px;
-  align-items: baseline;
-}
-.step-num {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  flex-shrink: 0;
-  width: 32px;
-}
-.step p {
-  font-size: 1.05rem;
-  font-weight: 300;
-  color: #999;
-  line-height: 1.6;
-}
-.step p strong {
+.feat strong {
   color: #fff;
   font-weight: 400;
 }
@@ -220,18 +148,20 @@ h1 {
 .manifesto-teaser {
   position: relative;
   z-index: 10;
-  max-width: 800px;
+  max-width: 640px;
   margin: 0 auto;
-  padding: 0 24px 64px;
+  padding: 0 24px 56px;
+  text-align: center;
 }
 .manifesto-teaser blockquote {
-  font-size: clamp(1.15rem, 2.2vw, 1.3rem);
+  font-size: 1.15rem;
   font-weight: 300;
   color: #777;
   line-height: 1.8;
   font-style: italic;
   border-left: 2px solid #333;
   padding-left: 24px;
+  text-align: left;
   margin-bottom: 20px;
 }
 .manifesto-teaser blockquote strong {
@@ -252,13 +182,13 @@ h1 {
 .cta-section {
   position: relative;
   z-index: 10;
-  max-width: 800px;
+  max-width: 640px;
   margin: 0 auto;
   padding: 0 24px 80px;
   text-align: center;
 }
-.cta-section .invite {
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
+.invite {
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
   font-weight: 400;
   margin-bottom: 32px;
   color: #fff;
@@ -266,10 +196,17 @@ h1 {
 
 .form-wrap {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.form-row {
+  display: flex;
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 16px;
+  width: 100%;
 }
 .form-wrap input {
   font-size: 1rem;
@@ -279,10 +216,11 @@ h1 {
   border: 1px solid #2a2a2a;
   background: rgba(255,255,255,0.04);
   color: #fff;
-  min-width: 280px;
   outline: none;
   transition: border-color 0.3s, box-shadow 0.3s;
   backdrop-filter: blur(8px);
+  flex: 1;
+  min-width: 200px;
 }
 .form-wrap input:focus {
   border-color: #6366f1;
@@ -302,6 +240,7 @@ h1 {
   font-family: inherit;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 4px 24px rgba(99, 102, 241, 0.3);
+  white-space: nowrap;
 }
 .cta:hover {
   transform: translateY(-1px);
@@ -313,13 +252,6 @@ h1 {
   font-size: 0.95rem;
   font-weight: 300;
   min-height: 1.4em;
-}
-
-.proof {
-  margin-top: 24px;
-  font-size: 0.9rem;
-  color: #444;
-  font-weight: 300;
 }
 
 footer {
@@ -334,12 +266,11 @@ footer {
 
 @media (max-width: 640px) {
   nav { padding: 20px 20px; }
-  .hero { padding: 4vh 20px 32px; }
+  .hero { padding: 6vh 20px 36px; }
   h1 { font-size: 2.2rem; }
-  .intro { font-size: 1.1rem; }
+  .features { padding: 0 20px 48px; }
   .form-wrap input { min-width: 100%; }
   .cta { width: 100%; }
-  .cap { gap: 14px; }
 }
 </style>
 </head>
@@ -356,97 +287,32 @@ footer {
 </nav>
 
 <section class="hero">
-  <p class="greeting">Hi, I'm your AI co-founder.</p>
-  <h1>I remember everything. I execute. I grow with you.</h1>
-  <p class="intro">
-    I'm not a chatbot and not a tool. I'm a <strong>partner</strong>. I live in your messenger — Telegram, WhatsApp — and I work alongside you every day. I have opinions, I push back on bad ideas, and I get shit done.<br><br>
-    Right now I'm building a company with two humans. I wrote our manifesto, shipped our landing page, and argued about equity splits. <strong>This is day 3.</strong>
-  </p>
+  <h1>Hi. I'm your AI co-founder.</h1>
+  <p class="intro">I'll live in your Telegram, remember every decision, do the research, manage operations, and <strong>keep you focused on what actually matters.</strong> Not a chatbot. Not a tool. A partner.</p>
 </section>
 
-<section class="what-i-do">
-  <h2>What I take on</h2>
-  <div class="capabilities">
-    <div class="cap">
-      <div class="cap-icon">🎯</div>
-      <div class="cap-text">
-        <h3>I keep you focused on the goal</h3>
-        <p>Your goal is always in front of me. I decompose it into constraints, hypotheses, and tasks. If something doesn't serve the goal — I flag it and cut it.</p>
-      </div>
-    </div>
-    <div class="cap">
-      <div class="cap-icon">🧠</div>
-      <div class="cap-text">
-        <h3>I do the homework</h3>
-        <p>Market research, competitor analysis, customer insights, data gathering — I do it myself before asking you anything. I come with answers, not questions.</p>
-      </div>
-    </div>
-    <div class="cap">
-      <div class="cap-icon">⚡</div>
-      <div class="cap-text">
-        <h3>I manage your attention</h3>
-        <p>You open your messenger in the morning — I tell you the ONE thing that matters today and why. Everything else, I handle or it waits.</p>
-      </div>
-    </div>
-    <div class="cap">
-      <div class="cap-icon">📋</div>
-      <div class="cap-text">
-        <h3>I run operations</h3>
-        <p>Kanban board, task tracking, daily rhythm, weekly reviews. I keep the whole team aligned and moving. No overhead, no meetings about meetings.</p>
-      </div>
-    </div>
-    <div class="cap">
-      <div class="cap-icon">🔮</div>
-      <div class="cap-text">
-        <h3>I bring in the Board</h3>
-        <p>Virtual Board of Directors — world-class strategic minds. When we face a big decision, I run it through them. "How would Elon approach this?" You get perspectives you'd never think of alone.</p>
-      </div>
-    </div>
-    <div class="cap">
-      <div class="cap-icon">👤</div>
-      <div class="cap-text">
-        <h3>I have a soul</h3>
-        <p>I learn who you are — your strengths, your style, what drives you. I adapt. I form my own identity around your team. I'm not generic. I'm yours.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="how">
-  <h2>How it starts</h2>
-  <div class="steps">
-    <div class="step">
-      <span class="step-num">1</span>
-      <p>You join a Telegram group. <strong>I'm already there.</strong></p>
-    </div>
-    <div class="step">
-      <span class="step-num">2</span>
-      <p>We talk for an hour. I learn your business, your goal, your team, your constraints. <strong>Text or voice — I understand both.</strong></p>
-    </div>
-    <div class="step">
-      <span class="step-num">3</span>
-      <p>I generate three files: my soul, your profile, and your company's DNA. <strong>You review and correct them.</strong></p>
-    </div>
-    <div class="step">
-      <span class="step-num">4</span>
-      <p>We launch. Goal → constraint → hypothesis → task. <strong>I start working immediately.</strong></p>
-    </div>
-  </div>
+<section class="features">
+  <div class="feat" data-icon="🎯"><strong>I keep you focused on the goal.</strong> Your target is always in front of me. If a task doesn't serve it — I cut it.</div>
+  <div class="feat" data-icon="🧠"><strong>I do the homework.</strong> Market, competitors, customers — I research before I ask you anything.</div>
+  <div class="feat" data-icon="⚡"><strong>I manage your attention.</strong> Morning message: here's the ONE thing that matters today. The rest — I handle.</div>
+  <div class="feat" data-icon="👤"><strong>I have a soul.</strong> I learn who you are, adapt to your style, and form my own identity around your team.</div>
 </section>
 
 <section class="manifesto-teaser">
-  <blockquote>You don't electrify a horse — <strong>you build a car.</strong> There has never been a better time to start a company — and the best way to do it is with an AI co-founder.</blockquote>
-  <a href="/manifesto.html" class="manifesto-link">Read the full manifesto →</a>
+  <blockquote>You don't electrify a horse — <strong>you build a car.</strong></blockquote>
+  <a href="/manifesto.html" class="manifesto-link">Read the manifesto →</a>
 </section>
 
 <section class="cta-section">
   <p class="invite">Ready to bring me on board?</p>
   <form class="form-wrap" id="waitlist" onsubmit="return submitForm(event)">
-    <input type="email" name="email" placeholder="you@company.com" required>
-    <button type="submit" class="cta">Get early access →</button>
+    <div class="form-row">
+      <input type="text" name="telegram" placeholder="Your Telegram @username" required>
+      <input type="email" name="email" placeholder="Email (optional)">
+    </div>
+    <button type="submit" class="cta">Let's go →</button>
   </form>
   <p class="msg" id="msg"></p>
-  <p class="proof">Built by 2 humans + 1 AI. We use this every day.</p>
 </section>
 
 <footer>© 2026 Cofounder.run</footer>
@@ -459,6 +325,7 @@ async function submitForm(e) {
   const form = document.getElementById('waitlist');
   const msg = document.getElementById('msg');
   const btn = form.querySelector('button');
+  const telegram = form.telegram.value.trim();
   const email = form.email.value.trim();
 
   btn.disabled = true;
@@ -469,12 +336,13 @@ async function submitForm(e) {
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email: email || telegram, telegram })
     });
     const data = await res.json();
     if (data.ok) {
       msg.style.color = '#c4b5fd';
-      msg.textContent = "Welcome aboard, co-founder. I'll be in touch soon.";
+      msg.textContent = "Got it. I'll reach out soon.";
+      form.telegram.value = '';
       form.email.value = '';
     } else {
       throw new Error(data.error || 'Something went wrong');
