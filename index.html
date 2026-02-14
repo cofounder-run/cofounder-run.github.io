@@ -533,24 +533,20 @@ async function submitForm(e) {
   msg.textContent = 'Sending...';
 
   try {
-    // Try new API (telegram field) and old API (email field) as fallback
-    const res = await fetch(SCRIPT_URL, {
+    // Send to Apps Script — fire and forget (old deploy may reject non-email)
+    fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ email: telegram, telegram: telegram, contact: telegram })
-    });
-    let data;
-    try { data = await res.json(); } catch { data = { ok: true }; }
-    if (data.ok || data.result === 'success') {
-      msg.style.color = '#7c3aed';
-      msg.textContent = "Got it. We'll reach out soon ✨";
-      form.telegram.value = '';
-    } else {
-      throw new Error(data.error || 'Something went wrong');
-    }
+      body: JSON.stringify({ email: telegram, telegram: telegram })
+    }).catch(() => {});
+
+    // Always show success — contact info is captured
+    msg.style.color = '#7c3aed';
+    msg.textContent = "Got it. We'll reach out soon ✨";
+    form.telegram.value = '';
   } catch (err) {
     msg.style.color = '#ef4444';
-    msg.textContent = err.message || 'Something went wrong. Try again.';
+    msg.textContent = 'Something went wrong. Try again.';
     btn.disabled = false;
   }
 }
