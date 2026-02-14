@@ -1,5 +1,5 @@
 // Google Apps Script: Waitlist form handler
-// Saves Telegram usernames to the active Google Sheet and notifies via Telegram.
+// Saves contact info (Telegram, phone, email) to Google Sheet and notifies via Telegram.
 //
 // Setup:
 // 1. Create a new Google Sheet
@@ -10,28 +10,23 @@
 // 4. Deploy → New deployment → Web app
 //    - Execute as: Me
 //    - Who has access: Anyone
-// 5. Copy the deployment URL into index.html (APPS_SCRIPT_URL)
+// 5. Copy the deployment URL into index.html (SCRIPT_URL)
 
 function doPost(e) {
   try {
     var body = JSON.parse(e.postData.contents);
-    var telegram = (body.telegram || '').trim();
+    var contact = (body.contact || body.telegram || body.email || '').trim();
 
-    if (!telegram) {
-      return jsonResponse({ ok: false, error: 'Please enter your Telegram username' });
-    }
-
-    // Normalize: add @ if missing
-    if (telegram.charAt(0) !== '@') {
-      telegram = '@' + telegram;
+    if (!contact) {
+      return jsonResponse({ ok: false, error: 'Please enter your contact info' });
     }
 
     // Save to sheet
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    sheet.appendRow([telegram, new Date().toISOString()]);
+    sheet.appendRow([contact, new Date().toISOString()]);
 
     // Notify Telegram
-    sendTelegram('🚀 New waitlist signup: ' + telegram);
+    sendTelegram('New waitlist signup: ' + contact);
 
     return jsonResponse({ ok: true });
   } catch (err) {

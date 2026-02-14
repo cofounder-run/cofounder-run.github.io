@@ -519,31 +519,33 @@ footer {
 <footer>© 2026 Ori · <a href="https://x.com/cofounder_run" target="_blank" style="color:var(--gray-300);text-decoration:none">@cofounder_run on 𝕏</a></footer>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxb5gIGBkiYGdcnaVdcMB3u-BIsBn3h97Wk0AqM8FhDaS2LIHvIqsx10rnuCmCiUbfg/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5vAZ-trf_PnWZBCLPT8Woqt0meTefRB-cPBTDlJXpu44S6zq0vKsgTCgfkJC-w2YN/exec';
 
 async function submitForm(e) {
   e.preventDefault();
   const form = document.getElementById('waitlist');
   const msg = document.getElementById('msg');
   const btn = form.querySelector('button');
-  const telegram = form.telegram.value.trim();
+  const contact = form.telegram.value.trim();
 
   btn.disabled = true;
   msg.style.color = '#6b7280';
   msg.textContent = 'Sending...';
 
   try {
-    // Send to Apps Script — fire and forget (old deploy may reject non-email)
-    fetch(SCRIPT_URL, {
+    const res = await fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ email: telegram, telegram: telegram })
-    }).catch(() => {});
-
-    // Always show success — contact info is captured
-    msg.style.color = '#7c3aed';
-    msg.textContent = "Got it. We'll reach out soon ✨";
-    form.telegram.value = '';
+      body: JSON.stringify({ contact })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      msg.style.color = '#7c3aed';
+      msg.textContent = "Got it. We'll reach out soon ✨";
+      form.telegram.value = '';
+    } else {
+      throw new Error(data.error || 'Something went wrong');
+    }
   } catch (err) {
     msg.style.color = '#ef4444';
     msg.textContent = 'Something went wrong. Try again.';
