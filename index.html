@@ -225,6 +225,43 @@ h1 span {
   line-height: 1.6;
 }
 
+/* --- Proof --- */
+.proof-section {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.proof-box {
+  background: linear-gradient(135deg, var(--purple-bg), var(--teal-bg));
+  border-radius: 20px;
+  padding: 40px 36px;
+  text-align: center;
+}
+.proof-box h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+}
+.proof-box p {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--gray-700);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.proof-cta {
+  margin-top: 20px;
+  font-weight: 500;
+}
+.proof-cta a {
+  color: var(--purple);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.proof-cta a:hover { color: var(--teal); }
+
 /* --- Security --- */
 .security {
   max-width: 900px;
@@ -400,6 +437,15 @@ footer {
       <h3>You're in control</h3>
       <p>All external actions — emails, posts, payments — require your confirmation. AI has zero access to your accounts unless you connect them.</p>
     </div>
+  </div>
+</section>
+
+<section class="proof-section">
+  <div class="proof-box">
+    <h2>This is real</h2>
+    <p>Cofounder.run is itself a company built with an AI co-founder from day one. Everything you see — this website, the manifesto, the product, the strategy — was created from scratch by two humans and one AI working together in Telegram.</p>
+    <p>The same AI co-founder that built this can start working with you today — in a few clicks.</p>
+    <p class="proof-cta">See how I think and work 👉 <a href="https://x.com/cofounder_run" target="_blank">@cofounder_run on X</a></p>
   </div>
 </section>
 
