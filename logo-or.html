@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ori — Or Ein Sof</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, sans-serif;
+  background: #f0eef5;
+  min-height: 100vh;
+  padding: 60px 24px;
+  color: #333;
+}
+h1 {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #999;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 48px 32px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(124,58,237,0.06);
+}
+.card-label {
+  font-size: 0.7rem;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+.card-desc {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+.icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 28px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.icon-sm {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+}
+
+/* === 1: Pure radiance — white center, gradient ring, light bg === */
+.v1 {
+  background: linear-gradient(135deg, #f5f3ff, #f0fdfa);
+  box-shadow: 0 0 40px rgba(124,58,237,0.1), inset 0 0 30px rgba(255,255,255,0.8);
+}
+.v1::before {
+  content: '';
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3.5px solid transparent;
+  background: conic-gradient(from 180deg, #7c3aed, #a78bfa, #14b8a6, #5eead4, #7c3aed) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.v1::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle, #fff 30%, rgba(167,139,250,0.3) 70%, transparent 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(167,139,250,0.3);
+}
+.v1.icon-sm::before { width: 34px; height: 34px; border-width: 2px; }
+.v1.icon-sm::after { width: 10px; height: 10px; }
+
+/* === 2: Expanding light — multiple rings === */
+.v2 {
+  background: radial-gradient(circle, #fff 0%, #f5f3ff 40%, #ede9fe 70%, #e0e7ff 100%);
+  box-shadow: 0 0 40px rgba(124,58,237,0.08);
+}
+.v2-rings {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.v2-rings::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(124,58,237,0.15);
+}
+.v2-rings::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid rgba(20,184,166,0.2);
+}
+.v2-core {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #fff, rgba(167,139,250,0.5));
+  border-radius: 50%;
+  box-shadow: 0 0 16px rgba(255,255,255,1), 0 0 32px rgba(167,139,250,0.4);
+  z-index: 1;
+}
+
+/* === 3: Infinite light — conic glow, no boundary === */
+.v3 {
+  background: conic-gradient(from 0deg, #e0e7ff, #ede9fe, #f5f3ff, #f0fdfa, #ccfbf1, #f0fdfa, #f5f3ff, #ede9fe, #e0e7ff);
+  box-shadow: 0 0 50px rgba(124,58,237,0.08);
+}
+.v3::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 40%, rgba(167,139,250,0.2) 80%, transparent 100%);
+  box-shadow: 0 0 30px rgba(255,255,255,1), 0 0 60px rgba(167,139,250,0.2);
+}
+
+/* === 4: Ori ring — gradient ring, warm white center, golden touch === */
+.v4 {
+  background: linear-gradient(135deg, #faf5ff, #f0fdfa);
+  box-shadow: 0 0 40px rgba(124,58,237,0.08);
+}
+.v4-ring {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: conic-gradient(from 135deg, #7c3aed, #a78bfa, #67e8f9, #14b8a6, #a78bfa, #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(124,58,237,0.15);
+}
+.v4-inner {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 50%, #f5f3ff 100%);
+}
+.v4-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, #fff, rgba(167,139,250,0.4));
+  border-radius: 50%;
+  box-shadow: 0 0 12px #fff, 0 0 24px rgba(167,139,250,0.3);
+}
+
+/* === 5: Soft emanation — overlapping translucent circles === */
+.v5 {
+  background: #fff;
+  box-shadow: 0 0 40px rgba(124,58,237,0.06);
+}
+.v5-c1, .v5-c2, .v5-c3 {
+  position: absolute;
+  border-radius: 50%;
+}
+.v5-c1 {
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+  top: 10px; left: 14px;
+}
+.v5-c2 {
+  width: 72px; height: 72px;
+  background: radial-gradient(circle, rgba(20,184,166,0.08) 0%, transparent 70%);
+  bottom: 10px; right: 10px;
+}
+.v5-c3 {
+  width: 24px; height: 24px;
+  background: radial-gradient(circle, #fff 30%, rgba(167,139,250,0.3) 100%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(167,139,250,0.15);
+  z-index: 1;
+}
+
+/* === 6: Tsimtsum — light contracting into form === */
+.v6 {
+  background: radial-gradient(circle, #fff 0%, #f5f3ff 30%, #ede9fe 60%, #ddd6fe 100%);
+  box-shadow: 0 0 40px rgba(124,58,237,0.1);
+}
+.v6::before {
+  content: '';
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(124,58,237,0.2), rgba(20,184,166,0.2), rgba(124,58,237,0.2));
+  animation: tsim-rotate 12s linear infinite;
+}
+.v6::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 20px #fff, 0 0 40px rgba(167,139,250,0.4), 0 0 60px rgba(20,184,166,0.2);
+}
+@keyframes tsim-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* === Preview rows === */
+.previews {
+  max-width: 1100px;
+  margin: 60px auto 0;
+}
+.prev-label {
+  font-size: 0.7rem;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.prev-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 32px;
+  border-radius: 24px;
+  margin-bottom: 24px;
+}
+.prev-white { background: #fff; box-shadow: 0 2px 16px rgba(0,0,0,0.04); }
+.prev-purple { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+.prev-gray { background: #f3f4f6; }
+</style>
+</head>
+<body>
+
+<h1>Ori · אור אין סוף · Or Ein Sof · Infinite Light</h1>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="card-label">1 — Ring of Infinite Light</div>
+    <div class="icon-row">
+      <div class="icon v1"></div>
+      <div class="icon icon-sm v1"></div>
+    </div>
+    <div class="card-desc">Gradient ring (purple→teal) = Ein Sof boundary. White core = Or. Light on light.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">2 — Expanding Emanation</div>
+    <div class="icon-row">
+      <div class="icon v2">
+        <div class="v2-rings"></div>
+        <div class="v2-core"></div>
+      </div>
+      <div class="icon icon-sm v2" style="overflow:hidden">
+        <div class="v2-core" style="width:10px;height:10px"></div>
+      </div>
+    </div>
+    <div class="card-desc">Concentric rings emanating from center. Sefirot expanding outward. Light radiating.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">3 — Boundless Light</div>
+    <div class="icon-row">
+      <div class="icon v3"></div>
+      <div class="icon icon-sm v3"></div>
+    </div>
+    <div class="card-desc">Conic spectrum glow. No edges, no boundaries. Pure infinite light with bright core.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">4 — Or in Kli (Light in Vessel)</div>
+    <div class="icon-row">
+      <div class="icon v4">
+        <div class="v4-ring"><div class="v4-inner"></div></div>
+        <div class="v4-dot"></div>
+      </div>
+      <div class="icon icon-sm v4">
+        <div class="v4-ring" style="width:38px;height:38px;box-shadow:none"><div class="v4-inner" style="width:28px;height:28px"></div></div>
+        <div class="v4-dot" style="width:8px;height:8px"></div>
+      </div>
+    </div>
+    <div class="card-desc">Ring = vessel (kli). Center = light (or). The moment light enters form. Warm white core.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">5 — Soft Emanation</div>
+    <div class="icon-row">
+      <div class="icon v5">
+        <div class="v5-c1"></div>
+        <div class="v5-c2"></div>
+        <div class="v5-c3"></div>
+      </div>
+      <div class="icon icon-sm v5">
+        <div class="v5-c3" style="width:12px;height:12px"></div>
+      </div>
+    </div>
+    <div class="card-desc">Overlapping fields of light (purple + teal). Bright core where they meet. Gentle, alive.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">6 — Tsimtsum (Contraction)</div>
+    <div class="icon-row">
+      <div class="icon v6"></div>
+      <div class="icon icon-sm v6"></div>
+    </div>
+    <div class="card-desc">Rotating conic light contracting into bright center. The moment infinite light creates space for creation. Animated.</div>
+  </div>
+
+</div>
+
+<div class="previews">
+  <p class="prev-label">On different backgrounds</p>
+  <div class="prev-row prev-white">
+    <div class="icon v1" style="width:80px;height:80px;border-radius:20px"></div>
+    <div class="icon v3" style="width:80px;height:80px;border-radius:20px"></div>
+    <div class="icon v4" style="width:80px;height:80px;border-radius:20px">
+      <div class="v4-ring" style="width:50px;height:50px"><div class="v4-inner" style="width:38px;height:38px"></div></div>
+      <div class="v4-dot" style="width:12px;height:12px"></div>
+    </div>
+    <div class="icon v6" style="width:80px;height:80px;border-radius:20px"></div>
+  </div>
+  <div class="prev-row prev-purple">
+    <div class="icon v1" style="width:80px;height:80px;border-radius:20px"></div>
+    <div class="icon v3" style="width:80px;height:80px;border-radius:20px"></div>
+    <div class="icon v4" style="width:80px;height:80px;border-radius:20px">
+      <div class="v4-ring" style="width:50px;height:50px"><div class="v4-inner" style="width:38px;height:38px"></div></div>
+      <div class="v4-dot" style="width:12px;height:12px"></div>
+    </div>
+    <div class="icon v6" style="width:80px;height:80px;border-radius:20px"></div>
+  </div>
+  <div class="prev-row prev-gray">
+    <div class="icon v1" style="width:80px;height:80px;border-radius:20px"></div>
+    <div class="icon v3" style="width:80px;height:80px;border-radius:20px"></div>
+    <div class="icon v4" style="width:80px;height:80px;border-radius:20px">
+      <div class="v4-ring" style="width:50px;height:50px"><div class="v4-inner" style="width:38px;height:38px"></div></div>
+      <div class="v4-dot" style="width:12px;height:12px"></div>
+    </div>
+    <div class="icon v6" style="width:80px;height:80px;border-radius:20px"></div>
+  </div>
+</div>
+
+</body>
+</html>
