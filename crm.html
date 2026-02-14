@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ori — CRM</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: #f8f9fa; color: #111827; padding: 24px; }
+h1 { font-size: 1.5rem; margin-bottom: 8px; }
+.subtitle { color: #6b7280; font-size: 0.9rem; margin-bottom: 24px; }
+.pipeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.stage { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.stage h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.stage-lead h2 { color: #6b7280; border-bottom: 2px solid #e5e7eb; }
+.stage-contact h2 { color: #f59e0b; border-bottom: 2px solid #f59e0b; }
+.stage-demo h2 { color: #7c3aed; border-bottom: 2px solid #7c3aed; }
+.stage-active h2 { color: #10b981; border-bottom: 2px solid #10b981; }
+.count { background: #f3f4f6; border-radius: 12px; padding: 2px 10px; font-size: 0.75rem; font-weight: 600; }
+.deal { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+.deal h3 { font-size: 0.9rem; margin-bottom: 4px; }
+.deal p { font-size: 0.78rem; color: #6b7280; line-height: 1.5; }
+.deal .tag { display: inline-block; font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; margin-top: 6px; }
+.tag-hot { background: #fef2f2; color: #dc2626; }
+.tag-warm { background: #fff7ed; color: #ea580c; }
+.tag-new { background: #eff6ff; color: #2563eb; }
+.tag-price { background: #f5f3ff; color: #7c3aed; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.metric { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; }
+.metric .num { font-size: 1.8rem; font-weight: 700; }
+.metric .num.purple { color: #7c3aed; }
+.metric .num.teal { color: #14b8a6; }
+.metric .num.amber { color: #f59e0b; }
+.metric .num.green { color: #10b981; }
+.metric .label { font-size: 0.75rem; color: #6b7280; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<h1>Ori — Sales Pipeline</h1>
+<p class="subtitle">Concierge MVP · Target: $3-5K/mo per client · Margin ≥80%</p>
+
+<div class="metrics">
+  <div class="metric">
+    <div class="num purple">2</div>
+    <div class="label">Total Leads</div>
+  </div>
+  <div class="metric">
+    <div class="num amber">1</div>
+    <div class="label">In Demo</div>
+  </div>
+  <div class="metric">
+    <div class="num green">0</div>
+    <div class="label">Active Clients</div>
+  </div>
+  <div class="metric">
+    <div class="num teal">$0</div>
+    <div class="label">MRR</div>
+  </div>
+</div>
+
+<div class="pipeline">
+
+<div class="stage stage-lead">
+  <h2>🔍 Lead <span class="count">1</span></h2>
+  <div class="deal">
+    <h3>Deepn</h3>
+    <p>2-й потенциальный клиент. Ждёт Zoom от Александра.</p>
+    <span class="tag tag-warm">Warm</span>
+  </div>
+</div>
+
+<div class="stage stage-contact">
+  <h2>📞 Contact <span class="count">0</span></h2>
+</div>
+
+<div class="stage stage-demo">
+  <h2>🎯 Demo <span class="count">1</span></h2>
+  <div class="deal">
+    <h3>Naora</h3>
+    <p>Fintech + mobility. EV rent-to-own для водителей Bolt/Uber в Португалии. 300+ водителей.</p>
+    <p>Встреча: 14 фев 11:00 UTC — в процессе 🔴</p>
+    <span class="tag tag-hot">Hot</span>
+    <span class="tag tag-price">$3-5K/mo</span>
+  </div>
+</div>
+
+<div class="stage stage-active">
+  <h2>✅ Active Client <span class="count">0</span></h2>
+</div>
+
+</div>
+
+</body>
+</html>
