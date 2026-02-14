@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ori — Icon Concepts (Light)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  min-height: 100vh;
+  padding: 60px 24px;
+}
+h1 {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #555;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.card {
+  background: #111;
+  border-radius: 24px;
+  padding: 40px 24px;
+  text-align: center;
+  border: 1px solid #1a1a1a;
+}
+.card-label {
+  font-size: 0.7rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+.card-desc {
+  font-size: 0.8rem;
+  color: #444;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+.icon-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.icon-box {
+  width: 96px;
+  height: 96px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.icon-sm {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+
+/* === 1: Radial burst — light source === */
+.i1 {
+  background: linear-gradient(135deg, #1a0533, #0d1117);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+}
+.i1::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #fff 0%, rgba(124,58,237,0.8) 30%, rgba(20,184,166,0.4) 60%, transparent 80%);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255,255,255,0.6), 0 0 60px rgba(124,58,237,0.5);
+}
+
+/* === 2: Star / spark === */
+.i2 {
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
+}
+.i2 svg { width: 52px; height: 52px; filter: drop-shadow(0 0 12px rgba(255,255,255,0.5)); }
+
+/* === 3: Rising light — horizon === */
+.i3 {
+  background: linear-gradient(180deg, #0d1117 0%, #1a0533 50%, #7c3aed 100%);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+}
+.i3::before {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  width: 60px;
+  height: 30px;
+  background: radial-gradient(ellipse at center bottom, rgba(255,255,255,0.9) 0%, rgba(124,58,237,0.6) 40%, transparent 70%);
+  border-radius: 50% 50% 0 0;
+}
+.i3::after {
+  content: '';
+  position: absolute;
+  bottom: 18px;
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+}
+
+/* === 4: Lens flare / diamond === */
+.i4 {
+  background: #000;
+  box-shadow: 0 0 40px rgba(20, 184, 166, 0.15);
+}
+.i4::before {
+  content: '';
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  transform: rotate(45deg);
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(124,58,237,0.5), 0 0 80px rgba(20,184,166,0.3);
+}
+.i4::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.6), rgba(255,255,255,0.8), rgba(20,184,166,0.6), transparent);
+}
+
+/* === 5: Soft glow circle === */
+.i5 {
+  background: linear-gradient(135deg, #0f0f23, #1a0533);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.15);
+}
+.i5::before {
+  content: '';
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(167,139,250,0.7) 35%, rgba(20,184,166,0.3) 65%, transparent 85%);
+  box-shadow: 0 0 24px rgba(255,255,255,0.4), 0 0 48px rgba(124,58,237,0.3);
+}
+
+/* === 6: Abstract O — ring of light === */
+.i6 {
+  background: #000;
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.15);
+}
+.i6::before {
+  content: '';
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  background: conic-gradient(from 135deg, #7c3aed, #14b8a6, #7c3aed) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  box-shadow: 0 0 20px rgba(124,58,237,0.4);
+}
+.i6::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 22px;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255,255,255,0.8);
+}
+
+/* === 7: Lighthouse beam === */
+.i7 {
+  background: linear-gradient(180deg, #0d1117, #1a0533);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.15);
+  overflow: visible;
+}
+.i7-beam {
+  position: absolute;
+  top: 12px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 50px solid rgba(255,255,255,0.08);
+}
+.i7-core {
+  position: absolute;
+  top: 58px;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 16px #fff, 0 0 32px rgba(124,58,237,0.6);
+}
+
+/* === 8: Flame / candle === */
+.i8 {
+  background: linear-gradient(180deg, #0d0d1a, #1a0a2e);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.15);
+}
+.i8 svg { width: 44px; height: 56px; filter: drop-shadow(0 0 16px rgba(167,139,250,0.6)); }
+
+/* === Preview on white === */
+.white-row {
+  max-width: 1100px;
+  margin: 60px auto 0;
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.white-row .icon-box {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+}
+.wlabel {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.7rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<h1>Ori — App Icon Concepts · Light Theme</h1>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="card-label">1 — Light Source</div>
+    <div class="icon-area">
+      <div class="icon-box i1"></div>
+      <div class="icon-box icon-sm i1"></div>
+    </div>
+    <div class="card-desc">Pure light emanating from center. Radial glow, purple→teal.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">2 — Spark Star</div>
+    <div class="icon-area">
+      <div class="icon-box i2">
+        <svg viewBox="0 0 52 52" fill="none">
+          <path d="M26 2L31 18.5L26 15L21 18.5L26 2Z" fill="white"/>
+          <path d="M26 50L21 33.5L26 37L31 33.5L26 50Z" fill="white"/>
+          <path d="M2 26L18.5 21L15 26L18.5 31L2 26Z" fill="white"/>
+          <path d="M50 26L33.5 31L37 26L33.5 21L50 26Z" fill="white"/>
+          <circle cx="26" cy="26" r="6" fill="white"/>
+        </svg>
+      </div>
+      <div class="icon-box icon-sm i2">
+        <svg viewBox="0 0 52 52" fill="none" style="width:28px;height:28px">
+          <path d="M26 2L31 18.5L26 15L21 18.5L26 2Z" fill="white"/>
+          <path d="M26 50L21 33.5L26 37L31 33.5L26 50Z" fill="white"/>
+          <path d="M2 26L18.5 21L15 26L18.5 31L2 26Z" fill="white"/>
+          <path d="M50 26L33.5 31L37 26L33.5 21L50 26Z" fill="white"/>
+          <circle cx="26" cy="26" r="6" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-desc">4-point star burst. Light breaking through. On purple bg.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">3 — Horizon / Sunrise</div>
+    <div class="icon-area">
+      <div class="icon-box i3"></div>
+      <div class="icon-box icon-sm i3"></div>
+    </div>
+    <div class="card-desc">Light rising from horizon. Dawn = new beginning, clarity.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">4 — Diamond Flare</div>
+    <div class="icon-area">
+      <div class="icon-box i4"></div>
+      <div class="icon-box icon-sm i4"></div>
+    </div>
+    <div class="card-desc">Diamond shape with lens flare. Precious + light.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">5 — Soft Glow</div>
+    <div class="icon-area">
+      <div class="icon-box i5"></div>
+      <div class="icon-box icon-sm i5"></div>
+    </div>
+    <div class="card-desc">Soft orb of light. Warm, approachable. Like a guide.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">6 — Ring of Light</div>
+    <div class="icon-area">
+      <div class="icon-box i6"></div>
+      <div class="icon-box icon-sm i6"></div>
+    </div>
+    <div class="card-desc">O as ring of light (conic gradient). Spark at top = insight moment.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">7 — Lighthouse</div>
+    <div class="icon-area">
+      <div class="icon-box i7">
+        <div class="i7-beam"></div>
+        <div class="i7-core"></div>
+      </div>
+      <div class="icon-box icon-sm i7">
+        <div class="i7-beam" style="top:6px;border-left-width:10px;border-right-width:10px;border-bottom-width:25px"></div>
+        <div class="i7-core" style="top:29px;width:5px;height:5px"></div>
+      </div>
+    </div>
+    <div class="card-desc">Lighthouse beam. Ori = guide, direction, clarity.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">8 — Flame</div>
+    <div class="icon-area">
+      <div class="icon-box i8">
+        <svg viewBox="0 0 44 56" fill="none">
+          <path d="M22 0C22 0 36 18 36 32C36 44 30 52 22 56C14 52 8 44 8 32C8 18 22 0 22 0Z" fill="url(#fg)"/>
+          <path d="M22 20C22 20 30 30 30 38C30 44 26 48 22 50C18 48 14 44 14 38C14 30 22 20 22 20Z" fill="white" opacity="0.7"/>
+          <defs><linearGradient id="fg" x1="22" y1="0" x2="22" y2="56">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#14b8a6"/>
+          </linearGradient></defs>
+        </svg>
+      </div>
+      <div class="icon-box icon-sm i8">
+        <svg viewBox="0 0 44 56" fill="none" style="width:24px;height:30px">
+          <path d="M22 0C22 0 36 18 36 32C36 44 30 52 22 56C14 52 8 44 8 32C8 18 22 0 22 0Z" fill="url(#fg2)"/>
+          <path d="M22 20C22 20 30 30 30 38C30 44 26 48 22 50C18 48 14 44 14 38C14 30 22 20 22 20Z" fill="white" opacity="0.7"/>
+          <defs><linearGradient id="fg2" x1="22" y1="0" x2="22" y2="56">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#14b8a6"/>
+          </linearGradient></defs>
+        </svg>
+      </div>
+    </div>
+    <div class="card-desc">Flame / inner fire. Purple→teal. White core = clarity.</div>
+  </div>
+
+</div>
+
+<p class="wlabel">Preview on white background</p>
+<div class="white-row">
+  <div class="icon-box i1"></div>
+  <div class="icon-box i2">
+    <svg viewBox="0 0 52 52" fill="none" style="width:52px;height:52px"><path d="M26 2L31 18.5L26 15L21 18.5L26 2Z" fill="white"/><path d="M26 50L21 33.5L26 37L31 33.5L26 50Z" fill="white"/><path d="M2 26L18.5 21L15 26L18.5 31L2 26Z" fill="white"/><path d="M50 26L33.5 31L37 26L33.5 21L50 26Z" fill="white"/><circle cx="26" cy="26" r="6" fill="white"/></svg>
+  </div>
+  <div class="icon-box i3"></div>
+  <div class="icon-box i4"></div>
+  <div class="icon-box i5"></div>
+  <div class="icon-box i6"></div>
+  <div class="icon-box i8">
+    <svg viewBox="0 0 44 56" fill="none" style="width:44px;height:56px"><path d="M22 0C22 0 36 18 36 32C36 44 30 52 22 56C14 52 8 44 8 32C8 18 22 0 22 0Z" fill="url(#fg3)"/><path d="M22 20C22 20 30 30 30 38C30 44 26 48 22 50C18 48 14 44 14 38C14 30 22 20 22 20Z" fill="white" opacity="0.7"/><defs><linearGradient id="fg3" x1="22" y1="0" x2="22" y2="56"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#14b8a6"/></linearGradient></defs></svg>
+  </div>
+</div>
+
+</body>
+</html>
