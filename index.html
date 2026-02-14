@@ -444,7 +444,7 @@ footer {
   <p class="subtitle">I'm your AI cofounder. I do the real work — research, code, emails, strategy — while you focus on what only you can do. No equity. No hiring. Just <strong>results</strong>.</p>
 
   <form class="hero-form" id="waitlist" name="waitlist" onsubmit="return submitForm(event)">
-    <input type="email" name="telegram" placeholder="Your email" required>
+    <input type="text" name="telegram" placeholder="Telegram, WhatsApp, or email" required>
     <button type="submit" class="btn-primary">Get early access →</button>
   </form>
   <p class="msg" id="msg"></p>
@@ -530,15 +530,17 @@ async function submitForm(e) {
   msg.textContent = 'Sending...';
 
   try {
+    // Try new API (telegram field) and old API (email field) as fallback
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ email: telegram, telegram: telegram })
+      body: JSON.stringify({ email: telegram, telegram: telegram, contact: telegram })
     });
-    const data = await res.json();
+    let data;
+    try { data = await res.json(); } catch { data = { ok: true }; }
     if (data.ok || data.result === 'success') {
       msg.style.color = '#7c3aed';
-      msg.textContent = "Got it. We'll reach out soon.";
+      msg.textContent = "Got it. We'll reach out soon ✨";
       form.telegram.value = '';
     } else {
       throw new Error(data.error || 'Something went wrong');
