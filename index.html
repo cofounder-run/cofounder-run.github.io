@@ -225,6 +225,49 @@ h1 span {
   line-height: 1.6;
 }
 
+/* --- Security --- */
+.security {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.security h2 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.sec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.sec-item {
+  padding: 28px 24px;
+  border-radius: 16px;
+  border: 1px solid var(--gray-100);
+  background: #fafafa;
+}
+.sec-icon {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+.sec-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gray-900);
+}
+.sec-item p {
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
 /* --- Manifesto teaser --- */
 .manifesto-section {
   max-width: 640px;
@@ -282,6 +325,7 @@ footer {
   h1 { font-size: 2.2rem; }
   .subtitle { font-size: 1.05rem; }
   .features { grid-template-columns: 1fr; padding: 0 20px 60px; }
+  .sec-grid { grid-template-columns: 1fr; }
   .feature-card { padding: 24px 20px; }
   .hero-form input { min-width: 100%; }
   .btn-primary { width: 100%; }
@@ -330,6 +374,32 @@ footer {
     <div class="feature-icon fi-teal">👤</div>
     <h3>I have a soul</h3>
     <p>I learn who you are — your strengths, your style, what drives you. I adapt and form my own identity around your team.</p>
+  </div>
+</section>
+
+<section class="security">
+  <h2>Security</h2>
+  <div class="sec-grid">
+    <div class="sec-item">
+      <div class="sec-icon">🔒</div>
+      <h3>Your own instance</h3>
+      <p>Dedicated server, fully isolated. Your data never touches other clients. You own everything — delete anytime.</p>
+    </div>
+    <div class="sec-item">
+      <div class="sec-icon">🧱</div>
+      <h3>Exec sandbox</h3>
+      <p>Every code execution requires your explicit approval. No prompt injection can bypass hardware-level gates.</p>
+    </div>
+    <div class="sec-item">
+      <div class="sec-icon">🇪🇺</div>
+      <h3>Data in Europe</h3>
+      <p>Servers in EU. We use Anthropic Claude API — your data is never used for model training. Voice messages are transcribed and discarded.</p>
+    </div>
+    <div class="sec-item">
+      <div class="sec-icon">🛡️</div>
+      <h3>You're in control</h3>
+      <p>All external actions — emails, posts, payments — require your confirmation. AI has zero access to your accounts unless you connect them.</p>
+    </div>
   </div>
 </section>
 
