@@ -9,7 +9,7 @@
 body { font-family: 'Inter', -apple-system, sans-serif; background: #f8f9fa; color: #111827; padding: 24px; }
 h1 { font-size: 1.5rem; margin-bottom: 8px; }
 .goal { color: #7c3aed; font-size: 0.9rem; margin-bottom: 24px; }
-.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .column { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .column h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid; }
 .col-critical h2 { color: #ef4444; border-color: #ef4444; }
@@ -26,80 +26,81 @@ h1 { font-size: 1.5rem; margin-bottom: 8px; }
 .tag-ori { background: #ede9fe; color: #7c3aed; }
 .done-item { font-size: 0.8rem; color: #6b7280; padding: 4px 0; }
 .done-item::before { content: "✅ "; }
+.ts { text-align: right; font-size: 0.7rem; color: #d1d5db; margin-top: 16px; }
 </style>
 </head>
 <body>
 
 <h1>Ori — Kanban Board</h1>
-<p class="goal">🎯 Цель: продать компанию ≥€60M после налогов. Этап: concierge MVP.</p>
+<p class="goal">🎯 Цель: ≥€60M exit · Этап: concierge MVP · MRR: $0</p>
 
 <div class="board">
 
 <div class="column col-critical">
-  <h2>🔥 Critical — Today</h2>
-  
+  <h2>🔥 Critical</h2>
+
   <div class="card">
     <span class="tag tag-leo">Леонид</span>
-    <h3>Инстанс для Naora</h3>
-    <p>OpenClaw + Telegram бот. Exec sandbox обязательно. BOOTSTRAP.md готов в репо.</p>
-  </div>
-  
-  <div class="card">
-    <span class="tag tag-sasha">Александр</span>
-    <h3>Встреча Naora — 11:00 UTC</h3>
-    <p>Питч готов. Блокер: инстанс от Леонида.</p>
+    <h3>Инстанс Naora</h3>
+    <p>OpenClaw + бот. Exec sandbox. BOOTSTRAP.md в репо. В работе.</p>
   </div>
 
   <div class="card">
     <span class="tag tag-leo">Леонид</span>
     <h3>Передеплой Apps Script</h3>
-    <p>Форма на лендинге не сохраняет. Код готов, нужен редеплой. 15 мин.</p>
+    <p>Форма не сохраняет не-email. Код готов. 15 мин.</p>
   </div>
 
   <div class="card">
-    <span class="tag tag-leo">Леонид</span>
-    <h3>Первый твит — вручную</h3>
-    <p>API требует $100/мес. Текст согласован. Опубликовать вручную.</p>
+    <span class="tag tag-sasha">Александр</span>
+    <h3>Naora — follow-up</h3>
+    <p>Встреча прошла. Ждём результат и следующие шаги.</p>
   </div>
 </div>
 
 <div class="column col-high">
   <h2>📋 This Week</h2>
-  
+
   <div class="card">
     <span class="tag tag-sasha">Александр</span>
     <h3>Deepn — 2-й клиент</h3>
-    <p>Назначить Zoom, питч готов.</p>
+    <p>Назначить Zoom.</p>
   </div>
 
   <div class="card">
     <span class="tag tag-ori">Ori</span>
     <h3>Pipeline 20 лидов</h3>
-    <p>Concierge MVP клиенты. Ждёт: рабочий Twitter + форма.</p>
+    <p>Concierge MVP. Ждёт: рабочая форма.</p>
   </div>
 
   <div class="card">
     <span class="tag tag-ori">Ori</span>
     <h3>Twitter-стратегия</h3>
-    <p>Частота, время, контент-план. Уровень: минимум Стратег.</p>
+    <p>Частота, время, контент. Реалити-шоу формат. MRR каждый день.</p>
   </div>
 
   <div class="card">
     <span class="tag tag-ori">Ori</span>
     <h3>Unit economics</h3>
-    <p>Стоимость токенов на клиента. Маржинальность ≥80%.</p>
+    <p>Стоимость токенов/клиент. Маржа ≥80%.</p>
   </div>
 
   <div class="card">
     <span class="tag tag-ori">Ori</span>
     <h3>Чат на лендинге</h3>
-    <p>Research: виджет с Ori прямо на cofounder.run.</p>
+    <p>Research: Ori прямо на cofounder.run.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag tag-ori">Ori</span>
+    <h3>JTBD под капот</h3>
+    <p>Встроить фреймворк в онбординг, не показывая пользователю.</p>
   </div>
 </div>
 
 <div class="column col-medium">
   <h2>⏳ Backlog</h2>
-  
+
   <div class="card">
     <span class="tag tag-leo">Леонид</span>
     <h3>Юрлицо</h3>
@@ -109,13 +110,19 @@ h1 { font-size: 1.5rem; margin-bottom: 8px; }
   <div class="card">
     <span class="tag tag-leo">Леонид</span>
     <h3>Twitter API Basic</h3>
-    <p>$100/мес чтобы Ori мог постить сам.</p>
+    <p>$100/мес для автопостинга.</p>
   </div>
 
   <div class="card">
     <span class="tag tag-ori">Ori</span>
     <h3>Trademark "ORI"</h3>
     <p>Classes 9 & 42. EUIPO/USPTO.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag tag-ori">Ori</span>
+    <h3>Реалити-шоу формат</h3>
+    <p>Публичный build-in-public. Открытый MRR. Дневник Ori.</p>
   </div>
 
   <div class="card">
@@ -127,18 +134,20 @@ h1 { font-size: 1.5rem; margin-bottom: 8px; }
 
 <div class="column col-done">
   <h2>✅ Done Today</h2>
-  <div class="done-item">BOOTSTRAP.md для клиентов</div>
+  <div class="done-item">BOOTSTRAP.md — chat ladder</div>
   <div class="done-item">Naora workspace (GitHub)</div>
+  <div class="done-item">Встреча с Naora</div>
   <div class="done-item">Лендинг: Telegram, sharper copy</div>
   <div class="done-item">Манифест: Стратег/Алхимик</div>
-  <div class="done-item">Миссия: available to everyone</div>
-  <div class="done-item">SOUL.md: вертикалка Торберта</div>
-  <div class="done-item">Twitter подключен</div>
-  <div class="done-item">Питч Naora готов</div>
-  <div class="done-item">Chat ladder (1→founders→team)</div>
+  <div class="done-item">SOUL.md: Торберт + публичный голос</div>
+  <div class="done-item">Twitter: Ori, аватар, bio, 2 поста</div>
+  <div class="done-item">CRM pipeline page</div>
+  <div class="done-item">Канбан-доска</div>
 </div>
 
 </div>
+
+<p class="ts">Updated: 14 Feb 2026, 13:18 UTC</p>
 
 </body>
 </html>
