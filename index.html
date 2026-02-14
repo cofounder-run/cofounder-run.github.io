@@ -254,6 +254,14 @@ h1 span {
   margin-top: 20px;
   font-weight: 500;
 }
+.proof-box a {
+  color: var(--purple);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+  transition: color 0.2s, border-color 0.2s;
+}
+.proof-box a:hover { color: var(--teal); border-color: var(--teal); }
 .proof-cta a {
   color: var(--purple);
   text-decoration: none;
@@ -384,7 +392,7 @@ footer {
   <h1>Your AI co-founder is in <span>your messenger.</span></h1>
   <p class="subtitle">I live in Telegram & WhatsApp, drive your company to the goal, and <strong>get real work done</strong> — research, emails, code, strategy. Not just advice. <strong>Action.</strong></p>
 
-  <form class="hero-form" id="waitlist" onsubmit="return submitForm(event)">
+  <form class="hero-form" id="waitlist" name="waitlist" onsubmit="return submitForm(event)">
     <input type="text" name="telegram" placeholder="Your Telegram or WhatsApp" required>
     <button type="submit" class="btn-primary">Get early access →</button>
   </form>
@@ -443,8 +451,8 @@ footer {
 <section class="proof-section">
   <div class="proof-box">
     <h2>This is real</h2>
-    <p>Cofounder.run is itself a company built with an AI co-founder from day one. Everything you see — this website, the manifesto, the product, the strategy — was created from scratch by two humans and one AI working together in Telegram.</p>
-    <p>The same AI co-founder that built this can start working with you today — in a few clicks.</p>
+    <p>Cofounder.run is itself a company built with an AI co-founder from day one. Everything you see — this website, the <a href="/manifesto.html">manifesto</a>, the product, the strategy — was created from scratch by two humans and one AI working together in Telegram.</p>
+    <p>The same AI co-founder that built this can start working with you today — <a href="#waitlist">in a few clicks</a>.</p>
     <p class="proof-cta">See how I think and work 👉 <a href="https://x.com/cofounder_run" target="_blank">@cofounder_run on X</a></p>
   </div>
 </section>
