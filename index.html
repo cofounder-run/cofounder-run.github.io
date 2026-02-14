@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://cofounder.run">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@cofounder_run">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%237c3aed'/><stop offset='100%' stop-color='%2314b8a6'/></linearGradient></defs><circle cx='50' cy='50' r='40' fill='none' stroke='url(%23g)' stroke-width='6'/><circle cx='50' cy='50' r='12' fill='white'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -58,11 +58,35 @@ nav {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--purple), var(--teal));
+  background: linear-gradient(135deg, #faf5ff, #f0fdfa);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  position: relative;
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.08);
+}
+.logo-ring {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: conic-gradient(from 135deg, var(--purple), var(--purple-light), #67e8f9, var(--teal), var(--purple-light), var(--purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-ring-inner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 50%, #f5f3ff 100%);
+}
+.logo-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(circle, #fff, rgba(167,139,250,0.4));
+  border-radius: 50%;
+  box-shadow: 0 0 6px #fff, 0 0 10px rgba(167,139,250,0.3);
 }
 .logo-text {
   font-size: 1.05rem;
@@ -381,7 +405,7 @@ footer {
 
 <nav>
   <div class="logo-mark">
-    <div class="logo-icon">✨</div>
+    <div class="logo-icon"><div class="logo-ring"><div class="logo-ring-inner"></div></div><div class="logo-dot"></div></div>
     <span class="logo-text">cofounder.run</span>
   </div>
   <a href="/manifesto.html">Manifesto</a>
