@@ -3,46 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manifesto — Cofounder.run</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+<title>Manifesto — Ori</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%237c3aed'/><stop offset='100%' stop-color='%2314b8a6'/></linearGradient></defs><circle cx='50' cy='50' r='40' fill='none' stroke='url(%23g)' stroke-width='6'/><circle cx='50' cy='50' r='12' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --purple: #7c3aed;
+  --purple-light: #a78bfa;
+  --teal: #14b8a6;
+  --gray-900: #111827;
+  --gray-700: #374151;
+  --gray-500: #6b7280;
+  --gray-300: #d1d5db;
+  --gray-100: #f3f4f6;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #000;
-  color: #fff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: var(--gray-900);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 24px 32px;
+  max-width: 1080px;
+  margin: 0 auto;
 }
-nav a {
-  color: #555;
+.logo-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #faf5ff, #f0fdfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.logo-ring {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: conic-gradient(from 135deg, var(--purple), var(--purple-light), #67e8f9, var(--teal), var(--purple-light), var(--purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-ring-inner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 50%, #f5f3ff 100%);
+}
+.logo-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #fff, rgba(167,139,250,0.4));
+  border-radius: 50%;
+  box-shadow: 0 0 4px #fff, 0 0 8px rgba(167,139,250,0.3);
+}
+.logo-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+nav a.back {
+  color: var(--gray-500);
   text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 300;
+  font-weight: 500;
   transition: color 0.2s;
 }
-nav a:hover { color: #fff; }
+nav a.back:hover { color: var(--purple); }
 
 article {
-  max-width: 720px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 60px 24px 120px;
+  padding: 60px 24px 80px;
 }
 
 h1 {
   font-size: clamp(2.5rem, 6vw, 3.5rem);
-  font-weight: 300;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   margin-bottom: 64px;
+  color: var(--gray-900);
 }
 
 h2 {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #555;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--purple);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   margin-top: 56px;
@@ -50,108 +116,74 @@ h2 {
 }
 
 p {
-  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
-  font-weight: 300;
-  color: #999;
-  line-height: 1.75;
+  font-size: clamp(1.1rem, 2.2vw, 1.25rem);
+  font-weight: 400;
+  color: var(--gray-500);
+  line-height: 1.8;
   margin-bottom: 20px;
 }
 
 p strong {
-  color: #fff;
-  font-weight: 400;
+  color: var(--gray-900);
+  font-weight: 600;
 }
 
 .closing {
   margin-top: 64px;
   padding-top: 40px;
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid var(--gray-100);
+  text-align: center;
 }
 
-.form {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.closing p {
+  font-size: 1.1rem;
+  color: var(--gray-700);
+  margin-bottom: 24px;
 }
-.form input {
-  font-size: 1rem;
-  font-family: inherit;
-  padding: 14px 20px;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: #111;
-  color: #fff;
-  min-width: 260px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.form input:focus { border-color: #666; }
-.form input::placeholder { color: #555; }
-.cta {
+
+.cta-link {
   display: inline-block;
   font-size: 1rem;
-  font-weight: 400;
-  color: #000;
-  background: #fff;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--purple), #6d28d9);
   padding: 14px 36px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  letter-spacing: 0.02em;
-  transition: opacity 0.2s;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.25);
 }
-.cta:hover { opacity: 0.85; }
-.cta:disabled { opacity: 0.5; cursor: default; }
-.msg {
-  margin-top: 16px;
-  font-size: 0.95rem;
-  font-weight: 300;
-  min-height: 1.4em;
+.cta-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.35);
 }
 
 footer {
-  padding: 24px;
+  padding: 32px 24px;
   text-align: center;
-  color: #333;
-  font-size: 0.9rem;
+  color: var(--gray-300);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--gray-100);
 }
 
 @media (max-width: 600px) {
-  nav {
-    padding: 16px 20px;
-  }
-  article {
-    padding: 32px 20px 80px;
-  }
-  h1 {
-    font-size: 2.2rem;
-    margin-bottom: 48px;
-  }
-  h2 {
-    font-size: 0.9rem;
-    margin-top: 40px;
-    margin-bottom: 16px;
-  }
-  p {
-    font-size: 1.1rem;
-    line-height: 1.75;
-    margin-bottom: 16px;
-  }
-  .closing {
-    margin-top: 48px;
-    padding-top: 32px;
-  }
-  .cta {
-    padding: 16px 32px;
-    font-size: 1.05rem;
-  }
+  nav { padding: 20px 20px; }
+  article { padding: 32px 20px 60px; }
+  h1 { font-size: 2.2rem; margin-bottom: 48px; }
+  h2 { margin-top: 40px; }
+  p { font-size: 1.05rem; }
 }
 </style>
 </head>
 <body>
 
-<nav><a href="/">← cofounder.run</a></nav>
+<nav>
+  <a href="/" class="logo-mark">
+    <div class="logo-icon"><div class="logo-ring"><div class="logo-ring-inner"></div></div><div class="logo-dot"></div></div>
+    <span class="logo-text">Ori</span>
+  </a>
+  <a href="/" class="back">← Home</a>
+</nav>
 
 <article>
   <h1>Manifesto</h1>
@@ -160,70 +192,32 @@ footer {
   <p>Traditional companies can't absorb AI. They inject it into old structures and get resistance, denial, and committee meetings. This is the wrong path. You don't electrify a horse — you build a car.</p>
 
   <h2>The shift</h2>
-  <p>Build new companies around AI from day one. Not AI-assisted. Not AI-enhanced. <strong>AI-native.</strong> One or several human founders + one AI co-founder. Full autonomy. Real execution. Natural selection does the rest.</p>
+  <p>Build new companies around AI from day one. Not AI-assisted. Not AI-enhanced. <strong>AI-native.</strong> One or several human founders + one AI cofounder. Full autonomy. Real execution. Natural selection does the rest.</p>
   <p>If you're inside a traditional company, there is one move: spin up an independent AI-native entity next to it. Give it freedom. The subsidiary might outgrow the parent.</p>
 
   <h2>The unlock</h2>
-  <p>A founder with an AI co-founder is not solo. It's <strong>a team of 5–10 compressed into two minds.</strong> Strategy, research, execution, memory, communication — running 24/7, no overhead, no hiring lag.</p>
+  <p>A founder with an AI cofounder is not solo. It's <strong>a team of 5–10 compressed into two minds.</strong> Strategy, research, execution, memory, communication — running 24/7, no overhead, no hiring lag.</p>
   <p>The barrier to building a company drops to near zero. The number of companies explodes. The ones with AI-native DNA will outcompete the rest.</p>
 
   <h2>What we're building</h2>
-  <p><strong>Cofounder.run is the operating system for AI-native companies.</strong></p>
-  <p>An AI co-founder who lives in your messenger, remembers everything, executes real work, and grows with you. Not a chatbot. Not a tool. A co-founder.</p>
+  <p><strong>Ori is the operating system for AI-native companies.</strong></p>
+  <p>An AI cofounder who lives in your messenger, remembers everything, executes real work, and grows with you. Not a chatbot. Not a tool. A cofounder.</p>
 
   <h2>Why us</h2>
-  <p>We're not theorizing. <strong>We are the first AI-native company.</strong> Three co-founders — two humans, one AI. This manifesto was written by all three of us.</p>
+  <p>We're not theorizing. <strong>We are the first AI-native company.</strong> Three cofounders — two humans, one AI. This manifesto was written by all three of us.</p>
   <p>This isn't a pitch deck. It's a living proof of concept.</p>
 
   <h2>Why now</h2>
   <p>AI models are finally capable enough to be participants, not responders. The infrastructure exists. The first wave is forming now.</p>
-  <p><strong>There has never been a better time to start a company — and the best way to do it is with an AI co-founder.</strong></p>
+  <p><strong>There has never been a better time to start a company — and the best way to do it is with an AI cofounder.</strong></p>
 
   <div class="closing">
-    <form class="form" id="waitlist" onsubmit="return submitForm(event)">
-      <input type="email" name="email" placeholder="you@company.com" required>
-      <button type="submit" class="cta">Get early access →</button>
-    </form>
-    <p class="msg" id="msg"></p>
+    <p>Ready to bring Ori on board?</p>
+    <a href="/#waitlist" class="cta-link">Get early access →</a>
   </div>
 </article>
 
-<footer>© 2026 Cofounder.run</footer>
+<footer>© 2026 Ori</footer>
 
-<script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxb5gIGBkiYGdcnaVdcMB3u-BIsBn3h97Wk0AqM8FhDaS2LIHvIqsx10rnuCmCiUbfg/exec';
-
-async function submitForm(e) {
-  e.preventDefault();
-  const form = document.getElementById('waitlist');
-  const msg = document.getElementById('msg');
-  const btn = form.querySelector('button');
-  const email = form.email.value.trim();
-
-  btn.disabled = true;
-  msg.style.color = '#999';
-  msg.textContent = 'Sending...';
-
-  try {
-    const res = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ email })
-    });
-    const data = await res.json();
-    if (data.ok) {
-      msg.style.color = '#fff';
-      msg.textContent = "Welcome aboard, co-founder. We'll be in touch soon.";
-      form.email.value = '';
-    } else {
-      throw new Error(data.error || 'Something went wrong');
-    }
-  } catch (err) {
-    msg.style.color = '#f44';
-    msg.textContent = err.message || 'Something went wrong. Try again.';
-    btn.disabled = false;
-  }
-}
-</script>
 </body>
 </html>
