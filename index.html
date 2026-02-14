@@ -533,12 +533,12 @@ async function submitForm(e) {
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ telegram })
+      body: JSON.stringify({ email: telegram, telegram: telegram })
     });
     const data = await res.json();
-    if (data.ok) {
+    if (data.ok || data.result === 'success') {
       msg.style.color = '#7c3aed';
-      msg.textContent = "Got it. I'll reach out on Telegram soon.";
+      msg.textContent = "Got it. We'll reach out soon.";
       form.telegram.value = '';
     } else {
       throw new Error(data.error || 'Something went wrong');
