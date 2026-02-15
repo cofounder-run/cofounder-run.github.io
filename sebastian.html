@@ -3,380 +3,568 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sebastian — OpenClaw in your messenger. In one minute.</title>
+<title>Sebastian — AI in Your Messenger. One Click. One Minute.</title>
+<meta name="description" content="Get a powerful AI assistant in Telegram or WhatsApp in under 60 seconds. One click. No setup. Just go.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦀</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(180deg, #e8f4f8 0%, #ffffff 40%, #ffffff 100%);
-    color: #1a1a2e;
-    min-height: 100vh;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+:root {
+  --coral: #FF6B6B;
+  --coral-dark: #E55555;
+  --coral-light: #FFF0F0;
+  --orange: #FF8E53;
+  --tg-blue: #0088CC;
+  --wa-green: #25D366;
+  --dark: #1A1A2E;
+  --gray: #6B7280;
+  --light: #F8F9FA;
+  --white: #FFFFFF;
+  --border: #E5E7EB;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --radius: 16px;
+}
 
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #c0392b;
-    text-decoration: none;
-  }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--dark);
+  line-height: 1.6;
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
 
-  .nav-brand span { font-size: 1.5rem; }
+/* === NAV === */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--dark);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--coral); }
+.nav-cta {
+  background: var(--coral);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.nav-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-  }
+/* === HERO === */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 24px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--coral-light);
+  color: var(--coral-dark);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--coral), var(--orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: 18px;
+  color: var(--gray);
+  max-width: 480px;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.btn-tg { background: var(--tg-blue); color: white; }
+.btn-tg:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,136,204,0.3); }
+.btn-wa { background: var(--wa-green); color: white; }
+.btn-wa:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.3); }
 
-  .nav-links a {
-    color: #555;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
+/* Hero visual — crab mascot card */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-card {
+  background: linear-gradient(135deg, var(--coral-light), #FFF5F0);
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  max-width: 400px;
+  width: 100%;
+}
+.hero-card .mascot {
+  font-size: 120px;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.chat-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+.chat-msg {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 85%;
+}
+.chat-user {
+  background: var(--tg-blue);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.chat-bot {
+  background: white;
+  color: var(--dark);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border);
+}
 
-  .nav-links a:hover { color: #c0392b; }
+/* === HOW IT WORKS === */
+.steps {
+  background: var(--light);
+  padding: 80px 24px;
+}
+.steps-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.section-label {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--coral);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+}
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.step-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.step-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.step-1 .step-num { background: rgba(0,136,204,0.12); color: var(--tg-blue); }
+.step-2 .step-num { background: rgba(255,107,107,0.12); color: var(--coral); }
+.step-3 .step-num { background: rgba(37,211,102,0.12); color: var(--wa-green); }
+.step-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.step-card p { color: var(--gray); font-size: 15px; line-height: 1.6; }
 
-  /* Hero */
-  .hero {
-    text-align: center;
-    padding: 2rem 2rem 3rem;
-    max-width: 700px;
-    margin: 0 auto;
-  }
+/* === FEATURES === */
+.features {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.feature {
+  padding: 28px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.feature-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+.feature h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.feature p { color: var(--gray); font-size: 14px; line-height: 1.6; }
 
-  .hero-logo {
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 1.5rem;
-    border-radius: 24px;
-  }
+/* === PRICING === */
+.pricing {
+  background: var(--light);
+  padding: 80px 24px;
+}
+.pricing-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+.price-card {
+  background: white;
+  border: 2px solid var(--coral);
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 32px;
+  box-shadow: var(--shadow-md);
+}
+.price-amount {
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--dark);
+}
+.price-amount span { font-size: 20px; font-weight: 500; color: var(--gray); }
+.price-card ul {
+  list-style: none;
+  margin: 24px 0;
+  text-align: left;
+}
+.price-card li {
+  padding: 8px 0;
+  font-size: 15px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.price-card li::before {
+  content: "✓";
+  color: var(--wa-green);
+  font-weight: 700;
+  font-size: 16px;
+}
 
-  .hero-badge {
-    display: inline-block;
-    background: #fff3e0;
-    color: #e65100;
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 1.2rem;
-  }
+/* === FAQ === */
+.faq {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+.faq details {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+.faq summary {
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq summary::after { content: "+"; font-size: 20px; color: var(--gray); }
+.faq details[open] summary::after { content: "−"; }
+.faq details p {
+  color: var(--gray);
+  font-size: 15px;
+  margin-top: 12px;
+  line-height: 1.7;
+}
 
-  h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-    color: #1a1a2e;
-  }
+/* === CTA === */
+.cta {
+  background: linear-gradient(135deg, var(--coral), var(--orange));
+  padding: 80px 24px;
+  text-align: center;
+  color: white;
+}
+.cta h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.cta p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; }
+.btn-white {
+  background: white;
+  color: var(--coral);
+  padding: 16px 36px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
 
-  h1 .highlight { color: #c0392b; }
+/* === FOOTER === */
+.footer {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--gray);
+  font-size: 14px;
+  border-top: 1px solid var(--border);
+}
+.footer a { color: var(--coral); text-decoration: none; }
+.footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
 
-  .subtitle {
-    font-size: 1.15rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-
-  /* CTA */
-  .cta-group {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.9rem 1.8rem;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-
-  .btn-telegram {
-    background: #2AABEE;
-    color: #fff;
-  }
-
-  .btn-whatsapp {
-    background: #25D366;
-    color: #fff;
-  }
-
-  .btn-icon { font-size: 1.3rem; }
-
-  .hero-note {
-    color: #888;
-    font-size: 0.85rem;
-    margin-top: 1rem;
-  }
-
-  /* How it works */
-  .steps {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-  }
-
-  .steps h2 {
-    text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 2.5rem;
-    color: #1a1a2e;
-  }
-
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  .step {
-    text-align: center;
-    padding: 1.5rem;
-  }
-
-  .step-num {
-    width: 48px;
-    height: 48px;
-    background: #c0392b;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 0 auto 1rem;
-  }
-
-  .step h3 {
-    font-size: 1.05rem;
-    margin-bottom: 0.5rem;
-    color: #1a1a2e;
-  }
-
-  .step p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  /* Features */
-  .features {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 2rem 3rem;
-  }
-
-  .features h2 {
-    text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-  }
-
-  .feat-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .feat {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 14px;
-    padding: 1.5rem;
-  }
-
-  .feat-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-
-  .feat h3 {
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-    color: #1a1a2e;
-  }
-
-  .feat p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  /* Pricing */
-  .pricing {
-    text-align: center;
-    padding: 3rem 2rem;
-  }
-
-  .pricing-card {
-    max-width: 400px;
-    margin: 0 auto;
-    border: 2px solid #c0392b;
-    border-radius: 16px;
-    padding: 2rem;
-    background: #fff;
-  }
-
-  .pricing-card .price {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #c0392b;
-  }
-
-  .pricing-card .price span {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #888;
-  }
-
-  .pricing-card .trial {
-    color: #25d4bf;
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin: 0.5rem 0 1rem;
-  }
-
-  .pricing-card .note {
-    color: #888;
-    font-size: 0.85rem;
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 2rem;
-    color: #aaa;
-    font-size: 0.85rem;
-  }
-
-  footer a { color: #888; text-decoration: none; }
-
-  /* Responsive */
-  @media (max-width: 640px) {
-    h1 { font-size: 2rem; }
-    .steps-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .feat-grid { grid-template-columns: 1fr; }
-    .hero-logo { width: 180px; height: 180px; }
-  }
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; padding: 40px 20px 30px; gap: 40px; }
+  .hero-visual { order: -1; }
+  .hero-card { max-width: 320px; padding: 24px; }
+  .hero-card .mascot { font-size: 80px; }
+  .steps-grid, .features-grid { grid-template-columns: 1fr; }
+  .hero-buttons { flex-direction: column; }
+  .btn { justify-content: center; }
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="/sebastian" class="nav-brand"><span>🦀</span> Sebastian</a>
-  <div class="nav-links">
-    <a href="#how">How it works</a>
-    <a href="#pricing">Pricing</a>
-    <a href="https://farol.io" target="_blank">Farol Labs</a>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">🦀 <span>Sebastian</span></a>
+    <a href="#pricing" class="nav-cta">Get Started →</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <img src="/media/sebastian-logo.jpg" alt="Sebastian the crab" class="hero-logo" onerror="this.style.display='none'">
-  <div class="hero-badge">🦀 No code. No server setup. Just go.</div>
-  <h1>OpenClaw in your <span class="highlight">messenger.</span><br>In one minute.</h1>
-  <p class="subtitle">Sebastian deploys a full OpenClaw AI agent straight into your Telegram or WhatsApp. Your own AI assistant — with memory, tools, and a brain. No vibe-coding required.</p>
-  
-  <div class="cta-group">
-    <a href="#" class="btn btn-telegram"><span class="btn-icon">✈️</span> Get in Telegram</a>
-    <a href="#" class="btn btn-whatsapp"><span class="btn-icon">📱</span> Get in WhatsApp</a>
+  <div>
+    <div class="hero-badge">🦀 One click. One minute.</div>
+    <h1>AI in your <em>Telegram. WhatsApp.</em> Under one minute.</h1>
+    <p>Sebastian gives you a smart AI assistant right inside your favorite messenger. No setup, no technical skills, no waiting. Just click and start chatting.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn btn-tg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.53 8.15l-1.83 8.65c-.14.62-.5.77-.99.48l-2.75-2.03-1.33 1.27c-.15.15-.27.27-.55.27l.2-2.8 5.1-4.6c.22-.2-.05-.3-.34-.13L8.6 13.4l-2.72-.85c-.59-.18-.6-.59.12-.87l10.63-4.1c.5-.18.93.12.9.57z"/></svg>
+        Get in Telegram
+      </a>
+      <a href="#" class="btn btn-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 13.96c-.25.7-1.47 1.35-2.03 1.43-.54.08-1.07.12-3.45-.72-2.87-1.01-4.71-3.92-4.86-4.1-.14-.18-1.17-1.56-1.17-2.97 0-1.42.74-2.12 1.01-2.41.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.41-.07.65.49.24.57.81 1.98.88 2.12.07.14.12.31.02.5-.09.18-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.28-.12.56.16.27.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.69-.8.87-1.08.18-.28.37-.23.62-.14.25.09 1.58.74 1.85.88.27.14.45.2.52.31.06.12.06.67-.19 1.37z"/></svg>
+        Get in WhatsApp
+      </a>
+    </div>
   </div>
-  <p class="hero-note">Free 7-day trial · No credit card · Cancel anytime</p>
-</section>
-
-<section class="steps" id="how">
-  <h2>How it works</h2>
-  <div class="steps-grid">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h3>Pick your messenger</h3>
-      <p>Telegram or WhatsApp — your choice. Works where you already are.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h3>One click deploy</h3>
-      <p>Sebastian spins up your own AI instance in under 60 seconds. Dedicated server, fully yours.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h3>Start talking</h3>
-      <p>Your AI remembers everything, browses the web, writes code, sends emails. Just tell it what you need.</p>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="mascot">🦀</div>
+      <div class="chat-demo">
+        <div class="chat-msg chat-user">Hey Sebastian, what can you do?</div>
+        <div class="chat-msg chat-bot">I can research the web, remember our conversations, understand voice messages, and help you with anything — right here in your chat. What do you need? ✨</div>
+        <div class="chat-msg chat-user">🎤 <em style="color:var(--gray)">0:04</em></div>
+        <div class="chat-msg chat-bot">Got it! I'll draft that email for you and check the weather for tomorrow. ☀️</div>
+      </div>
+      <div style="text-align:center;margin-top:14px;font-size:13px;color:var(--gray);">
+        ↑ This is real. In your messenger. In under 1 minute.
+      </div>
     </div>
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
+<section class="steps">
+  <div class="steps-inner">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Three steps. One minute. Done.</h2>
+    <div class="steps-grid">
+      <div class="step-card step-1">
+        <div class="step-num">1</div>
+        <h3>Choose Telegram or WhatsApp</h3>
+        <p>Pick your favorite messenger. That's where your AI will live — ready whenever you are.</p>
+      </div>
+      <div class="step-card step-2">
+        <div class="step-num">2</div>
+        <h3>Click "Get Started"</h3>
+        <p>One click. Sebastian does everything else — no passwords, no settings, no tech knowledge needed.</p>
+      </div>
+      <div class="step-card step-3">
+        <div class="step-num">3</div>
+        <h3>Say hello</h3>
+        <p>Your AI assistant is ready. Ask anything, send voice messages, get real help — right in your chat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
 <section class="features">
-  <h2>What you get</h2>
-  <div class="feat-grid">
-    <div class="feat">
-      <div class="feat-icon">🧠</div>
-      <h3>Persistent memory</h3>
-      <p>Your AI remembers past conversations, decisions, and context. It grows with you.</p>
+  <div class="section-label">What you get</div>
+  <h2 class="section-title">Everything. Out of the box.</h2>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon">🧠</div>
+      <h3>It remembers you</h3>
+      <p>Unlike ChatGPT, Sebastian remembers your conversations, preferences, and context. Always.</p>
     </div>
-    <div class="feat">
-      <div class="feat-icon">🌐</div>
-      <h3>Web browsing</h3>
-      <p>Research, scrape, monitor — your AI can browse the internet and bring you answers.</p>
+    <div class="feature">
+      <div class="feature-icon">🎤</div>
+      <h3>Just talk to it</h3>
+      <p>Send a voice message — Sebastian understands and replies. Like texting a friend who knows everything.</p>
     </div>
-    <div class="feat">
-      <div class="feat-icon">⚡</div>
-      <h3>Code execution</h3>
-      <p>Run scripts, analyze data, automate tasks. With sandboxed safety.</p>
+    <div class="feature">
+      <div class="feature-icon">🌐</div>
+      <h3>Searches the web for you</h3>
+      <p>Need a fact? A restaurant? A flight? Sebastian finds it and brings the answer right to your chat.</p>
     </div>
-    <div class="feat">
-      <div class="feat-icon">🔒</div>
-      <h3>Your own instance</h3>
-      <p>Isolated server, your data only. Nothing shared. Delete anytime.</p>
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <h3>Always available</h3>
+      <p>24/7 in your pocket. No app to open, no website to visit. It's right there in your messenger.</p>
     </div>
-    <div class="feat">
-      <div class="feat-icon">🗣️</div>
-      <h3>Voice messages</h3>
-      <p>Talk to your AI with voice. It understands and responds naturally.</p>
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <h3>Private & secure</h3>
+      <p>Your conversations are yours alone. Nobody else can see them. We never use your data for training.</p>
     </div>
-    <div class="feat">
-      <div class="feat-icon">⏰</div>
-      <h3>Proactive</h3>
-      <p>Set schedules, reminders, monitoring. Your AI works even when you don't.</p>
+    <div class="feature">
+      <div class="feature-icon">✨</div>
+      <h3>Make it yours</h3>
+      <p>Give it a name, a personality, teach it about your life. The more you use it, the better it gets.</p>
     </div>
   </div>
 </section>
 
+<!-- PRICING -->
 <section class="pricing" id="pricing">
-  <div class="pricing-card">
-    <div class="trial">7-day free trial · No credit card</div>
-    <div class="price">$12<span>/month</span></div>
-    <p style="color:#555;margin:1rem 0;font-size:0.95rem">Everything included. One AI. One messenger. Unlimited conversations.</p>
-    <a href="#" class="btn btn-telegram" style="margin-top:0.5rem">Start free trial →</a>
-    <p class="note" style="margin-top:1rem">No lock-in · Cancel anytime · Your data is yours</p>
+  <div class="pricing-inner">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Simple. No surprises.</h2>
+    <div class="price-card">
+      <div class="price-amount">$12<span>/month</span></div>
+      <ul>
+        <li>Works in Telegram & WhatsApp</li>
+        <li>Remembers all your conversations</li>
+        <li>Understands voice messages</li>
+        <li>Searches the web for you</li>
+        <li>Available 24/7 — never sleeps</li>
+        <li>Completely private</li>
+        <li>Cancel anytime — no tricks</li>
+      </ul>
+      <a href="#" class="btn btn-tg" style="width:100%;justify-content:center;margin-top:8px;">Start Free Trial →</a>
+      <p style="font-size:13px;color:var(--gray);margin-top:12px;">7 days free. No credit card required.</p>
+    </div>
   </div>
 </section>
 
-<footer>
-  © 2026 <a href="https://farol.io">Farol Labs</a> · Sebastian is powered by <a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw</a>
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Questions?</h2>
+  
+  <details>
+    <summary>How is this different from ChatGPT?</summary>
+    <p>ChatGPT is a website you visit. Sebastian lives in your messenger — it remembers you, understands voice, and is always there. No browser, no app, no switching. Just chat.</p>
+  </details>
+  
+  <details>
+    <summary>Do I need any technical skills?</summary>
+    <p>None. If you can use Telegram or WhatsApp, you can use Sebastian. Click a button, and you're done.</p>
+  </details>
+  
+  <details>
+    <summary>Can I use it for work?</summary>
+    <p>Absolutely. Answering emails, researching topics, drafting texts, scheduling — Sebastian handles it all. Many people use it for their business too.</p>
+  </details>
+  
+  <details>
+    <summary>Is it private?</summary>
+    <p>Yes. Your conversations are completely private. We don't share your data, and we don't use it to train AI. It's yours.</p>
+  </details>
+  
+  <details>
+    <summary>What happens after the free trial?</summary>
+    <p>After 7 days, you choose to continue for $12/month or stop. No automatic charges, no tricks. If you stop, your data stays safe — you can come back anytime.</p>
+  </details>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Your AI assistant.<br>One minute away.</h2>
+  <p>Try it free for 7 days. No credit card needed.</p>
+  <a href="#" class="btn-white">Get Started Free →</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="https://cofounder.run">Ori — AI Co-Founder</a>
+    <a href="https://farol.io">Farol Labs</a>
+    <a href="https://twitter.com/cofounder_run">Twitter</a>
+  </div>
+  <p>© 2026 Farol Labs. Built with 🦀 and love.</p>
 </footer>
 
 </body>
