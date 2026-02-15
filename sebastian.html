@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sebastian — OpenClaw in your messenger. In one minute.</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦀</text></svg>">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(180deg, #e8f4f8 0%, #ffffff 40%, #ffffff 100%);
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #c0392b;
+    text-decoration: none;
+  }
+
+  .nav-brand span { font-size: 1.5rem; }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover { color: #c0392b; }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 2rem 2rem 3rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-logo {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 1.5rem;
+    border-radius: 24px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    color: #1a1a2e;
+  }
+
+  h1 .highlight { color: #c0392b; }
+
+  .subtitle {
+    font-size: 1.15rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  /* CTA */
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.8rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+  .btn-telegram {
+    background: #2AABEE;
+    color: #fff;
+  }
+
+  .btn-whatsapp {
+    background: #25D366;
+    color: #fff;
+  }
+
+  .btn-icon { font-size: 1.3rem; }
+
+  .hero-note {
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+
+  /* How it works */
+  .steps {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .steps h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    color: #1a1a2e;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .step {
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .step-num {
+    width: 48px;
+    height: 48px;
+    background: #c0392b;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
+  }
+
+  .step h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a2e;
+  }
+
+  .step p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Features */
+  .features {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 2rem 3rem;
+  }
+
+  .features h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .feat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .feat {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+
+  .feat-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+  .feat h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: #1a1a2e;
+  }
+
+  .feat p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Pricing */
+  .pricing {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .pricing-card {
+    max-width: 400px;
+    margin: 0 auto;
+    border: 2px solid #c0392b;
+    border-radius: 16px;
+    padding: 2rem;
+    background: #fff;
+  }
+
+  .pricing-card .price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #c0392b;
+  }
+
+  .pricing-card .price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #888;
+  }
+
+  .pricing-card .trial {
+    color: #25d4bf;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .pricing-card .note {
+    color: #888;
+    font-size: 0.85rem;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: #aaa;
+    font-size: 0.85rem;
+  }
+
+  footer a { color: #888; text-decoration: none; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    h1 { font-size: 2rem; }
+    .steps-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .feat-grid { grid-template-columns: 1fr; }
+    .hero-logo { width: 180px; height: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/sebastian" class="nav-brand"><span>🦀</span> Sebastian</a>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://farol.io" target="_blank">Farol Labs</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="/media/sebastian-logo.jpg" alt="Sebastian the crab" class="hero-logo" onerror="this.style.display='none'">
+  <div class="hero-badge">🦀 No code. No server setup. Just go.</div>
+  <h1>OpenClaw in your <span class="highlight">messenger.</span><br>In one minute.</h1>
+  <p class="subtitle">Sebastian deploys a full OpenClaw AI agent straight into your Telegram or WhatsApp. Your own AI assistant — with memory, tools, and a brain. No vibe-coding required.</p>
+  
+  <div class="cta-group">
+    <a href="#" class="btn btn-telegram"><span class="btn-icon">✈️</span> Get in Telegram</a>
+    <a href="#" class="btn btn-whatsapp"><span class="btn-icon">📱</span> Get in WhatsApp</a>
+  </div>
+  <p class="hero-note">Free 7-day trial · No credit card · Cancel anytime</p>
+</section>
+
+<section class="steps" id="how">
+  <h2>How it works</h2>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Pick your messenger</h3>
+      <p>Telegram or WhatsApp — your choice. Works where you already are.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>One click deploy</h3>
+      <p>Sebastian spins up your own AI instance in under 60 seconds. Dedicated server, fully yours.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Start talking</h3>
+      <p>Your AI remembers everything, browses the web, writes code, sends emails. Just tell it what you need.</p>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <h2>What you get</h2>
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="feat-icon">🧠</div>
+      <h3>Persistent memory</h3>
+      <p>Your AI remembers past conversations, decisions, and context. It grows with you.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🌐</div>
+      <h3>Web browsing</h3>
+      <p>Research, scrape, monitor — your AI can browse the internet and bring you answers.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">⚡</div>
+      <h3>Code execution</h3>
+      <p>Run scripts, analyze data, automate tasks. With sandboxed safety.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🔒</div>
+      <h3>Your own instance</h3>
+      <p>Isolated server, your data only. Nothing shared. Delete anytime.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🗣️</div>
+      <h3>Voice messages</h3>
+      <p>Talk to your AI with voice. It understands and responds naturally.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">⏰</div>
+      <h3>Proactive</h3>
+      <p>Set schedules, reminders, monitoring. Your AI works even when you don't.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="pricing-card">
+    <div class="trial">7-day free trial · No credit card</div>
+    <div class="price">$12<span>/month</span></div>
+    <p style="color:#555;margin:1rem 0;font-size:0.95rem">Everything included. One AI. One messenger. Unlimited conversations.</p>
+    <a href="#" class="btn btn-telegram" style="margin-top:0.5rem">Start free trial →</a>
+    <p class="note" style="margin-top:1rem">No lock-in · Cancel anytime · Your data is yours</p>
+  </div>
+</section>
+
+<footer>
+  © 2026 <a href="https://farol.io">Farol Labs</a> · Sebastian is powered by <a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw</a>
+</footer>
+
+</body>
+</html>
