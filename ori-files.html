@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ori — Workspace Files</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:#0d0d12; color:#e0e0e8; min-height:100vh; padding:24px; }
+h1 { font-size:1.6rem; font-weight:700; margin-bottom:6px; background:linear-gradient(135deg,#a78bfa,#60a5fa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.subtitle { color:#888; font-size:.85rem; margin-bottom:28px; }
+.tree { max-width:720px; margin:0 auto; }
+.folder { margin-bottom:2px; }
+.folder-header { display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; cursor:pointer; user-select:none; transition:background .15s; font-weight:600; font-size:.9rem; }
+.folder-header:hover { background:#1a1a24; }
+.folder-header .icon { font-size:1.1rem; }
+.folder-header .arrow { transition:transform .2s; font-size:.7rem; color:#666; }
+.folder.open > .folder-header .arrow { transform:rotate(90deg); }
+.folder-children { display:none; padding-left:20px; border-left:1px solid #222; margin-left:16px; }
+.folder.open > .folder-children { display:block; }
+.file { display:flex; align-items:center; gap:8px; padding:6px 12px; border-radius:6px; font-size:.82rem; color:#aab; transition:background .15s; }
+.file:hover { background:#1a1a24; }
+.file .icon { font-size:.9rem; }
+.ext-md { color:#60a5fa; }
+.ext-html { color:#f97316; }
+.ext-json { color:#facc15; }
+.ext-svg { color:#a78bfa; }
+.ext-png { color:#34d399; }
+.ext-py { color:#22d3ee; }
+.ext-sh { color:#f472b6; }
+.ext-pdf { color:#ef4444; }
+.ext-css { color:#c084fc; }
+.ext-env { color:#888; }
+.ext-gs { color:#22d3ee; }
+.count { font-size:.7rem; color:#666; margin-left:auto; }
+</style>
+</head>
+<body>
+<div class="tree">
+<h1>✨ Ori Workspace</h1>
+<p class="subtitle">/home/exedev/.openclaw/workspace/ — все файлы</p>
+
+<div id="root"></div>
+</div>
+
+<script>
+const structure = {
+  "📋 Корневые файлы": {
+    _files: ["AGENTS.md","SOUL.md","USER.md","IDENTITY.md","MEMORY.md","HEARTBEAT.md","TOOLS.md","tasks.md",".gitignore"]
+  },
+  "🧠 memory/": {
+    _files: ["2026-02-11.md","2026-02-12.md","2026-02-13.md","2026-02-14.md","2026-02-15.md","2026-02-16.md","2026-02-17.md","2026-02-18.md","heartbeat-state.json","todos-leonid.md","lex-fridman-491-second-half-summary.md"],
+    "💬 chat-logs/": { _files: ["2026-02-16-founders-workspace.md"] }
+  },
+  "🏛 board-meetings/": {
+    _files: ["2026-02-13.md","2026-02-13-hypotheses.md","2026-02-14.md","2026-02-15.md","2026-02-16.md","2026-02-17.md","2026-02-18.md"]
+  },
+  "📦 product/": {
+    _files: ["BOOTSTRAP.md","PHILOSOPHY.md","manifesto.md","onboarding.md","onboarding-protocol.md","system-prompt-client.md","pcm-guide.md","pcm-markers.pdf","pcm-practices.pdf","reputation-system.md","producthunt-draft.md","sebastian-skills-v1.md","sebastian-skills-board-review.md"]
+  },
+  "🔬 research/": {
+    _files: ["competitors-ai-native-os.md","competitor-analysis-sebastian-2026-02-16.md","hypothesis-business-workflows.md","mvp-ai-native-os.md","mvp-ubuntu-messenger.md"],
+    "📂 example-workflows/": {
+      _files: ["solo-founder-ops.md","flower-shop-orders.md","freelancer-crm.md"],
+      "🌸 flower-shop-full/": { _files: ["README.md","SOUL.md","HEARTBEAT.md","CATALOG.md","WORKFLOWS.md"] }
+    }
+  },
+  "💰 sales/": {
+    _files: ["pipeline-20-leads.md","first-100-users-plan.md","naora-pitch.md","deepn-pitch.md","deepn-presentation.html","security-faq.md"]
+  },
+  "📣 outreach/": {
+    _files: ["linkedin-prospects-20.md","message-drafts.md","contacts-research.md"]
+  },
+  "👥 advisors/": {
+    _files: ["SUMMARY.md","altman.md","amodei.md","andreessen.md","chesky.md","gershuni.md","mooji.md","musk.md","nielsen.md","rabois.md","srinivasan.md"]
+  },
+  "👔 team/": {
+    _files: ["README.md"],
+    "📊 cfo/": { _files: ["SOUL.md","CONTEXT.md","WORKFLOW.md"] },
+    "📢 cmo/": { _files: ["SOUL.md","CONTEXT.md","WORKFLOW.md"] },
+    "🎯 product/": { _files: ["SOUL.md","CONTEXT.md","WORKFLOW.md"] },
+    "💼 sales/": { _files: ["SOUL.md","CONTEXT.md","WORKFLOW.md"] },
+    "😊 customer-happiness/": { _files: ["SOUL.md","CONTEXT.md","WORKFLOW.md"] }
+  },
+  "🌐 landing/": {
+    _files: ["index.html","manifesto.html","sebastian.html","logo-or.html","logo-icons.html","logo-concepts.html","CLAUDE.md"],
+    "⚙️ apps-script/": { _files: ["Code.gs"] }
+  },
+  "🦀 sebastian-brand/": {
+    _files: ["landing.html","sebastian-logos.html","VOICE.md","sebastian-icon.svg","sebastian-icon-32.png","sebastian-icon-64.png","sebastian-icon-512.png","sebastian-palette.css","sebastian-palette.png","sebastian-logo.py"]
+  },
+  "🎨 design/": {
+    _files: ["sebastian-logo-v2.svg","sebastian-logo-v2.png","sebastian-v2a.svg","sebastian-v2a.png","sebastian-v2b.svg","sebastian-v2b.png","sebastian-v2c.svg","sebastian-v2c.png"]
+  },
+  "🖼 assets/": {
+    _files: ["ori-avatar.png","sebastian-logo-claw.png"]
+  },
+  "🔧 scripts/": {
+    _files: ["extract-chat-log.sh"]
+  }
+};
+
+function getExt(f) {
+  const m = f.match(/\.(\w+)$/);
+  return m ? m[1] : '';
+}
+function fileIcon(f) {
+  const ext = getExt(f);
+  const map = {md:'📄',html:'🌐',json:'📋',svg:'🎨',png:'🖼',py:'🐍',sh:'⚙️',pdf:'📕',css:'🎨',env:'🔒',gs:'⚙️',gitignore:'👁'};
+  return map[ext] || '📄';
+}
+
+function render(obj, parent) {
+  for (const [key, val] of Object.entries(obj)) {
+    if (key === '_files') {
+      val.forEach(f => {
+        const div = document.createElement('div');
+        div.className = 'file';
+        div.innerHTML = `<span class="icon">${fileIcon(f)}</span><span class="ext-${getExt(f)}">${f}</span>`;
+        parent.appendChild(div);
+      });
+    } else {
+      const folder = document.createElement('div');
+      folder.className = 'folder';
+      const fileCount = countFiles(val);
+      folder.innerHTML = `<div class="folder-header"><span class="arrow">▶</span><span>${key}</span><span class="count">${fileCount}</span></div><div class="folder-children"></div>`;
+      folder.querySelector('.folder-header').onclick = () => folder.classList.toggle('open');
+      render(val, folder.querySelector('.folder-children'));
+      parent.appendChild(folder);
+    }
+  }
+}
+function countFiles(obj) {
+  let c = 0;
+  for (const [k,v] of Object.entries(obj)) {
+    if (k === '_files') c += v.length;
+    else c += countFiles(v);
+  }
+  return c;
+}
+
+render(structure, document.getElementById('root'));
+// Auto-open root folders
+document.querySelectorAll('#root > .folder').forEach(f => f.classList.add('open'));
+</script>
+</body>
+</html>
