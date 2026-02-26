@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-native компания. Agentic Workflow.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0A0F1C;
+    --surface: #1E293B;
+    --surface2: #151D2E;
+    --border: #334155;
+    --text: #FFFFFF;
+    --text-dim: #94A3B8;
+    --cyan: #22D3EE;
+    --cyan-glow: rgba(34, 211, 238, 0.15);
+    --cyan-dim: rgba(34, 211, 238, 0.08);
+    --green: #68D391;
+    --green-dim: rgba(104, 211, 145, 0.12);
+    --red: #FC8181;
+    --red-dim: rgba(252, 129, 129, 0.08);
+    --purple: #B794F6;
+    --blue: #90CDF4;
+    --teal: #4FD1C5;
+    --yellow: #F6C244;
+    --footer: #475569;
+
+    --font-display: 'Manrope', sans-serif;
+    --font-accent: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+
+  body {
+    font-family: var(--font-display);
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── GRID BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--cyan);
+    z-index: 200;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px var(--cyan-glow);
+    width: 0%;
+  }
+
+  /* ─── SLIDE SYSTEM ─── */
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 4rem);
+    scroll-snap-align: start;
+    position: relative;
+    z-index: 1;
+  }
+  .slide-inner {
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  /* ─── NAV DOTS ─── */
+  nav {
+    position: fixed;
+    right: clamp(0.5rem, 1.5vw, 1.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  nav a {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  nav a:hover, nav a.active {
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan-glow);
+    transform: scale(1.4);
+  }
+
+  /* ─── TYPOGRAPHY ─── */
+  .hero-title {
+    font-size: clamp(2.5rem, 5.5vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--text-dim);
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 750px;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    line-height: 1.1;
+    color: var(--text);
+  }
+  h2.gradient {
+    color: var(--cyan);
+  }
+  .section-label {
+    font-family: var(--font-accent);
+    font-size: clamp(0.7rem, 1vw, 0.9rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    font-size: clamp(0.9rem, 1.3vw, 1.125rem);
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 720px;
+    margin-bottom: 40px;
+  }
+
+  /* ─── SLIDE NUM ─── */
+  .slide-num {
+    position: absolute;
+    bottom: 24px;
+    right: 40px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--footer);
+    font-weight: 500;
+  }
+
+  /* ─── BADGE ─── */
+  .badge-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.4em 1em;
+    font-size: clamp(0.65rem, 0.9vw, 0.875rem);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-dim);
+  }
+  .badge .b-icon { font-size: 14px; }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    background: var(--cyan-dim);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin-top: 24px;
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    color: var(--cyan);
+    text-align: center;
+    font-weight: 600;
+  }
+
+  /* ─── CARDS (problem-grid) ─── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    margin-top: 36px;
+  }
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(1rem, 2vw, 1.75rem);
+    transition: transform 0.2s;
+  }
+  .problem-card:hover { transform: translateY(-3px); }
+  .problem-card .pc-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+  .problem-card .pc-title {
+    font-family: var(--font-accent);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .problem-card .pc-desc {
+    font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ─── THESIS BOX ─── */
+  .thesis-box-rounded {
+    background: var(--surface2);
+    border: 2px solid rgba(34, 211, 238, 0.25);
+    border-radius: 16px;
+    padding: clamp(1.5rem, 3vw, 3rem);
+    text-align: center;
+    margin: 32px 0;
+  }
+  .thesis-main {
+    font-family: var(--font-accent);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    color: var(--cyan);
+  }
+  .thesis-sub {
+    font-size: clamp(0.9rem, 1.3vw, 1.125rem);
+    color: var(--text-dim);
+    line-height: 1.5;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* ─── COMPARE ─── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 36px;
+  }
+  .compare-before, .compare-after {
+    border-radius: 16px;
+    padding: clamp(1.25rem, 2vw, 2rem);
+  }
+  .compare-before {
+    background: rgba(252, 129, 129, 0.04);
+    border: 2px solid rgba(252, 129, 129, 0.15);
+  }
+  .compare-after {
+    background: rgba(34, 211, 238, 0.04);
+    border: 2px solid rgba(34, 211, 238, 0.15);
+  }
+  .compare-label {
+    font-family: var(--font-accent);
+    font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .compare-before .compare-label { color: var(--red); }
+  .compare-after .compare-label { color: var(--cyan); }
+  .compare-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .compare-list li {
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+    line-height: 1.5;
+    color: var(--text-dim);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .compare-list li .ci {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .compare-before .compare-list li .ci { color: var(--red); }
+  .compare-after .compare-list li .ci { color: var(--cyan); }
+
+  /* ─── HOW CARDS ─── */
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    margin-top: 36px;
+  }
+  .how-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(1rem, 2vw, 1.75rem);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .how-card:hover { transform: translateY(-3px); }
+  .how-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--teal));
+  }
+  .how-card .hc-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+  .how-card .hc-title {
+    font-family: var(--font-accent);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--cyan);
+  }
+  .how-card .hc-desc {
+    font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ─── FLOW GRID ─── */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    margin-top: 36px;
+  }
+  .flow-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(1rem, 2vw, 1.75rem);
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .flow-card:hover { transform: translateY(-3px); }
+  .flow-card .fc-step {
+    width: clamp(2rem, 3vw, 3rem);
+    height: clamp(2rem, 3vw, 3rem);
+    border-radius: 8px;
+    background: var(--cyan);
+    color: var(--bg);
+    font-size: clamp(0.9rem, 1.3vw, 1.25rem);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .flow-card .fc-title {
+    font-family: var(--font-accent);
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .flow-card .fc-desc {
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ─── TIMELINE / WAVES ─── */
+  .waves {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 36px;
+    position: relative;
+  }
+  .waves::before {
+    content: '';
+    position: absolute;
+    left: 60px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--border) 0%, var(--border) 60%, var(--cyan) 100%);
+  }
+  .wave-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+    position: relative;
+    min-height: 90px;
+  }
+  .wave-year {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 24px;
+    padding-right: 24px;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .wave-year-label {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--footer);
+  }
+  .wave-item.wave-active .wave-year-label {
+    color: var(--cyan);
+  }
+  .wave-dot {
+    position: absolute;
+    right: -7px;
+    top: 27px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 3px solid var(--footer);
+    background: var(--bg);
+    z-index: 2;
+  }
+  .wave-item.wave-active .wave-dot {
+    border-color: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan-glow);
+  }
+  .wave-content {
+    padding: 12px 0 12px 28px;
+  }
+  .wave-card {
+    border-radius: 12px;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: all 0.3s;
+  }
+  .wave-item.wave-active .wave-card {
+    border-color: rgba(34, 211, 238, 0.3);
+    background: var(--cyan-dim);
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.06);
+  }
+  .wave-card .wc-title {
+    font-family: var(--font-accent);
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .wave-item.wave-active .wave-card .wc-title {
+    color: var(--cyan);
+  }
+  .wave-card .wc-desc {
+    font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .wave-card .wc-examples {
+    font-family: var(--font-mono);
+    font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+    color: var(--footer);
+    margin-top: 6px;
+  }
+
+  /* ─── FORMULA ─── */
+  .formula {
+    margin-top: 28px;
+    text-align: center;
+    padding: clamp(1rem, 2vw, 1.75rem);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .formula-text {
+    font-family: var(--font-accent);
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: var(--cyan);
+  }
+
+  /* ─── ARCHITECTURE DIAGRAM ─── */
+  .arch-diagram { margin-top: 36px; }
+  .arch-platform {
+    background: var(--cyan-dim);
+    border: 2px solid rgba(34, 211, 238, 0.25);
+    border-radius: 16px;
+    padding: clamp(1.25rem, 2vw, 2rem);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .arch-platform .ap-title {
+    font-family: var(--font-accent);
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .arch-platform .ap-desc {
+    font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+    color: var(--text-dim);
+  }
+  .arch-agents {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.5rem, 1vw, 1rem);
+    margin-bottom: 12px;
+  }
+  .arch-agent {
+    border-radius: 12px;
+    padding: clamp(0.75rem, 1.5vw, 1.25rem) clamp(0.5rem, 1vw, 1rem);
+    text-align: center;
+  }
+  .arch-agent .aa-icon { font-size: 24px; margin-bottom: 6px; }
+  .arch-agent .aa-name {
+    font-family: var(--font-accent);
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .arch-agent .aa-role {
+    font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+    color: var(--text-dim);
+    line-height: 1.3;
+  }
+  .arch-agent .aa-docker {
+    font-family: var(--font-mono);
+    font-size: clamp(0.55rem, 0.7vw, 0.7rem);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-top: 6px;
+    display: inline-block;
+    background: rgba(255,255,255,0.06);
+    color: var(--footer);
+  }
+  /* ─── COFOUNDER AGENT HERO ─── */
+  .arch-cofounder {
+    background: rgba(34, 211, 238, 0.06);
+    border: 2px solid rgba(34, 211, 238, 0.3);
+    border-radius: 16px;
+    padding: clamp(1.25rem, 2vw, 2rem);
+    text-align: center;
+    margin-bottom: 16px;
+    position: relative;
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.08);
+  }
+  .arch-cofounder .aa-icon { font-size: 36px; margin-bottom: 8px; }
+  .arch-cofounder .aa-name {
+    font-family: var(--font-accent);
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .arch-cofounder .aa-role {
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+  .arch-cofounder .aa-docker {
+    font-family: var(--font-mono);
+    font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+    padding: 3px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-top: 8px;
+    display: inline-block;
+    background: rgba(34, 211, 238, 0.1);
+    color: var(--cyan);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+  }
+  .arch-arrows {
+    text-align: center;
+    font-size: 18px;
+    color: var(--cyan);
+    padding: 6px 0;
+    letter-spacing: 16px;
+    opacity: 0.6;
+  }
+  .arch-shared {
+    background: var(--surface);
+    border: 1.5px dashed var(--border);
+    border-radius: 12px;
+    padding: clamp(0.75rem, 1.5vw, 1.25rem) clamp(1rem, 2vw, 1.75rem);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .arch-shared .as-icon { font-size: 24px; min-width: 36px; text-align: center; }
+  .arch-shared .as-title {
+    font-family: var(--font-accent);
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .arch-shared .as-desc {
+    font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* ─── STATS / CASE STUDY ─── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.5rem, 1vw, 1rem);
+    margin-top: 28px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(1rem, 1.5vw, 1.5rem) clamp(0.75rem, 1vw, 1.25rem);
+    text-align: center;
+  }
+  .stat-card .sc-number {
+    font-family: var(--font-accent);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+  .stat-card .sc-number.green { color: var(--green); }
+  .stat-card .sc-number.amber { color: var(--yellow); }
+  .stat-card .sc-number.blue { color: var(--blue); }
+  .stat-card .sc-label {
+    font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+  .stat-card .sc-detail {
+    font-family: var(--font-mono);
+    font-size: clamp(0.55rem, 0.7vw, 0.7rem);
+    color: var(--footer);
+    margin-top: 4px;
+  }
+
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    align-items: center;
+    margin-top: 28px;
+  }
+  .ba-column {
+    border-radius: 16px;
+    padding: clamp(1rem, 2vw, 1.75rem);
+  }
+  .ba-column.before {
+    background: rgba(252, 129, 129, 0.04);
+    border: 2px solid rgba(252, 129, 129, 0.15);
+  }
+  .ba-column.after {
+    background: rgba(34, 211, 238, 0.04);
+    border: 2px solid rgba(34, 211, 238, 0.15);
+  }
+  .ba-column .ba-title {
+    font-family: var(--font-accent);
+    font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .ba-column.before .ba-title { color: var(--red); }
+  .ba-column.after .ba-title { color: var(--cyan); }
+  .ba-arrow {
+    text-align: center;
+    font-size: 28px;
+    color: var(--cyan);
+  }
+  .ba-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .ba-row:last-child { border-bottom: none; }
+  .ba-row .ba-metric {
+    font-size: clamp(0.75rem, 0.95vw, 0.875rem);
+    color: var(--text-dim);
+  }
+  .ba-row .ba-value {
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    font-weight: 700;
+  }
+  .ba-column.before .ba-value { color: var(--red); }
+  .ba-column.after .ba-value { color: var(--cyan); }
+
+  /* ─── MANIFESTO ─── */
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    margin-top: 36px;
+  }
+  .manifesto-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(1rem, 2vw, 1.75rem);
+    transition: transform 0.2s;
+  }
+  .manifesto-card:hover { transform: translateY(-3px); }
+  .manifesto-card .mc-title {
+    font-family: var(--font-accent);
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--cyan);
+  }
+  .manifesto-card .mc-desc {
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .manifesto-card .mc-quote {
+    font-family: var(--font-mono);
+    font-size: clamp(0.65rem, 0.8vw, 0.75rem);
+    color: var(--footer);
+    font-style: italic;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── CTA ─── */
+  .cta-box { text-align: center; padding: 20px 0; }
+  .cta-button {
+    display: inline-block;
+    background: var(--cyan);
+    color: var(--bg);
+    font-family: var(--font-accent);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 700;
+    padding: 18px 48px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 32px;
+  }
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--cyan-glow);
+  }
+
+  /* ─── REVEAL ANIMATION ─── */
+  .slide-inner > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  }
+  .slide.visible .slide-inner > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .slide.visible .slide-inner > *:nth-child(1) { transition-delay: 0.05s; }
+  .slide.visible .slide-inner > *:nth-child(2) { transition-delay: 0.12s; }
+  .slide.visible .slide-inner > *:nth-child(3) { transition-delay: 0.19s; }
+  .slide.visible .slide-inner > *:nth-child(4) { transition-delay: 0.26s; }
+  .slide.visible .slide-inner > *:nth-child(5) { transition-delay: 0.33s; }
+  .slide.visible .slide-inner > *:nth-child(6) { transition-delay: 0.40s; }
+  .slide.visible .slide-inner > *:nth-child(7) { transition-delay: 0.47s; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <a href="#s1" title="Cover"></a>
+  <a href="#s2" title="Волны AI"></a>
+  <a href="#s3" title="Почему сейчас"></a>
+  <a href="#s4" title="Agentic Workflow"></a>
+  <a href="#s5" title="OpenClaw"></a>
+  <a href="#s6" title="Multi-agent"></a>
+  <a href="#s7" title="CTA"></a>
+</nav>
+
+<!-- ════════════ SLIDE 1: COVER ════════════ -->
+<section class="slide" id="s1">
+  <div class="slide-inner">
+    <div class="section-label">cofounder.run</div>
+    <h1 class="hero-title">AI-native компания.<br>Уже не будущее.</h1>
+    <p class="hero-sub">
+      Не чат-бот. Не автоматизация. Команда AI-агентов, которая работает как сотрудники.
+    </p>
+
+    <div class="badge-row" style="margin-top: 32px;">
+      <div class="badge"><span class="b-icon">🤖</span> Agentic Workflow</div>
+      <div class="badge"><span class="b-icon">🧠</span> OpenClaw</div>
+      <div class="badge"><span class="b-icon">🐳</span> Docker-изоляция</div>
+      <div class="badge"><span class="b-icon">👥</span> Multi-agent</div>
+    </div>
+  </div>
+  <div class="slide-num">01 / 07</div>
+</section>
+
+<!-- ════════════ SLIDE 2: ЧЕТЫРЕ ВОЛНЫ AI ════════════ -->
+<section class="slide" id="s2">
+  <div class="slide-inner">
+    <div class="section-label">Эволюция</div>
+    <h2>Четыре волны AI в бизнесе</h2>
+    <p class="subtitle">
+      От инструментов к командам агентов. Каждая волна меняла отношение к AI.
+    </p>
+
+    <div class="waves">
+      <div class="wave-item">
+        <div class="wave-year">
+          <span class="wave-year-label">2022</span>
+          <div class="wave-dot"></div>
+        </div>
+        <div class="wave-content">
+          <div class="wave-card">
+            <div class="wc-title">Инструменты</div>
+            <div class="wc-desc">Человек спрашивает — AI отвечает. Одноразовое взаимодействие. Нет памяти, нет контекста, нет действий.</div>
+            <div class="wc-examples">ChatGPT, Copilot, Midjourney</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wave-item">
+        <div class="wave-year">
+          <span class="wave-year-label">2023</span>
+          <div class="wave-dot"></div>
+        </div>
+        <div class="wave-content">
+          <div class="wave-card">
+            <div class="wc-title">Чат-боты</div>
+            <div class="wc-desc">Все прикрутили GPT API к сайту. Отвечают на FAQ, генерируют текст. Но без памяти, без интеграций, без действий.</div>
+            <div class="wc-examples">GPT-обёртки, Intercom AI, сценарные боты</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wave-item">
+        <div class="wave-year">
+          <span class="wave-year-label">2024</span>
+          <div class="wave-dot"></div>
+        </div>
+        <div class="wave-content">
+          <div class="wave-card">
+            <div class="wc-title">Агенты</div>
+            <div class="wc-desc">AI-сотрудник. Помнит контекст, вызывает функции, использует инструменты. Действует, а не отвечает.</div>
+            <div class="wc-examples">AI SDR, AI Support, Claude Code, function calling</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wave-item wave-active">
+        <div class="wave-year">
+          <span class="wave-year-label">2026</span>
+          <div class="wave-dot"></div>
+        </div>
+        <div class="wave-content">
+          <div class="wave-card">
+            <div class="wc-title">Agentic Workflow</div>
+            <div class="wc-desc">Команда AI-агентов. Handoffs, shared knowledge, оркестрация. Не один агент — целый отдел.</div>
+            <div class="wc-examples">Multi-agent orchestration, cofounder.run</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      Мы здесь. Agentic workflow — это сейчас.
+    </div>
+  </div>
+  <div class="slide-num">02 / 07</div>
+</section>
+
+<!-- ════════════ SLIDE 3: ПОЧЕМУ СЕЙЧАС ════════════ -->
+<section class="slide" id="s3">
+  <div class="slide-inner">
+    <div class="section-label">Технологии</div>
+    <h2>Почему сейчас возможно</h2>
+    <p class="subtitle">
+      Четыре технологических сдвига сделали AI-агентов реальностью.
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="pc-icon">🧠</div>
+        <div class="pc-title">LLM = мозг</div>
+        <div class="pc-desc">Claude Sonnet, 200K контекст. Агент может удерживать всю историю клиента — сотни сообщений, документы, решения.</div>
+      </div>
+
+      <div class="problem-card">
+        <div class="pc-icon">🐳</div>
+        <div class="pc-title">Контейнеры = тело</div>
+        <div class="pc-desc">Docker-изоляция. Каждый агент — отдельная среда с файлами, памятью, инструментами. Безопасно и масштабируемо.</div>
+      </div>
+
+      <div class="problem-card">
+        <div class="pc-icon">📉</div>
+        <div class="pc-title">Стоимость ↓</div>
+        <div class="pc-desc">$3 за 1M токенов. Агент обрабатывает 1000+ диалогов в день за $10-30. Команда из 4-5 человек вместо 10 — при тех же объёмах.</div>
+      </div>
+
+      <div class="problem-card">
+        <div class="pc-icon">🔧</div>
+        <div class="pc-title">Инструменты = руки</div>
+        <div class="pc-desc">API-интеграции: CRM, календарь, email, мессенджеры. Агент может не просто говорить, а делать.</div>
+      </div>
+    </div>
+
+    <div class="formula">
+      <div class="formula-text">Мозг + Тело + Руки = AI-сотрудник</div>
+    </div>
+
+  </div>
+  <div class="slide-num">03 / 07</div>
+</section>
+
+<!-- ════════════ SLIDE 4: AGENTIC WORKFLOW ════════════ -->
+<section class="slide" id="s4">
+  <div class="slide-inner">
+    <div class="section-label">Тезис</div>
+    <h2>Agentic Workflow</h2>
+    <p class="subtitle">
+      Принципиально другой подход. Не автоматизация диалогов — создание цифровых сотрудников.
+    </p>
+
+    <div class="thesis-box-rounded">
+      <div class="thesis-main">Агент ≠ чат-бот</div>
+      <div class="thesis-sub">Агент = сотрудник с ролью, памятью, инструментами и KPI</div>
+    </div>
+
+    <div class="compare">
+      <div class="compare-before">
+        <div class="compare-label">✕ Чат-бот</div>
+        <ul class="compare-list">
+          <li><span class="ci">✕</span> Забывает после сессии — каждый раз с нуля</li>
+          <li><span class="ci">✕</span> Только текст — не может записать в CRM или поставить напоминание</li>
+          <li><span class="ci">✕</span> Отвечает шаблоном — не понимает контекст семьи</li>
+          <li><span class="ci">✕</span> Ждёт вопроса — молчит, пока не напишут</li>
+          <li><span class="ci">✕</span> Один сценарий — не передаёт контекст дальше</li>
+        </ul>
+      </div>
+      <div class="compare-after">
+        <div class="compare-label">✓ AI-агент</div>
+        <ul class="compare-list">
+          <li><span class="ci">✓</span> Помнит всё — историю, предпочтения, причину отказа, бюджет</li>
+          <li><span class="ci">✓</span> Записывает лида в CRM, бронирует тур, отправляет follow-up</li>
+          <li><span class="ci">✓</span> Персонализирует — "Maria, мы подготовили встречу с преподавателем French programme"</li>
+          <li><span class="ci">✓</span> Проактивный — напоминает за 24ч, 2ч, 30 мин до визита</li>
+          <li><span class="ci">✓</span> Передаёт горячего лида live-менеджеру с готовым профилем</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">04 / 07</div>
+</section>
+
+<!-- ════════════ SLIDE 5: OPENCLAW ════════════ -->
+<section class="slide" id="s5">
+  <div class="slide-inner">
+    <div class="section-label">Технология</div>
+    <h2 class="gradient">OpenClaw — AI-агент</h2>
+    <p class="subtitle">
+      Открытый AI-agent runtime. Каждый экземпляр — изолированный контейнер с личностью, памятью и инструментами.
+    </p>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="hc-icon">👤</div>
+        <div class="hc-title">SOUL</div>
+        <div class="hc-desc">Личность и правила агента. SOUL.md, IDENTITY.md. Определяет как агент общается, что делает и чего не делает. Полный контроль поведения.</div>
+      </div>
+
+      <div class="how-card">
+        <div class="hc-icon">💾</div>
+        <div class="hc-title">Память</div>
+        <div class="hc-desc">Persistent filesystem. Агент помнит все разговоры, решения, контекст клиента. Между сессиями и перезапусками.</div>
+      </div>
+
+      <div class="how-card">
+        <div class="hc-icon">🔧</div>
+        <div class="hc-title">Инструменты</div>
+        <div class="hc-desc">CRM, Calendar, Email, мессенджеры. Агент не просто отвечает — записывает в CRM, ставит напоминания, отправляет письма.</div>
+      </div>
+
+      <div class="how-card">
+        <div class="hc-icon">🔒</div>
+        <div class="hc-title">Изоляция</div>
+        <div class="hc-desc">Docker-контейнер. Данные зашифрованы. Нет доступа к другим агентам. Безопасно как отдельный сервер.</div>
+      </div>
+    </div>
+
+    <div class="badge-row" style="margin-top: 28px;">
+      <div class="badge"><span class="b-icon">🔑</span> Ed25519 идентификация</div>
+      <div class="badge"><span class="b-icon">🧠</span> LLM через LiteLLM</div>
+      <div class="badge"><span class="b-icon">⚡</span> Hot-config</div>
+      <div class="badge"><span class="b-icon">🔄</span> Auto-recovery</div>
+    </div>
+  </div>
+  <div class="slide-num">05 / 07</div>
+</section>
+
+<!-- ════════════ SLIDE 6: MULTI-AGENT ════════════ -->
+<section class="slide" id="s6">
+  <div class="slide-inner">
+    <div class="section-label">Архитектура</div>
+    <h2>Не один бот — команда</h2>
+    <p class="subtitle">
+      Несколько агентов с разными ролями, оркестрируемых единой платформой.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="arch-platform">
+        <div class="ap-title">Платформа оркестрации</div>
+        <div class="ap-desc">Маршрутизация сообщений / Health-check каждые 5 мин / Provisioning / Auto-recovery / Hot-config</div>
+      </div>
+
+      <div class="arch-arrows">↕</div>
+
+      <div class="arch-cofounder">
+        <div class="aa-icon">🎯</div>
+        <div class="aa-name">Cofounder Agent</div>
+        <div class="aa-role">Оркестрация всей команды, эскалации, аналитика, принятие решений</div>
+        <div class="aa-docker">Docker #0 — master</div>
+      </div>
+
+      <div class="arch-arrows">↕ ↕ ↕</div>
+
+      <div class="arch-agents">
+        <div class="arch-agent" style="background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.2); border-radius:12px;">
+          <div class="aa-icon">💬</div>
+          <div class="aa-name" style="color:#68D391;">Admissions Bot</div>
+          <div class="aa-role">Квалификация лидов, запись на тур, FAQ школы</div>
+          <div class="aa-docker">Docker #1</div>
+        </div>
+        <div class="arch-agent" style="background:rgba(144,205,244,0.08); border:1px solid rgba(144,205,244,0.2); border-radius:12px;">
+          <div class="aa-icon">📅</div>
+          <div class="aa-name" style="color:#90CDF4;">Tour Coordinator</div>
+          <div class="aa-role">Напоминания, re-scheduling, show-up rate</div>
+          <div class="aa-docker">Docker #2</div>
+        </div>
+        <div class="arch-agent" style="background:rgba(183,148,246,0.08); border:1px solid rgba(183,148,246,0.2); border-radius:12px;">
+          <div class="aa-icon">📧</div>
+          <div class="aa-name" style="color:#B794F6;">Nurturing Bot</div>
+          <div class="aa-role">Прогрев холодных лидов, контент-цепочки</div>
+          <div class="aa-docker">Docker #3</div>
+        </div>
+      </div>
+
+      <div class="arch-arrows">↕ ↕ ↕</div>
+
+      <div class="arch-shared">
+        <div class="as-icon">📁</div>
+        <div>
+          <div class="as-title">Shared Knowledge Base</div>
+          <div class="as-desc">Скрипты квалификации, FAQ школы, curriculum, pricing, история лидов. RW/RO доступ по ролям. Агенты делятся контекстом через общий volume.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="badge-row" style="margin-top: 20px;">
+      <div class="badge"><span class="b-icon">🐳</span> Каждый агент = Docker-контейнер</div>
+      <div class="badge"><span class="b-icon">🔄</span> Автоматические handoffs</div>
+      <div class="badge"><span class="b-icon">🩺</span> Health-check + auto-recovery</div>
+      <div class="badge"><span class="b-icon">⚡</span> Новый агент за ~90 сек</div>
+    </div>
+  </div>
+  <div class="slide-num">06 / 07</div>
+</section>
+
+<!-- ════════════ SLIDE 7: CTA ════════════ -->
+<section class="slide" id="s7">
+  <div class="slide-inner" style="text-align: center;">
+    <div class="section-label">Начать</div>
+    <h2 class="gradient" style="max-width: 800px; margin: 0 auto 12px;">Сделаем ваш бизнес<br>AI-native</h2>
+
+    <div class="badge-row" style="justify-content: center; margin-bottom: 40px;">
+      <div class="badge"><span class="b-icon">🐳</span> Docker-изоляция</div>
+      <div class="badge"><span class="b-icon">🔐</span> E2E шифрование</div>
+      <div class="badge"><span class="b-icon">💬</span> Telegram + WhatsApp</div>
+      <div class="badge"><span class="b-icon">📊</span> CRM-интеграции</div>
+    </div>
+
+    <div class="cta-box">
+      <a href="https://cofounder.run" target="_blank" class="cta-button">cofounder.run</a>
+    </div>
+  </div>
+  <div class="slide-num">07 / 07</div>
+</section>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const navLinks = document.querySelectorAll('nav a');
+const progressBar = document.getElementById('progress');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      entry.target.classList.add('visible');
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+      // Update progress bar
+      const idx = Array.from(slides).indexOf(entry.target);
+      const pct = ((idx + 1) / slides.length) * 100;
+      progressBar.style.width = pct + '%';
+    }
+  });
+}, { threshold: 0.4 });
+
+slides.forEach(slide => observer.observe(slide));
+</script>
+
+</body>
+</html>
