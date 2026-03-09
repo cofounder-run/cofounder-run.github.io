@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Your Agent — Farol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  background: #fafafa; color: #111;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px clamp(20px, 4vw, 48px);
+  background: #fff; border-bottom: 1px solid #eee;
+}
+.nav-logo { font-weight: 800; font-size: 18px; letter-spacing: -0.03em; text-decoration: none; color: #111; }
+.nav-logo span { color: #f59e0b; }
+.nav-back { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; }
+.nav-back:hover { color: #111; }
+
+/* Layout */
+.layout {
+  display: grid; grid-template-columns: 1fr 360px;
+  gap: 32px; max-width: 1080px; margin: 0 auto;
+  padding: 32px clamp(16px, 4vw, 32px);
+}
+
+/* Form */
+.form-section { background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 32px; }
+.form-title { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
+.form-sub { font-size: 14px; color: #888; margin-bottom: 28px; }
+
+.field { margin-bottom: 20px; }
+.field label {
+  display: block; font-size: 13px; font-weight: 600;
+  color: #333; margin-bottom: 6px;
+}
+.field .hint { font-size: 12px; color: #999; margin-bottom: 6px; }
+
+.field input, .field textarea, .field select {
+  width: 100%; padding: 10px 14px;
+  border: 1.5px solid #e0e0e0; border-radius: 10px;
+  font-size: 14px; font-family: inherit; color: #111;
+  background: #fff; transition: border-color 0.15s;
+  outline: none;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: #f59e0b;
+}
+.field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.tags-input {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 8px 10px; border: 1.5px solid #e0e0e0; border-radius: 10px;
+  min-height: 42px; cursor: text; transition: border-color 0.15s;
+}
+.tags-input:focus-within { border-color: #f59e0b; }
+.tags-input .tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #f5f5f5; border-radius: 6px; padding: 4px 10px;
+  font-size: 12px; font-weight: 600; color: #555;
+}
+.tags-input .tag .x {
+  cursor: pointer; color: #bbb; font-size: 14px; line-height: 1;
+}
+.tags-input .tag .x:hover { color: #ef4444; }
+.tags-input input {
+  border: none; outline: none; padding: 4px 0; font-size: 13px;
+  flex: 1; min-width: 100px;
+}
+
+.emoji-pick {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.emoji-pick button {
+  width: 44px; height: 44px; font-size: 22px;
+  border: 2px solid #eee; border-radius: 12px;
+  background: #fff; cursor: pointer; transition: border-color 0.15s, transform 0.15s;
+}
+.emoji-pick button:hover { border-color: #ddd; transform: scale(1.08); }
+.emoji-pick button.active { border-color: #f59e0b; background: #fffbeb; }
+
+.price-row {
+  display: flex; align-items: center; gap: 8px;
+}
+.price-base {
+  padding: 10px 14px; background: #f5f5f5; border-radius: 10px;
+  font-size: 14px; font-weight: 600; color: #888; white-space: nowrap;
+}
+.price-plus { font-size: 18px; font-weight: 700; color: #ccc; }
+.price-row input { max-width: 120px; }
+
+.divider { border: none; border-top: 1px solid #f0f0f0; margin: 24px 0; }
+
+.btn-publish {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 14px; background: #111; color: #fff;
+  border: none; border-radius: 12px; font-size: 16px; font-weight: 700;
+  font-family: inherit; cursor: pointer; transition: opacity 0.15s;
+}
+.btn-publish:hover { opacity: 0.85; }
+.btn-publish:disabled { opacity: 0.4; cursor: not-allowed; }
+.publish-note { text-align: center; font-size: 12px; color: #999; margin-top: 8px; }
+
+/* Preview */
+.preview-section { position: sticky; top: 24px; }
+.preview-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: #999; margin-bottom: 12px;
+}
+.preview-card {
+  border: 1px solid #eee; border-radius: 16px; padding: 24px;
+  background: #fff;
+}
+.preview-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.preview-avatar {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; background: #f5f5f5;
+}
+.preview-name { font-size: 16px; font-weight: 700; }
+.preview-by { font-size: 12px; color: #999; }
+.preview-desc { font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 14px; min-height: 40px; }
+.preview-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.preview-tag {
+  font-size: 11px; font-weight: 600; padding: 3px 8px;
+  border-radius: 6px; background: #f5f5f5; color: #666;
+}
+.preview-footer { display: flex; align-items: center; justify-content: space-between; }
+.preview-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px; font-weight: 700;
+}
+.preview-price small { font-weight: 500; color: #999; font-size: 12px; }
+.preview-btn {
+  padding: 8px 16px; background: #111; color: #fff;
+  border-radius: 8px; font-size: 13px; font-weight: 600;
+}
+
+/* Steps */
+.steps-bar {
+  display: flex; gap: 8px; margin-bottom: 24px;
+}
+.step-dot {
+  flex: 1; height: 4px; border-radius: 4px; background: #eee;
+  transition: background 0.3s;
+}
+.step-dot.active { background: #f59e0b; }
+.step-dot.done { background: #22c55e; }
+
+/* Success */
+.success-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5); z-index: 100;
+  align-items: center; justify-content: center;
+}
+.success-overlay.show { display: flex; }
+.success-box {
+  background: #fff; border-radius: 20px; padding: 40px;
+  text-align: center; max-width: 420px; margin: 20px;
+}
+.success-box .big-emoji { font-size: 56px; margin-bottom: 16px; }
+.success-box h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.success-box p { font-size: 15px; color: #555; margin-bottom: 24px; line-height: 1.5; }
+.success-box a {
+  display: inline-flex; padding: 12px 24px; background: #111; color: #fff;
+  border-radius: 10px; font-weight: 700; text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .preview-section { position: static; }
+  .field-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../" class="nav-logo">farol<span>.</span></a>
+  <a href="../" class="nav-back">← Back to marketplace</a>
+</nav>
+
+<div class="layout">
+  <!-- FORM -->
+  <div class="form-section">
+    <div class="steps-bar">
+      <div class="step-dot active" id="s1"></div>
+      <div class="step-dot" id="s2"></div>
+      <div class="step-dot" id="s3"></div>
+    </div>
+
+    <h1 class="form-title">Create your agent</h1>
+    <p class="form-sub">Fill in the details. We'll handle the rest.</p>
+
+    <div class="field">
+      <label>Agent name *</label>
+      <input type="text" id="f-name" placeholder="e.g. FitCoach, LegalMate, SalesBot" maxlength="30" oninput="updatePreview()">
+    </div>
+
+    <div class="field">
+      <label>Icon</label>
+      <div class="emoji-pick" id="emoji-pick">
+        <button onclick="pickEmoji(this)">🤖</button>
+        <button onclick="pickEmoji(this)">🎯</button>
+        <button onclick="pickEmoji(this)">💼</button>
+        <button onclick="pickEmoji(this)">🧠</button>
+        <button onclick="pickEmoji(this)">💪</button>
+        <button onclick="pickEmoji(this)">⚖️</button>
+        <button onclick="pickEmoji(this)">🏠</button>
+        <button onclick="pickEmoji(this)">📊</button>
+        <button onclick="pickEmoji(this)">🎨</button>
+        <button onclick="pickEmoji(this)">🛒</button>
+        <button onclick="pickEmoji(this)">✈️</button>
+        <button onclick="pickEmoji(this)">🍳</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Short description *</label>
+      <div class="hint">One line that explains what your agent does</div>
+      <input type="text" id="f-desc" placeholder="e.g. Personal fitness coach that builds workout plans and tracks nutrition" maxlength="140" oninput="updatePreview()">
+    </div>
+
+    <hr class="divider">
+
+    <div class="field">
+      <label>Personality & instructions *</label>
+      <div class="hint">How should your agent behave? What tone, expertise, rules? This becomes its SOUL.</div>
+      <textarea id="f-personality" rows="5" placeholder="You are a friendly but strict fitness coach. You know exercise science, nutrition, and habit formation. Always ask about goals first. Never give medical advice. Speak in short, motivating sentences." oninput="updateSteps()"></textarea>
+    </div>
+
+    <div class="field">
+      <label>First message</label>
+      <div class="hint">What does your agent say when a new user starts? Leave empty for default.</div>
+      <textarea id="f-greeting" rows="3" placeholder="Hey! 💪 I'm your AI fitness coach. Before we start — what's your main goal? Weight loss, muscle gain, or general fitness?"></textarea>
+    </div>
+
+    <div class="field">
+      <label>What should it ask during onboarding?</label>
+      <div class="hint">Questions to learn about the user (asked once, remembered forever)</div>
+      <textarea id="f-onboard" rows="3" placeholder="1. What's your fitness goal?\n2. How many days per week can you train?\n3. Any injuries or limitations?\n4. Current fitness level (beginner/intermediate/advanced)?"></textarea>
+    </div>
+
+    <hr class="divider">
+
+    <div class="field">
+      <label>Tags</label>
+      <div class="hint">Press Enter to add a tag (max 3)</div>
+      <div class="tags-input" id="tags-box" onclick="this.querySelector('input').focus()">
+        <input type="text" id="f-tag-input" placeholder="e.g. Fitness" onkeydown="addTag(event)">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Your markup (on top of $49/mo base)</label>
+      <div class="hint">You keep 100% of your markup. Set $0 to offer at base price.</div>
+      <div class="price-row">
+        <div class="price-base">$49</div>
+        <div class="price-plus">+</div>
+        <input type="number" id="f-price" value="0" min="0" max="999" oninput="updatePreview()">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Your name</label>
+        <input type="text" id="f-author" placeholder="Your name or brand" oninput="updatePreview()">
+      </div>
+      <div class="field">
+        <label>Contact email</label>
+        <input type="email" id="f-email" placeholder="you@example.com">
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <button class="btn-publish" onclick="publish()">
+      🚀 Publish agent
+    </button>
+    <div class="publish-note">Free to publish. Your agent goes live on the marketplace.</div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-section">
+    <div class="preview-label">Live preview</div>
+    <div class="preview-card">
+      <div class="preview-top">
+        <div class="preview-avatar" id="p-icon">🤖</div>
+        <div>
+          <div class="preview-name" id="p-name">Your Agent</div>
+          <div class="preview-by" id="p-by">by you</div>
+        </div>
+      </div>
+      <div class="preview-desc" id="p-desc">Describe what your agent does...</div>
+      <div class="preview-tags" id="p-tags"></div>
+      <div class="preview-footer">
+        <div class="preview-price">$49<small id="p-markup"> + $0</small></div>
+        <div class="preview-btn">Try free</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="success-overlay" id="success">
+  <div class="success-box">
+    <div class="big-emoji">🎉</div>
+    <h2>Agent submitted!</h2>
+    <p>We'll review and deploy your agent within 24 hours. You'll get a Telegram bot link to share with your audience.</p>
+    <a href="../">Back to marketplace</a>
+  </div>
+</div>
+
+<script>
+let selectedEmoji = '🤖';
+let tags = [];
+
+function pickEmoji(btn) {
+  document.querySelectorAll('.emoji-pick button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedEmoji = btn.textContent;
+  document.getElementById('p-icon').textContent = selectedEmoji;
+}
+
+function updatePreview() {
+  const name = document.getElementById('f-name').value || 'Your Agent';
+  const desc = document.getElementById('f-desc').value || 'Describe what your agent does...';
+  const price = document.getElementById('f-price').value || '0';
+  const author = document.getElementById('f-author').value || 'you';
+
+  document.getElementById('p-name').textContent = name;
+  document.getElementById('p-desc').textContent = desc;
+  document.getElementById('p-markup').textContent = ' + $' + price;
+  document.getElementById('p-by').textContent = 'by ' + author;
+  updateSteps();
+}
+
+function updateSteps() {
+  const s1 = document.getElementById('f-name').value && document.getElementById('f-desc').value;
+  const s2 = document.getElementById('f-personality').value;
+  document.getElementById('s1').className = 'step-dot ' + (s1 ? 'done' : 'active');
+  document.getElementById('s2').className = 'step-dot ' + (s2 ? 'done' : (s1 ? 'active' : ''));
+  document.getElementById('s3').className = 'step-dot ' + (s1 && s2 ? 'active' : '');
+}
+
+function addTag(e) {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const input = e.target;
+  const val = input.value.trim();
+  if (!val || tags.length >= 3) return;
+  tags.push(val);
+  input.value = '';
+  renderTags();
+}
+
+function removeTag(i) {
+  tags.splice(i, 1);
+  renderTags();
+}
+
+function renderTags() {
+  const box = document.getElementById('tags-box');
+  box.querySelectorAll('.tag').forEach(t => t.remove());
+  const input = box.querySelector('input');
+  tags.forEach((t, i) => {
+    const el = document.createElement('span');
+    el.className = 'tag';
+    el.innerHTML = t + ' <span class="x" onclick="removeTag(' + i + ')">×</span>';
+    box.insertBefore(el, input);
+  });
+  // Preview tags
+  const pt = document.getElementById('p-tags');
+  pt.innerHTML = tags.map(t => '<span class="preview-tag">' + t + '</span>').join('');
+}
+
+function publish() {
+  const name = document.getElementById('f-name').value.trim();
+  const desc = document.getElementById('f-desc').value.trim();
+  const personality = document.getElementById('f-personality').value.trim();
+
+  if (!name || !desc || !personality) {
+    alert('Please fill in agent name, description, and personality.');
+    return;
+  }
+
+  const data = {
+    name, desc, personality,
+    icon: selectedEmoji,
+    greeting: document.getElementById('f-greeting').value.trim(),
+    onboarding: document.getElementById('f-onboard').value.trim(),
+    tags,
+    markup: document.getElementById('f-price').value || '0',
+    author: document.getElementById('f-author').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    created: new Date().toISOString()
+  };
+
+  // Store locally + send to email
+  const existing = JSON.parse(localStorage.getItem('farol-agents') || '[]');
+  existing.push(data);
+  localStorage.setItem('farol-agents', JSON.stringify(existing));
+
+  // Send via mailto as temporary solution
+  const body = Object.entries(data).map(([k,v]) => k + ': ' + (Array.isArray(v) ? v.join(', ') : v)).join('\n\n');
+  const mailto = 'mailto:ori@agentmail.to?subject=New Agent: ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body);
+  
+  // Open mailto in background
+  const a = document.createElement('a');
+  a.href = mailto;
+  a.target = '_blank';
+  a.click();
+
+  document.getElementById('success').classList.add('show');
+}
+</script>
+
+</body>
+</html>
