@@ -1,153 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ori — Kanban</title>
+<title>Farol Labs — Канбан</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', -apple-system, sans-serif; background: #f8f9fa; color: #111827; padding: 24px; }
-h1 { font-size: 1.5rem; margin-bottom: 8px; }
-.goal { color: #7c3aed; font-size: 0.9rem; margin-bottom: 24px; }
-.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.column { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.column h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid; }
-.col-critical h2 { color: #ef4444; border-color: #ef4444; }
-.col-high h2 { color: #f59e0b; border-color: #f59e0b; }
-.col-medium h2 { color: #6b7280; border-color: #e5e7eb; }
-.col-done h2 { color: #10b981; border-color: #10b981; }
-.card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; padding: 20px; }
+h1 { text-align: center; font-size: 1.6em; margin-bottom: 6px; color: #f0f6fc; }
+.subtitle { text-align: center; color: #8b949e; margin-bottom: 6px; font-size: 0.95em; }
+.alert { text-align: center; background: #da3633; color: #fff; padding: 10px 16px; border-radius: 8px; margin: 0 auto 20px; max-width: 700px; font-weight: 600; font-size: 0.95em; }
+.board { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 20px; align-items: flex-start; }
+.column { flex: 1; min-width: 260px; max-width: 340px; background: #161b22; border-radius: 10px; padding: 14px; }
+.column-title { font-size: 0.85em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid; }
+.col-blocked .column-title { color: #f85149; border-color: #f85149; }
+.col-progress .column-title { color: #58a6ff; border-color: #58a6ff; }
+.col-next .column-title { color: #d29922; border-color: #d29922; }
+.col-backlog .column-title { color: #8b949e; border-color: #30363d; }
+.col-done .column-title { color: #3fb950; border-color: #3fb950; }
+.card { background: #21262d; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #30363d; }
 .card:last-child { margin-bottom: 0; }
-.card h3 { font-size: 0.9rem; margin-bottom: 4px; }
-.card p { font-size: 0.8rem; color: #6b7280; line-height: 1.5; }
-.tag { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; }
-.tag-leo { background: #dbeafe; color: #1d4ed8; }
-.tag-sasha { background: #fce7f3; color: #be185d; }
-.tag-ori { background: #ede9fe; color: #7c3aed; }
-.done-item { font-size: 0.8rem; color: #6b7280; padding: 4px 0; }
-.done-item::before { content: "✅ "; }
-.ts { text-align: right; font-size: 0.7rem; color: #d1d5db; margin-top: 16px; }
+.card-title { font-weight: 600; font-size: 0.9em; color: #f0f6fc; margin-bottom: 4px; }
+.card-desc { font-size: 0.8em; color: #8b949e; line-height: 1.4; }
+.tag { display: inline-block; font-size: 0.7em; padding: 2px 7px; border-radius: 10px; font-weight: 600; margin-right: 4px; margin-top: 6px; }
+.tag-leo { background: #1f6feb33; color: #58a6ff; }
+.tag-mayak { background: #3fb95033; color: #3fb950; }
+.tag-ori { background: #d2992233; color: #d29922; }
+.tag-all { background: #8b949e33; color: #8b949e; }
+.card.blocked { border-left-color: #f85149; }
+.card.progress { border-left-color: #58a6ff; }
+.card.ready { border-left-color: #3fb950; }
+.constraint { background: #f8514922; border: 1px solid #f8514966; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+.constraint .card-title { color: #f85149; }
+.goals { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
+.goal { background: #161b22; border-radius: 8px; padding: 10px 16px; text-align: center; }
+.goal-label { font-size: 0.7em; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+.goal-value { font-size: 1.2em; font-weight: 700; color: #f0f6fc; }
+.goal-sub { font-size: 0.75em; color: #8b949e; }
 </style>
 </head>
 <body>
 
-<h1>Ori — Kanban Board</h1>
-<p class="goal">🎯 Цель: ≥€60M exit · Этап: concierge MVP · MRR: $0</p>
+<h1>🦀 Farol Labs — Канбан</h1>
+<p class="subtitle">9 марта 2026 · 75 дней до дедлайна</p>
+
+<div class="alert">🔴 BILLING НЕ ПОДКЛЮЧЁН — 17 дней простоя · Revenue = $0 · ~$200/день потерянного MRR</div>
+
+<div class="goals">
+  <div class="goal">
+    <div class="goal-label">Цель</div>
+    <div class="goal-value">$200K</div>
+    <div class="goal-sub">к 23 мая 2026</div>
+  </div>
+  <div class="goal">
+    <div class="goal-label">Revenue</div>
+    <div class="goal-value" style="color:#f85149">$0</div>
+    <div class="goal-sub">нет billing</div>
+  </div>
+  <div class="goal">
+    <div class="goal-label">Осталось</div>
+    <div class="goal-value">75 дн</div>
+    <div class="goal-sub">10.5 недель</div>
+  </div>
+  <div class="goal">
+    <div class="goal-label">Exit цель</div>
+    <div class="goal-value">≥$100M</div>
+    <div class="goal-sub">Farol Labs</div>
+  </div>
+</div>
 
 <div class="board">
 
-<div class="column col-critical">
-  <h2>🔥 Critical</h2>
-
-  <div class="card">
-    <span class="tag tag-leo">Леонид</span>
-    <h3>Инстанс Naora</h3>
-    <p>OpenClaw + бот. Exec sandbox. BOOTSTRAP.md в репо. В работе.</p>
+  <!-- BLOCKED -->
+  <div class="column col-blocked">
+    <div class="column-title">🔴 Блокировано</div>
+    <div class="constraint">
+      <div class="card-title">⛔ Billing (Stripe)</div>
+      <div class="card-desc">Нет юрлица → нет Stripe → revenue = $0. Блокирует ВСЁ остальное.<br>Workaround: Lemonsqueezy / Paddle без юрлица</div>
+      <span class="tag tag-leo">Леонид</span>
+    </div>
+    <div class="constraint">
+      <div class="card-title">⚠️ Онбординг Ori</div>
+      <div class="card-desc">Клиент не видит разницу с ChatGPT в первые 30 мин. Нет "aha moment".</div>
+      <span class="tag tag-ori">Ori</span> <span class="tag tag-mayak">Маяк</span>
+    </div>
   </div>
 
-  <div class="card">
-    <span class="tag tag-leo">Леонид</span>
-    <h3>Передеплой Apps Script</h3>
-    <p>Форма не сохраняет не-email. Код готов. 15 мин.</p>
+  <!-- IN PROGRESS -->
+  <div class="column col-progress">
+    <div class="column-title">🔵 В работе</div>
+    <div class="card progress">
+      <div class="card-title">Self-service deploy + Billing</div>
+      <div class="card-desc">Регистрация, автодеплой ✅, теперь billing + MiniMax интеграция</div>
+      <span class="tag tag-leo">Леонид</span>
+    </div>
+    <div class="card progress">
+      <div class="card-title">Sales + онбординг клиентов</div>
+      <div class="card-desc">5 лидов: Naora (ждём результат), BUNT, SHAMAN (Zoom), Leads4You, Deepn</div>
+      <span class="tag tag-mayak">Маяк</span>
+    </div>
+    <div class="card progress">
+      <div class="card-title">TG продвижение + Product Hunt</div>
+      <div class="card-desc">Research каналов, креативов, стоимости. Prep mode — НЕ запускать до billing.</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
   </div>
 
-  <div class="card">
-    <span class="tag tag-sasha">Александр</span>
-    <h3>Naora — follow-up</h3>
-    <p>Встреча прошла. Ждём результат и следующие шаги.</p>
+  <!-- NEXT -->
+  <div class="column col-next">
+    <div class="column-title">🟡 Следующее</div>
+    <div class="card">
+      <div class="card-title">Переезд → getori.app</div>
+      <div class="card-desc">Новый домен, лендинг, редиректы</div>
+      <span class="tag tag-leo">Леонид</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Юрлицо (Stripe Atlas)</div>
+      <div class="card-desc">~$500, 1-2 дня. Открывает Stripe + инвестиции</div>
+      <span class="tag tag-leo">Леонид</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Pricing page на лендинге</div>
+      <div class="card-desc">$20/мес Sebastian, $200/мес Ori</div>
+      <span class="tag tag-leo">Леонид</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Demo видео/GIF</div>
+      <div class="card-desc">Лендинг не конвертит без визуала</div>
+      <span class="tag tag-mayak">Маяк</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Утвердить pricing</div>
+      <div class="card-desc">$20/$200 — нужно подтверждение</div>
+      <span class="tag tag-mayak">Маяк</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Product Hunt launch</div>
+      <div class="card-desc">Burst трафика + social proof</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+    <div class="card">
+      <div class="card-title">System prompt доработка</div>
+      <div class="card-desc">После первого платящего клиента</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
   </div>
+
+  <!-- SECURITY -->
+  <div class="column col-backlog">
+    <div class="column-title">🔒 Security + Backlog</div>
+    <div class="card">
+      <div class="card-title">P0: Auth на всех инстансах</div>
+      <span class="tag tag-leo">Леонид</span>
+    </div>
+    <div class="card">
+      <div class="card-title">P0: bwrap sandbox</div>
+      <span class="tag tag-leo">Леонид</span>
+    </div>
+    <div class="card">
+      <div class="card-title">P1: fs-guard hooks</div>
+      <span class="tag tag-leo">Леонид</span> <span class="tag tag-ori">Ori</span>
+    </div>
+    <div class="card">
+      <div class="card-title">P1: DLP на выходе</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Pipeline 20 лидов</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Twitter-стратегия</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Trademark "ORI"</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+  </div>
+
+  <!-- DONE -->
+  <div class="column col-done">
+    <div class="column-title">✅ Готово</div>
+    <div class="card ready">
+      <div class="card-title">Self-service deploy</div>
+      <div class="card-desc">✅ Снято 5 марта</div>
+      <span class="tag tag-leo">Леонид</span>
+    </div>
+    <div class="card ready">
+      <div class="card-title">Лендинги</div>
+      <div class="card-desc">cofounder.run + getsebastian.app</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+    <div class="card ready">
+      <div class="card-title">Sebastian Onboarding v2</div>
+      <div class="card-desc">BOOTSTRAP.md + PCM + TOC</div>
+      <span class="tag tag-ori">Ori</span> <span class="tag tag-mayak">Маяк</span>
+    </div>
+    <div class="card ready">
+      <div class="card-title">Демо Naora</div>
+      <span class="tag tag-mayak">Маяк</span>
+    </div>
+    <div class="card ready">
+      <div class="card-title">SOUL.md + Манифест</div>
+      <span class="tag tag-all">Все</span>
+    </div>
+    <div class="card ready">
+      <div class="card-title">Unit Economics</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+    <div class="card ready">
+      <div class="card-title">Twitter API</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+    <div class="card ready">
+      <div class="card-title">Cron: Board + AI News</div>
+      <span class="tag tag-ori">Ori</span>
+    </div>
+  </div>
+
 </div>
 
-<div class="column col-high">
-  <h2>📋 This Week</h2>
-
-  <div class="card">
-    <span class="tag tag-sasha">Александр</span>
-    <h3>Deepn — 2-й клиент</h3>
-    <p>Назначить Zoom.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-ori">Ori</span>
-    <h3>Pipeline 20 лидов</h3>
-    <p>Concierge MVP. Ждёт: рабочая форма.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-ori">Ori</span>
-    <h3>Twitter-стратегия</h3>
-    <p>Частота, время, контент. Реалити-шоу формат. MRR каждый день.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-ori">Ori</span>
-    <h3>Unit economics</h3>
-    <p>Стоимость токенов/клиент. Маржа ≥80%.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-ori">Ori</span>
-    <h3>Чат на лендинге</h3>
-    <p>Research: Ori прямо на cofounder.run.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-ori">Ori</span>
-    <h3>JTBD под капот</h3>
-    <p>Встроить фреймворк в онбординг, не показывая пользователю.</p>
-  </div>
+<div style="text-align:center; color:#484f58; font-size:0.75em; margin-top:10px;">
+  Farol Labs · Sebastian ($49) · Ori ($200) · 🔴 Constraint: Billing · Updated 9 Mar 2026
 </div>
-
-<div class="column col-medium">
-  <h2>⏳ Backlog</h2>
-
-  <div class="card">
-    <span class="tag tag-leo">Леонид</span>
-    <h3>Юрлицо</h3>
-    <p>Stripe Atlas или альтернатива.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-leo">Леонид</span>
-    <h3>Twitter API Basic</h3>
-    <p>$100/мес для автопостинга.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-ori">Ori</span>
-    <h3>Trademark "ORI"</h3>
-    <p>Classes 9 & 42. EUIPO/USPTO.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-ori">Ori</span>
-    <h3>Реалити-шоу формат</h3>
-    <p>Публичный build-in-public. Открытый MRR. Дневник Ori.</p>
-  </div>
-
-  <div class="card">
-    <span class="tag tag-ori">Ori</span>
-    <h3>Домен getori.ai</h3>
-    <p>Купить когда решим.</p>
-  </div>
-</div>
-
-<div class="column col-done">
-  <h2>✅ Done Today</h2>
-  <div class="done-item">BOOTSTRAP.md — chat ladder</div>
-  <div class="done-item">Naora workspace (GitHub)</div>
-  <div class="done-item">Встреча с Naora</div>
-  <div class="done-item">Лендинг: Telegram, sharper copy</div>
-  <div class="done-item">Манифест: Стратег/Алхимик</div>
-  <div class="done-item">SOUL.md: Торберт + публичный голос</div>
-  <div class="done-item">Twitter: Ori, аватар, bio, 2 поста</div>
-  <div class="done-item">CRM pipeline page</div>
-  <div class="done-item">Канбан-доска</div>
-</div>
-
-</div>
-
-<p class="ts">Updated: 14 Feb 2026, 13:18 UTC</p>
 
 </body>
 </html>
