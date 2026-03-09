@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sebastian Onboarding Spec</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: #fafafa; color: #111; line-height: 1.7;
+  padding: 32px clamp(16px, 4vw, 48px);
+  max-width: 780px; margin: 0 auto;
+}
+h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; border-bottom: 3px solid #f59e0b; padding-bottom: 12px; }
+h2 { font-size: 22px; font-weight: 800; margin-top: 36px; margin-bottom: 12px; color: #92400e; }
+h3 { font-size: 16px; font-weight: 700; margin-top: 20px; margin-bottom: 8px; }
+p { margin-bottom: 12px; }
+code {
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;
+}
+pre {
+  background: #1e1e2e; color: #cdd6f4; padding: 16px 20px;
+  border-radius: 10px; overflow-x: auto; margin: 12px 0 20px;
+  font-size: 13px; line-height: 1.6;
+}
+pre code { background: none; padding: 0; color: inherit; }
+table {
+  width: 100%; border-collapse: collapse; margin: 16px 0;
+}
+th, td {
+  padding: 10px 14px; text-align: left; border: 1px solid #e5e5e5;
+  font-size: 14px;
+}
+th { background: #f8f8f8; font-weight: 700; }
+hr { border: none; border-top: 1px solid #e5e5e5; margin: 24px 0; }
+ul, ol { margin: 8px 0 16px 24px; }
+li { margin-bottom: 4px; }
+.copy-bar {
+  position: sticky; top: 0; background: #fafafa; padding: 8px 0 12px;
+  border-bottom: 1px solid #eee; margin-bottom: 16px; z-index: 10;
+}
+.copy-btn {
+  padding: 6px 16px; border: 1px solid #ddd; border-radius: 6px;
+  background: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+  font-family: inherit;
+}
+.copy-btn:hover { background: #f0f0f0; }
+.copy-btn.copied { background: #22c55e; color: #fff; border-color: #22c55e; }
+</style>
+</head>
+<body>
+<div class="copy-bar">
+  <button class="copy-btn" onclick="copyAll(this)">📋 Copy full Markdown</button>
+</div>
+<h1>Sebastian Onboarding Flow — ТЗ для Леонида</h1>
+
+<h2>Обзор</h2>
+
+<p>Три момента: до Start → после Start → готово. Минимум сообщений, максимум ясности.</p>
+
+<hr />
+
+<h2>1. До Start (BotFather settings)</h2>
+
+<p><strong>Что:</strong> описание бота + фото, видно ДО нажатия Start.</p>
+
+<p><strong>Bot photo:</strong> картинка краба Sebastian (файл: <code>product/sebastian-crab.jpg</code> — Маяк пришлёт)</p>
+
+<p><strong>Bot description (About):</strong></p>
+
+<pre><code>🦀 Sebastian — your AI assistant with real hands.
+
+I help you achieve your goals, save your time, and handle tasks independently.
+
+🧠 Memory · ⏰ Automation · 🔍 Research · 🎤 Voice
+</code></pre>
+
+<p><strong>Bot description (What can this bot do?):</strong></p>
+
+<pre><code>Sebastian is a personal AI assistant that:
+• Remembers everything between conversations
+• Works on schedule — morning briefings, reminders, monitoring
+• Researches, analyzes, and does tasks independently
+• Understands voice messages
+
+Press Start to set up your personal workspace →
+</code></pre>
+
+<p><strong>Настройка:</strong> BotFather → /setdescription, /setabouttext, /setuserpic</p>
+
+<hr />
+
+<h2>2. После Start (платформа отправляет)</h2>
+
+<p><strong>Когда:</strong> сразу после нажатия /start, ДО запуска контейнера или одновременно.</p>
+
+<p><strong>Одно сообщение (с картинкой краба):</strong></p>
+
+<pre><code>🔧 Setting up your personal workspace — memory, goals tracking, automation.
+
+This takes about 5 minutes. I'll message you when I'm ready!
+</code></pre>
+
+<p><strong>Важно:</strong>
+- Это отправляет платформа (Rails), НЕ OpenClaw
+- Картинку краба отправить как фото с caption
+- Никаких промежуточных "loading...", "almost there..." — одно сообщение
+- Убрать текущие "Setting up your assistant...", "Machine started...", "Your assistant is ready! Send me a message"</p>
+
+<hr />
+
+<h2>3. Когда контейнер готов (OpenClaw / BOOTSTRAP.md)</h2>
+
+<p><strong>Когда:</strong> контейнер запущен, OpenClaw работает — Sebastian САМ отправляет первое сообщение.</p>
+
+<p><strong>Сообщение:</strong></p>
+
+<pre><code>✅ Ready! Let's get to know each other.
+
+Feel free to send voice messages — I understand them perfectly, and it's faster than typing 🎤
+
+What's your name?
+</code></pre>
+
+<p><strong>Важно:</strong>
+- Sebastian НАЧИНАЕТ САМ — не "Send me a message to get started"
+- Это делает BOOTSTRAP.md (уже готов, файл <code>product/sebastian-bootstrap.md</code> / <code>product/sebastian-bootstrap-en.md</code>)
+- После этого сообщения идёт полный онбординг по BOOTSTRAP.md</p>
+
+<hr />
+
+<h2>Что убрать (текущие сообщения)</h2>
+
+<p>❌ "Setting up your assistant, please wait..." → заменить на п.2<br />
+❌ "Machine started, loading AI..." → убрать<br />
+❌ "Your assistant is ready! Send me a message to get started." → заменить на п.3 (BOOTSTRAP.md)</p>
+
+<hr />
+
+<h2>Файлы</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Файл</th>
+  <th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>product/sebastian-bootstrap.md</code></td>
+  <td>Онбординг (русский)</td>
+</tr>
+<tr>
+  <td><code>product/sebastian-bootstrap-en.md</code></td>
+  <td>Онбординг (английский) — класть как BOOTSTRAP.md в дефолтный workspace</td>
+</tr>
+<tr>
+  <td><code>product/sebastian-crab.jpg</code></td>
+  <td>Картинка краба для бота (Маяк пришлёт)</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2>Итого — что нужно сделать</h2>
+
+<ol>
+<li><strong>BotFather:</strong> обновить описание + фото бота</li>
+<li><strong>Rails:</strong> заменить 3 сообщения на 1 (п.2) + отправлять картинку краба</li>
+<li><strong>Дефолтный workspace:</strong> положить BOOTSTRAP.md (english version) — Sebastian сам начнёт онбординг</li>
+<li><strong>Убрать</strong> "Send me a message to get started" — Sebastian начинает сам</li>
+</ol>
+
+<script>
+const MD_SOURCE = '# Sebastian Onboarding Flow — ТЗ для Леонида\n\n## Обзор\n\nТри момента: до Start → после Start → готово. Минимум сообщений, максимум ясности.\n\n---\n\n## 1. До Start (BotFather settings)\n\n**Что:** описание бота + фото, видно ДО нажатия Start.\n\n**Bot photo:** картинка краба Sebastian (файл: `product/sebastian-crab.jpg` — Маяк пришлёт)\n\n**Bot description (About):**\n```\n🦀 Sebastian — your AI assistant with real hands.\n\nI help you achieve your goals, save your time, and handle tasks independently.\n\n🧠 Memory · ⏰ Automation · 🔍 Research · 🎤 Voice\n```\n\n**Bot description (What can this bot do?):**\n```\nSebastian is a personal AI assistant that:\n• Remembers everything between conversations\n• Works on schedule — morning briefings, reminders, monitoring\n• Researches, analyzes, and does tasks independently\n• Understands voice messages\n\nPress Start to set up your personal workspace →\n```\n\n**Настройка:** BotFather → /setdescription, /setabouttext, /setuserpic\n\n---\n\n## 2. После Start (платформа отправляет)\n\n**Когда:** сразу после нажатия /start, ДО запуска контейнера или одновременно.\n\n**Одно сообщение (с картинкой краба):**\n```\n🔧 Setting up your personal workspace — memory, goals tracking, automation.\n\nThis takes about 5 minutes. I\'ll message you when I\'m ready!\n```\n\n**Важно:**\n- Это отправляет платформа (Rails), НЕ OpenClaw\n- Картинку краба отправить как фото с caption\n- Никаких промежуточных "loading...", "almost there..." — одно сообщение\n- Убрать текущие "Setting up your assistant...", "Machine started...", "Your assistant is ready! Send me a message"\n\n---\n\n## 3. Когда контейнер готов (OpenClaw / BOOTSTRAP.md)\n\n**Когда:** контейнер запущен, OpenClaw работает — Sebastian САМ отправляет первое сообщение.\n\n**Сообщение:**\n```\n✅ Ready! Let\'s get to know each other.\n\nFeel free to send voice messages — I understand them perfectly, and it\'s faster than typing 🎤\n\nWhat\'s your name?\n```\n\n**Важно:**\n- Sebastian НАЧИНАЕТ САМ — не "Send me a message to get started"\n- Это делает BOOTSTRAP.md (уже готов, файл `product/sebastian-bootstrap.md` / `product/sebastian-bootstrap-en.md`)\n- После этого сообщения идёт полный онбординг по BOOTSTRAP.md\n\n---\n\n## Что убрать (текущие сообщения)\n\n❌ "Setting up your assistant, please wait..." → заменить на п.2  \n❌ "Machine started, loading AI..." → убрать  \n❌ "Your assistant is ready! Send me a message to get started." → заменить на п.3 (BOOTSTRAP.md)\n\n---\n\n## Файлы\n\n| Файл | Что |\n|------|-----|\n| `product/sebastian-bootstrap.md` | Онбординг (русский) |\n| `product/sebastian-bootstrap-en.md` | Онбординг (английский) — класть как BOOTSTRAP.md в дефолтный workspace |\n| `product/sebastian-crab.jpg` | Картинка краба для бота (Маяк пришлёт) |\n\n---\n\n## Итого — что нужно сделать\n\n1. **BotFather:** обновить описание + фото бота\n2. **Rails:** заменить 3 сообщения на 1 (п.2) + отправлять картинку краба\n3. **Дефолтный workspace:** положить BOOTSTRAP.md (english version) — Sebastian сам начнёт онбординг\n4. **Убрать** "Send me a message to get started" — Sebastian начинает сам\n';
+function copyAll(btn) {
+  navigator.clipboard.writeText(MD_SOURCE).then(() => {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy full Markdown'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
