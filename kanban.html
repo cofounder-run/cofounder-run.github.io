@@ -318,6 +318,12 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="cross-session-context">
+        <div class="card-tag">Infra · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Cross-session Ori context</div><div class="card-desc">Shared context between chats within a day. Hypothesis: cron job to save transcripts to file. Leonid to think through.</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
       <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-strat">
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">Twitter strategy</div></div>
@@ -364,6 +370,30 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   <div class="col" data-col="next">
     <div class="col-header"><span>Up Next</span><span class="col-count">0</span></div>
     <div class="card-list">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="zoom-ori">
+        <div class="card-tag">Infra · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Zoom: add Ori</div><div class="card-desc">Finish Zoom integration, connect Ori to calls</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="ori-mastermind">
+        <div class="card-tag">Product · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Ori in mastermind chat</div><div class="card-desc">Connect Ori to group mastermind chat</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak,ori" data-id="marketing-circle">
+        <div class="card-tag">Product · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Digital employee: marketing circle</div><div class="card-desc">Internal holacracy circle for marketing</div></div>
+        <div class="card-people"><span class="person">Alex</span> <span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak,ori" data-id="study-plurio">
+        <div class="card-tag">Research · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Study Plurio</div><div class="card-desc">$3.5M seed, AI performance marketing, Russia → Palo Alto</div></div>
+        <div class="card-people"><span class="person">Alex</span> <span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
       <div class="card card-item" draggable="true" data-owners="leo" data-id="getori">
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Move to getori.app</div><div class="card-desc">New domain, landing, redirects</div></div>
@@ -414,6 +444,24 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   <div class="col" data-col="progress">
     <div class="col-header"><span>In Progress</span><span class="col-count">0</span></div>
     <div class="card-list">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="domains-check">
+        <div class="card-tag">Infra · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Check domains: farol.io + farol.team</div><div class="card-desc">No access currently. Leonid to check status + GitHub Pages setup</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="farol-team-group">
+        <div class="card-tag">Product · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Create Farol / team group</div><div class="card-desc">TG group with founders + AI revenue agent</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="learn-claude-openclaw">
+        <div class="card-tag">Learning · 10 Mar</div>
+        <div class="card-body"><div class="card-title">Learn Claude + OpenClaw on server</div><div class="card-desc">Tomorrow: Leonid teaches Sasha Claude + OpenClaw</div></div>
+        <div class="card-people"><span class="person">Mayak</span> <span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
       <div class="card card-item is-blocked" draggable="true" data-owners="leo" data-id="billing">
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Billing (Stripe)</div><div class="card-desc">No legal entity → no Stripe → $0 revenue</div></div>
@@ -436,6 +484,42 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">TG promotion + PH prep</div><div class="card-desc">Channel research · Don't launch until billing</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item is-blocked" draggable="true" data-owners="leo,mayak" data-id="botfather">
+        <div class="card-tag">Product · 9 Mar · BLOCKER</div>
+        <div class="card-body"><div class="card-title">BotFather onboarding steps</div><div class="card-desc">⛔ Blocks Sebastian progress. Leonid adds onboarding steps → Alex approves workflow</div></div>
+        <div class="card-people"><span class="person">Leonid</span> <span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak,ori" data-id="naora-olx">
+        <div class="card-tag">Sales · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Naora: OLX workflow</div><div class="card-desc">Browser installed ✅ · Build OLX workflow in teamspace</div></div>
+        <div class="card-people"><span class="person">Alex</span> <span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="ads-sebastian">
+        <div class="card-tag">Marketing · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Ads: Sebastian (TG + Google)</div><div class="card-desc">⚠️ Prep mode — launch after billing</div></div>
+        <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="marketplace-mvp">
+        <div class="card-tag">Product · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Marketplace: first interface</div><div class="card-desc">First shot at positioning + UI for Sebastian marketplace</div></div>
+        <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="first-skill">
+        <div class="card-tag">Product · 9 Mar</div>
+        <div class="card-body"><div class="card-title">First business skill</div><div class="card-desc">Create ad manager skill in admin panel</div></div>
+        <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="distribute-seb">
+        <div class="card-tag">Sales · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Give Sebastian to friends</div><div class="card-desc">Distribute to several contacts + use yourself</div></div>
+        <div class="card-people"><span class="person">Alex</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
     </div>
@@ -492,6 +576,30 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Cron: Board + AI News</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="browser-naora">
+        <div class="card-tag">Infra · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Browser at Naora</div><div class="card-desc">Installed Mar 9 · works in teamspace</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="agentmail">
+        <div class="card-tag">Infra · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Email ori@agentmail.to</div><div class="card-desc">Set up Mar 9</div></div>
+        <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="all" data-id="farol-homepage">
+        <div class="card-tag">Design · 9 Mar</div>
+        <div class="card-body"><div class="card-title">New Farol homepage approved</div><div class="card-desc">Approved on call Mar 9</div></div>
+        <div class="card-people"><span class="person">All</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak,leo" data-id="sasha-lenya-call-9mar">
+        <div class="card-tag">Meeting · 9 Mar</div>
+        <div class="card-body"><div class="card-title">Sasha ↔ Lenya call</div><div class="card-desc">✅ Discussed: BotFather blocker, domains, team group, cross-session context, holacracy, ad manager skill</div></div>
+        <div class="card-people"><span class="person">Alex</span> <span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
     </div>
