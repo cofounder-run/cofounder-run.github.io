@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farol Labs — Kanban</title>
+<style>
+/* Fizzy-authentic design system */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --canvas: #fff;
+  --ink: oklch(26% 0.05 264);
+  --ink-dark: oklch(56% 0.014 260);
+  --ink-medium: oklch(66% 0.008 258);
+  --ink-light: oklch(84% 0.005 256);
+  --ink-lighter: oklch(92% 0.003 254);
+  --ink-lightest: oklch(96% 0.002 252);
+
+  --shadow: 0 0 0 1px oklch(0% 0 0 / 5%), 0 0.15em 0.15em oklch(0% 0 0 / 5%), 0 0.3em 0.3em oklch(0% 0 0 / 4%), 0 0.6em 0.6em oklch(0% 0 0 / 3%);
+  --shadow-hover: 0 0 0 1px oklch(0% 0 0 / 8%), 0 0.2em 0.4em oklch(0% 0 0 / 8%), 0 0.5em 1em oklch(0% 0 0 / 6%);
+
+  /* Column colors — Fizzy's oklch palette */
+  --color-notnow: oklch(66% 0.008 258);
+  --color-maybe: oklch(66% 0.196 258);
+  --color-next: oklch(74% 0.184 70);
+  --color-progress: oklch(66% 0.208 146);
+  --color-done: oklch(66% 0.008 258);
+  --color-blocked: oklch(66% 0.204 40);
+
+  --col-width: 280px;
+  --col-collapsed: 40px;
+  --col-gap: 8px;
+  --col-padding: 16px;
+  --col-radius: 20px;
+  --card-radius: 4px;
+}
+
+[data-theme="dark"] {
+  --canvas: oklch(20% 0.02 233);
+  --ink: oklch(96% 0.003 260);
+  --ink-dark: oklch(74% 0.009 260);
+  --ink-medium: oklch(62% 0.012 260);
+  --ink-light: oklch(40% 0.015 260);
+  --ink-lighter: oklch(30% 0.018 260);
+  --ink-lightest: oklch(25% 0.02 260);
+  --shadow: 0 0 0 1px oklch(0% 0 0 / 42%), 0 0.2em 1.6em -0.8em oklch(0% 0 0 / 60%);
+  --shadow-hover: 0 0 0 1px oklch(0% 0 0 / 50%), 0 0.3em 1.2em oklch(0% 0 0 / 40%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--canvas); color: var(--ink); min-height: 100vh; }
+
+/* Top bar */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 24px; border-bottom: 1px solid var(--ink-lighter);
+}
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.logo {
+  display: flex; gap: 2px; align-items: center;
+}
+.logo-bar { width: 3px; height: 16px; border-radius: 2px; }
+.logo-bar:nth-child(1) { background: oklch(66% 0.204 40); }
+.logo-bar:nth-child(2) { background: oklch(74% 0.184 70); }
+.logo-bar:nth-child(3) { background: oklch(66% 0.208 146); }
+.logo-bar:nth-child(4) { background: oklch(66% 0.196 258); }
+.logo-bar:nth-child(5) { background: oklch(66% 0.258 308); }
+.logo-text { font-weight: 800; font-size: 1.1em; margin-left: 6px; }
+.topbar-right { display: flex; gap: 8px; align-items: center; }
+.theme-btn {
+  background: none; border: 1px solid var(--ink-lighter); border-radius: 6px;
+  padding: 4px 10px; cursor: pointer; font-size: 0.85em; color: var(--ink-dark);
+}
+
+/* Alert strip */
+.alert-strip {
+  background: oklch(66% 0.204 40); color: #fff; text-align: center;
+  padding: 8px 16px; font-size: 0.82em; font-weight: 600;
+}
+
+/* Stats bar */
+.stats-bar {
+  display: flex; gap: 24px; justify-content: center; padding: 16px 24px;
+  border-bottom: 1px solid var(--ink-lighter); flex-wrap: wrap;
+}
+.stat-item { text-align: center; }
+.stat-label { font-size: 0.6em; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; color: var(--ink-dark); }
+.stat-value { font-size: 1.5em; font-weight: 900; }
+.stat-sub { font-size: 0.65em; color: var(--ink-medium); }
+
+/* Filters */
+.filters {
+  display: flex; gap: 6px; justify-content: center; padding: 14px 24px; flex-wrap: wrap;
+}
+.fbtn {
+  background: none; border: 1px solid var(--ink-lighter); color: var(--ink-dark);
+  padding: 5px 14px; border-radius: 99px; cursor: pointer; font-size: 0.78em;
+  font-weight: 600; font-family: var(--font); transition: all 0.15s;
+}
+.fbtn:hover { border-color: var(--ink-medium); }
+.fbtn.active { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
+.fbtn[data-f="leo"].active { background: oklch(57% 0.19 260); border-color: oklch(57% 0.19 260); }
+.fbtn[data-f="mayak"].active { background: oklch(55% 0.162 147); border-color: oklch(55% 0.162 147); }
+.fbtn[data-f="ori"].active { background: oklch(58% 0.156 60); border-color: oklch(58% 0.156 60); }
+
+/* Board */
+.board {
+  display: flex; gap: var(--col-gap); padding: 0 var(--col-gap);
+  overflow-x: auto; min-height: calc(100vh - 240px);
+  align-items: stretch;
+}
+
+/* Column */
+.col {
+  --card-color: var(--ink-medium);
+  flex: 0 0 var(--col-width); min-width: 0;
+  display: flex; flex-direction: column;
+  position: relative; transition: flex-basis 0.3s cubic-bezier(0.25, 1.25, 0.5, 1);
+}
+.col[data-col="notnow"] { --card-color: var(--color-notnow); }
+.col[data-col="maybe"] { --card-color: oklch(66% 0.196 258); }
+.col[data-col="next"] { --card-color: var(--color-next); }
+.col[data-col="progress"] { --card-color: var(--color-progress); }
+.col[data-col="done"] { --card-color: var(--color-notnow); }
+
+/* Column header — pill */
+.col-header {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px var(--col-padding); cursor: pointer; user-select: none;
+  font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--card-color) 75%, var(--ink));
+  position: sticky; top: 0; z-index: 2;
+  background: linear-gradient(to bottom, var(--canvas) 60%, transparent);
+}
+.col-header .col-count {
+  background: color-mix(in srgb, var(--card-color) 15%, var(--canvas));
+  padding: 1px 8px; border-radius: 99px; font-weight: 600;
+  font-size: 0.95em; min-width: 20px; text-align: center;
+}
+
+/* Card list */
+.card-list {
+  flex: 1; display: flex; flex-direction: column;
+  gap: clamp(6px, 1.2cqi, 12px);
+  padding: 0 var(--col-padding) var(--col-padding);
+  min-height: 60px;
+}
+
+/* Drop zone */
+.col.drag-over .card-list {
+  background: color-mix(in srgb, var(--card-color) 8%, var(--canvas));
+  border-radius: var(--col-radius);
+  outline: 2px dashed color-mix(in srgb, var(--card-color) 40%, transparent);
+  outline-offset: -2px;
+}
+
+/* Card — Fizzy style */
+.card {
+  --card-bg: color-mix(in srgb, var(--card-color) 4%, var(--canvas));
+  --card-content: color-mix(in srgb, var(--card-color) 30%, var(--ink));
+  --card-text: color-mix(in srgb, var(--card-color) 75%, var(--ink));
+
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  padding: 0;
+  cursor: grab; user-select: none;
+  position: relative;
+  transition: box-shadow 0.15s, transform 0.15s, opacity 0.2s;
+  overflow: hidden;
+}
+.card:hover { box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+.card:active { cursor: grabbing; }
+.card.dragging { opacity: 0.25; transform: scale(0.96); }
+.card.hidden { display: none; }
+
+/* Card top bar — colored tag */
+.card-tag {
+  background: var(--card-color); color: var(--canvas);
+  font-size: 0.6em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 4px 10px; display: inline-flex; align-items: center; gap: 4px;
+  border-radius: var(--card-radius) 0 var(--card-radius) 0;
+  pointer-events: none;
+}
+
+.card-body {
+  padding: 8px 12px 12px; pointer-events: none;
+}
+.card-title {
+  font-size: 1.15em; font-weight: 900; line-height: 1.15;
+  color: var(--card-content); text-wrap: balance;
+}
+.card-desc {
+  font-size: 0.78em; color: var(--card-text); margin-top: 4px; line-height: 1.4;
+}
+
+/* Person tags */
+.card-people { display: flex; gap: 4px; margin-top: 8px; pointer-events: none; }
+.person {
+  font-size: 0.6em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; padding: 2px 8px; border-radius: 2px;
+  background: color-mix(in srgb, var(--card-color) 12%, var(--canvas));
+  color: var(--card-text);
+}
+
+/* Blocked card overlay */
+.card.is-blocked {
+  --card-color: var(--color-blocked) !important;
+  --card-bg: color-mix(in srgb, var(--color-blocked) 6%, var(--canvas));
+}
+.card.is-blocked .card-tag { background: var(--color-blocked); }
+.blocked-stamp {
+  display: none; position: absolute; right: 8px; bottom: 8px;
+  border: 2px solid var(--color-blocked); border-radius: 3px;
+  color: var(--color-blocked); font-size: 0.55em; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 2px 6px; rotate: 4deg; pointer-events: none;
+  opacity: 0.7;
+}
+.card.is-blocked .blocked-stamp { display: block; }
+
+/* Drop indicator */
+.drop-indicator {
+  height: 3px; background: var(--card-color); border-radius: 2px;
+  margin: -2px 0; opacity: 0.6;
+}
+
+/* Empty state */
+.empty { text-align: center; color: var(--ink-light); font-size: 0.8em; padding: 32px 8px; display: none; opacity: 0.5; }
+.col.all-hidden .empty { display: block; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(16px);
+  background: var(--ink); color: var(--canvas); padding: 8px 20px; border-radius: 99px;
+  font-size: 0.8em; font-weight: 600; opacity: 0; transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none; z-index: 99; box-shadow: var(--shadow);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Footer */
+.footer-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 8px 16px; background: var(--canvas);
+  border-top: 1px solid var(--ink-lighter); font-size: 0.7em; color: var(--ink-medium);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .col { flex: 0 0 85vw; scroll-snap-align: center; }
+  .board { scroll-snap-type: x mandatory; padding: 0 4px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">
+      <div class="logo-bar"></div><div class="logo-bar"></div><div class="logo-bar"></div><div class="logo-bar"></div><div class="logo-bar"></div>
+      <span class="logo-text">Farol Labs</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
+  </div>
+</div>
+
+<!-- Alert -->
+<div class="alert-strip">⛔ Billing not connected — 17 days idle · Revenue $0 · ~$200/day lost MRR</div>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-label">Goal</div><div class="stat-value">$200K</div><div class="stat-sub">by May 23</div></div>
+  <div class="stat-item"><div class="stat-label">Revenue</div><div class="stat-value" style="color:oklch(66% 0.204 40)">$0</div><div class="stat-sub">no billing</div></div>
+  <div class="stat-item"><div class="stat-label">Days Left</div><div class="stat-value">75</div><div class="stat-sub">10.5 wks</div></div>
+  <div class="stat-item"><div class="stat-label">Exit</div><div class="stat-value">$100M+</div></div>
+</div>
+
+<!-- Filters -->
+<div class="filters">
+  <button class="fbtn active" data-f="all">All</button>
+  <button class="fbtn" data-f="leo">Leonid</button>
+  <button class="fbtn" data-f="mayak">Mayak</button>
+  <button class="fbtn" data-f="ori">Ori</button>
+</div>
+
+<!-- Board -->
+<div class="board">
+
+  <!-- NOT NOW -->
+  <div class="col" data-col="notnow">
+    <div class="col-header"><span>Not Now</span><span class="col-count">0</span></div>
+    <div class="card-list">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="auth">
+        <div class="card-tag">Security</div>
+        <div class="card-body"><div class="card-title">Auth on all instances</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="bwrap">
+        <div class="card-tag">Security</div>
+        <div class="card-body"><div class="card-title">bwrap sandbox</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="leo,ori" data-id="fs-guard">
+        <div class="card-tag">Security</div>
+        <div class="card-body"><div class="card-title">fs-guard hooks</div></div>
+        <div class="card-people"><span class="person">Leonid</span> <span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="dlp">
+        <div class="card-tag">Security</div>
+        <div class="card-body"><div class="card-title">DLP outbound</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-strat">
+        <div class="card-tag">Marketing</div>
+        <div class="card-body"><div class="card-title">Twitter strategy</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="trademark">
+        <div class="card-tag">Legal</div>
+        <div class="card-body"><div class="card-title">Trademark "ORI"</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+    </div>
+    <div class="empty">Nothing here</div>
+  </div>
+
+  <!-- MAYBE -->
+  <div class="col" data-col="maybe">
+    <div class="col-header"><span>Maybe</span><span class="col-count">0</span></div>
+    <div class="card-list">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="pipeline">
+        <div class="card-tag">Sales</div>
+        <div class="card-body"><div class="card-title">Pipeline 20 leads</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="ph-launch">
+        <div class="card-tag">Marketing</div>
+        <div class="card-body"><div class="card-title">Product Hunt launch</div><div class="card-desc">Traffic burst + social proof</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="demo-video">
+        <div class="card-tag">Content</div>
+        <div class="card-body"><div class="card-title">Demo video / GIF</div><div class="card-desc">Landing doesn't convert without visuals</div></div>
+        <div class="card-people"><span class="person">Mayak</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+    </div>
+    <div class="empty">Nothing here</div>
+  </div>
+
+  <!-- UP NEXT -->
+  <div class="col" data-col="next">
+    <div class="col-header"><span>Up Next</span><span class="col-count">0</span></div>
+    <div class="card-list">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="getori">
+        <div class="card-tag">Infra</div>
+        <div class="card-body"><div class="card-title">Move to getori.app</div><div class="card-desc">New domain, landing, redirects</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="legal">
+        <div class="card-tag">Legal</div>
+        <div class="card-body"><div class="card-title">Legal entity</div><div class="card-desc">Stripe Atlas · ~$500, 1-2 days</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="pricing-page">
+        <div class="card-tag">Product</div>
+        <div class="card-body"><div class="card-title">Pricing page</div><div class="card-desc">$20/mo Sebastian · $200/mo Ori</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="approve-pricing">
+        <div class="card-tag">Decision</div>
+        <div class="card-body"><div class="card-title">Approve pricing</div><div class="card-desc">$20 / $200 — needs confirmation</div></div>
+        <div class="card-people"><span class="person">Mayak</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="sys-prompt">
+        <div class="card-tag">Product</div>
+        <div class="card-body"><div class="card-title">System prompt refinement</div><div class="card-desc">After first paying client</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item is-blocked" draggable="true" data-owners="ori,mayak" data-id="onboarding">
+        <div class="card-tag">Product</div>
+        <div class="card-body"><div class="card-title">Ori onboarding</div><div class="card-desc">Client can't tell difference from ChatGPT in 30 min</div></div>
+        <div class="card-people"><span class="person">Ori</span> <span class="person">Mayak</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+    </div>
+    <div class="empty">Nothing here</div>
+  </div>
+
+  <!-- IN PROGRESS -->
+  <div class="col" data-col="progress">
+    <div class="col-header"><span>In Progress</span><span class="col-count">0</span></div>
+    <div class="card-list">
+      <div class="card card-item is-blocked" draggable="true" data-owners="leo" data-id="billing">
+        <div class="card-tag">Infra</div>
+        <div class="card-body"><div class="card-title">Billing (Stripe)</div><div class="card-desc">No legal entity → no Stripe → $0 revenue</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="self-service">
+        <div class="card-tag">Infra</div>
+        <div class="card-body"><div class="card-title">Self-service + Billing</div><div class="card-desc">Auto-deploy ✅ · Now: billing + MiniMax</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="sales">
+        <div class="card-tag">Sales</div>
+        <div class="card-body"><div class="card-title">Sales + onboarding</div><div class="card-desc">Naora · BUNT · SHAMAN · Leads4You · Deepn</div></div>
+        <div class="card-people"><span class="person">Mayak</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="tg-ph">
+        <div class="card-tag">Marketing</div>
+        <div class="card-body"><div class="card-title">TG promotion + PH prep</div><div class="card-desc">Channel research · Don't launch until billing</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+    </div>
+    <div class="empty">Nothing here</div>
+  </div>
+
+  <!-- DONE -->
+  <div class="col" data-col="done">
+    <div class="col-header"><span>Done</span><span class="col-count">0</span></div>
+    <div class="card-list">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="deploy-done">
+        <div class="card-tag">Infra</div>
+        <div class="card-body"><div class="card-title">Self-service deploy</div><div class="card-desc">Shipped Mar 5</div></div>
+        <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="landings">
+        <div class="card-tag">Marketing</div>
+        <div class="card-body"><div class="card-title">Landings</div><div class="card-desc">cofounder.run + getsebastian.app</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori,mayak" data-id="onboard-v2">
+        <div class="card-tag">Product</div>
+        <div class="card-body"><div class="card-title">Sebastian Onboarding v2</div><div class="card-desc">BOOTSTRAP.md + PCM + TOC</div></div>
+        <div class="card-people"><span class="person">Ori</span> <span class="person">Mayak</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="demo-naora">
+        <div class="card-tag">Sales</div>
+        <div class="card-body"><div class="card-title">Naora demo</div></div>
+        <div class="card-people"><span class="person">Mayak</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="all" data-id="soul">
+        <div class="card-tag">Foundation</div>
+        <div class="card-body"><div class="card-title">SOUL.md + Manifesto</div></div>
+        <div class="card-people"><span class="person">All</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="unit-econ">
+        <div class="card-tag">Strategy</div>
+        <div class="card-body"><div class="card-title">Unit Economics</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-api">
+        <div class="card-tag">Infra</div>
+        <div class="card-body"><div class="card-title">Twitter API</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="cron-setup">
+        <div class="card-tag">Infra</div>
+        <div class="card-body"><div class="card-title">Cron: Board + AI News</div></div>
+        <div class="card-people"><span class="person">Ori</span></div>
+        <div class="blocked-stamp">Blocked</div>
+      </div>
+    </div>
+    <div class="empty">Nothing here</div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="footer-bar">Drag cards between columns · Double-click to toggle blocked · Mar 9, 2026</div>
+
+<script>
+/* Theme */
+function toggleTheme() {
+  const h = document.documentElement;
+  const isDark = h.dataset.theme === 'dark';
+  h.dataset.theme = isDark ? 'light' : 'dark';
+  localStorage.setItem('farol-theme', h.dataset.theme);
+}
+const st = localStorage.getItem('farol-theme');
+if (st) document.documentElement.dataset.theme = st;
+
+/* Filters */
+const fbtns = document.querySelectorAll('.fbtn');
+function applyFilter(f) {
+  fbtns.forEach(b => b.classList.toggle('active', b.dataset.f === f));
+  document.querySelectorAll('.card-item').forEach(c => {
+    if (f === 'all') c.classList.remove('hidden');
+    else c.classList.toggle('hidden', !(c.dataset.owners.includes(f) || c.dataset.owners === 'all'));
+  });
+  updateCounts();
+  const u = new URL(location); if (f==='all') u.searchParams.delete('who'); else u.searchParams.set('who',f);
+  history.replaceState(null,'',u);
+}
+fbtns.forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.f)));
+
+function updateCounts() {
+  document.querySelectorAll('.col').forEach(col => {
+    const n = col.querySelectorAll('.card-item:not(.hidden)').length;
+    col.querySelector('.col-count').textContent = n;
+    col.classList.toggle('all-hidden', n === 0);
+  });
+}
+
+/* Toast */
+function showToast(m) {
+  const t = document.getElementById('toast');
+  t.textContent = m; t.classList.add('show');
+  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+/* Dblclick blocked toggle */
+document.addEventListener('dblclick', e => {
+  const c = e.target.closest('.card-item'); if (!c) return;
+  c.classList.toggle('is-blocked');
+  showToast(c.classList.contains('is-blocked') ? '🔴 Blocked' : '✅ Unblocked');
+  saveState();
+});
+
+const CL = { notnow:'Not Now', maybe:'Maybe', next:'Up Next', progress:'In Progress', done:'Done' };
+
+/* Drag & Drop */
+let dCard = null;
+document.addEventListener('dragstart', e => {
+  const c = e.target.closest('.card-item'); if (!c) return;
+  dCard = c; c.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+});
+document.addEventListener('dragend', () => {
+  if (dCard) { dCard.classList.remove('dragging'); dCard = null; }
+  document.querySelectorAll('.col').forEach(c => c.classList.remove('drag-over'));
+  document.querySelectorAll('.drop-indicator').forEach(e => e.remove());
+});
+document.querySelectorAll('.card-list').forEach(list => {
+  list.addEventListener('dragover', e => {
+    e.preventDefault(); list.closest('.col').classList.add('drag-over');
+    document.querySelectorAll('.drop-indicator').forEach(e => e.remove());
+    const cards = [...list.querySelectorAll('.card-item:not(.dragging):not(.hidden)')];
+    let before = null;
+    for (const c of cards) { const r = c.getBoundingClientRect(); if (e.clientY < r.top+r.height/2) { before=c; break; } }
+    const ind = document.createElement('div'); ind.className='drop-indicator';
+    if (before) list.insertBefore(ind,before); else list.appendChild(ind);
+  });
+  list.addEventListener('dragleave', e => {
+    const col = list.closest('.col');
+    if (!col.contains(e.relatedTarget)) { col.classList.remove('drag-over'); list.querySelectorAll('.drop-indicator').forEach(e=>e.remove()); }
+  });
+  list.addEventListener('drop', e => {
+    e.preventDefault(); const col = list.closest('.col'); col.classList.remove('drag-over');
+    if (!dCard) return;
+    const ind = list.querySelector('.drop-indicator');
+    if (ind) { list.insertBefore(dCard,ind); ind.remove(); } else list.appendChild(dCard);
+    showToast(`→ ${CL[col.dataset.col]}`);
+    updateCounts(); saveState();
+  });
+});
+
+/* Touch drag */
+let tCard=null,tClone=null,tSX,tSY,tList=null;
+document.addEventListener('touchstart', e => {
+  const c=e.target.closest('.card-item'); if(!c) return;
+  tCard=c; const t=e.touches[0]; tSX=t.clientX; tSY=t.clientY;
+},{passive:true});
+document.addEventListener('touchmove', e => {
+  if(!tCard) return; const t=e.touches[0];
+  if(!tClone&&(Math.abs(t.clientX-tSX)>8||Math.abs(t.clientY-tSY)>8)){
+    tClone=tCard.cloneNode(true);
+    Object.assign(tClone.style,{position:'fixed',width:tCard.offsetWidth+'px',opacity:'0.9',zIndex:'999',pointerEvents:'none',transform:'rotate(1.5deg) scale(1.04)',boxShadow:'0 12px 40px rgba(0,0,0,0.25)'});
+    document.body.appendChild(tClone); tCard.classList.add('dragging');
+  }
+  if(tClone){
+    e.preventDefault(); tClone.style.left=(t.clientX-tCard.offsetWidth/2)+'px'; tClone.style.top=(t.clientY-20)+'px';
+    const el=document.elementFromPoint(t.clientX,t.clientY); const col=el?el.closest('.col'):null;
+    document.querySelectorAll('.col').forEach(c=>c.classList.remove('drag-over'));
+    if(col){col.classList.add('drag-over');tList=col.querySelector('.card-list');}
+  }
+},{passive:false});
+document.addEventListener('touchend', ()=>{
+  if(tClone){
+    tClone.remove(); tClone=null; tCard.classList.remove('dragging');
+    if(tList){const col=tList.closest('.col'); tList.appendChild(tCard); col.classList.remove('drag-over');
+      showToast(`→ ${CL[col.dataset.col]}`); updateCounts(); saveState();}
+  }
+  tCard=null;tList=null; document.querySelectorAll('.col').forEach(c=>c.classList.remove('drag-over'));
+});
+
+/* Persistence */
+function saveState(){
+  const s={columns:{},blocked:[]};
+  document.querySelectorAll('.col').forEach(col=>{s.columns[col.dataset.col]=[...col.querySelectorAll('.card-item')].map(c=>c.dataset.id);});
+  document.querySelectorAll('.card-item.is-blocked').forEach(c=>s.blocked.push(c.dataset.id));
+  localStorage.setItem('farol-kanban-v5',JSON.stringify(s));
+}
+function loadState(){
+  const r=localStorage.getItem('farol-kanban-v5'); if(!r) return;
+  try{
+    const s=JSON.parse(r); const all={};
+    document.querySelectorAll('.card-item').forEach(c=>{all[c.dataset.id]=c;});
+    if(s.columns) for(const[cn,ids] of Object.entries(s.columns)){
+      const col=document.querySelector(`.col[data-col="${cn}"]`); if(!col) continue;
+      const list=col.querySelector('.card-list');
+      ids.forEach(id=>{if(all[id]) list.appendChild(all[id]);});
+    }
+    document.querySelectorAll('.card-item').forEach(c=>c.classList.remove('is-blocked'));
+    if(s.blocked) s.blocked.forEach(id=>{if(all[id]) all[id].classList.add('is-blocked');});
+  }catch(e){}
+}
+
+loadState();
+const p=new URLSearchParams(location.search); const w=p.get('who');
+if(w&&['leo','mayak','ori'].includes(w)) applyFilter(w); else updateCounts();
+</script>
+</body>
+</html>
