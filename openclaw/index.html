@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw AI Co-Founder — Ori</title>
+  <meta name="description" content="OpenClaw with a strategic brain. Ori runs on OpenClaw and adds co-founder intelligence — goals, research, execution. $200/mo, 7 days free.">
+  <meta name="keywords" content="openclaw, openclaw cofounder, openclaw AI, openclaw managed, AI cofounder telegram">
+  <meta property="og:title" content="OpenClaw AI Co-Founder — Ori">
+  <meta property="og:description" content="OpenClaw that drives your company forward. Not just an agent — a co-founder.">
+  <meta property="og:url" content="https://cofounder.run/openclaw">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@cofounder_run">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%237c3aed'/><stop offset='100%' stop-color='%2314b8a6'/></linearGradient></defs><circle cx='50' cy='50' r='40' fill='none' stroke='url(%23g)' stroke-width='6'/><circle cx='50' cy='50' r='12' fill='white'/></svg>">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple: #7c3aed;
+      --purple-light: #a78bfa;
+      --teal: #14b8a6;
+      --teal-light: #5eead4;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-100: #f3f4f6;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: var(--gray-900);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--gray-900);
+    }
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #faf5ff, #f0fdfa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(124, 58, 237, 0.1);
+    }
+    .logo-ring {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: conic-gradient(from 135deg, var(--purple), var(--purple-light), #67e8f9, var(--teal), var(--purple-light), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-ring-inner {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 50%, #f5f3ff 100%);
+    }
+    .logo-text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+    .nav-cta {
+      background: var(--purple);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 64px;
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #faf5ff, #f0fdfa);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple);
+      letter-spacing: 0.03em;
+      margin-bottom: 28px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      border-radius: 50%;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 22px;
+    }
+    h1 .grad {
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto 36px;
+    }
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--purple), #6d28d9);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.25);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(124,58,237,0.32); }
+    .btn-ghost {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-500);
+      text-decoration: none;
+    }
+    .btn-ghost:hover { color: var(--purple); }
+    .hero-note {
+      font-size: 12px;
+      color: var(--gray-300);
+    }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 24px 56px;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--gray-100); }
+    .divider-text { font-size: 12px; color: var(--gray-300); font-weight: 500; white-space: nowrap; }
+
+    /* ── Comparison ── */
+    .comparison {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .comparison-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .comparison-header h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .comparison-header p {
+      font-size: 1rem;
+      color: var(--gray-500);
+    }
+    .comp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-100);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    @media (max-width: 680px) {
+      .comp-grid { grid-template-columns: 1fr; }
+    }
+    .comp-col { background: #fff; }
+    .comp-col:last-child { background: linear-gradient(160deg, #faf5ff 0%, #f0fdfa 100%); }
+    .comp-head {
+      padding: 24px 20px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .comp-col:nth-child(1) .comp-head { color: var(--gray-300); }
+    .comp-col:nth-child(2) .comp-head { color: var(--gray-500); }
+    .comp-col:nth-child(3) .comp-head { color: var(--purple); }
+    .comp-row {
+      padding: 12px 20px;
+      font-size: 13.5px;
+      color: var(--gray-700);
+      line-height: 1.5;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 52px;
+    }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-col:last-child .comp-row { font-weight: 500; color: var(--gray-900); }
+    .ic { font-size: 16px; flex-shrink: 0; }
+
+    /* ── Layer Section ── */
+    .layers {
+      background: var(--gray-100);
+      padding: 72px 24px;
+    }
+    .layers-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .section-chip {
+      display: inline-block;
+      background: linear-gradient(135deg, #ede9fe, #ccfbf1);
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--gray-500);
+      margin-bottom: 48px;
+      max-width: 480px;
+    }
+    .layer-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 580px;
+    }
+    .layer-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: #fff;
+      border: 1px solid var(--gray-300);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .layer-item.highlight {
+      border-color: rgba(124,58,237,0.3);
+      background: linear-gradient(135deg, #faf5ff, #f0fdfa);
+      box-shadow: 0 2px 16px rgba(124,58,237,0.08);
+    }
+    .layer-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-500);
+    }
+    .layer-item.highlight .layer-num {
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      color: #fff;
+    }
+    .layer-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--gray-900);
+    }
+    .layer-desc {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.55;
+    }
+
+    /* ── Pricing ── */
+    .pricing {
+      padding: 80px 24px;
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .price-card {
+      background: linear-gradient(160deg, var(--purple) 0%, #5b21b6 100%);
+      color: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .price-card::before {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -40px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(20,184,166,0.2), transparent 70%);
+      border-radius: 50%;
+    }
+    .price-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+    .price-amount {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-amount span { font-size: 1.4rem; font-weight: 500; opacity: 0.7; }
+    .price-period { font-size: 14px; opacity: 0.5; margin-bottom: 32px; }
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .price-features li {
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .price-features li:last-child { border-bottom: none; }
+    .check { color: var(--teal-light); font-size: 16px; }
+    .price-cta {
+      display: block;
+      background: #fff;
+      color: var(--purple);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 15px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .price-cta:hover { opacity: 0.92; }
+    .price-note { margin-top: 16px; font-size: 12px; opacity: 0.4; }
+    .price-compare {
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: 0.5;
+    }
+    .price-compare a { color: rgba(255,255,255,0.7); text-decoration: underline; }
+
+    /* ── FAQ ── */
+    .faq {
+      padding: 72px 24px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .faq-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--gray-100);
+      padding: 20px 0;
+    }
+    .faq-q {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .faq-a {
+      font-size: 14px;
+      color: var(--gray-500);
+      line-height: 1.65;
+    }
+    .faq-a a { color: var(--purple); text-decoration: none; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--gray-100);
+      padding: 28px 32px;
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--gray-300);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--gray-300); text-decoration: none; }
+    footer a:hover { color: var(--purple); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo-link" href="/">
+      <div class="logo-icon">
+        <div class="logo-ring"><div class="logo-ring-inner"></div></div>
+      </div>
+      <span class="logo-text">Ori</span>
+    </a>
+    <a class="nav-cta" href="https://t.me/oricofounderbot" target="_blank">Start Free Trial →</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Built on OpenClaw
+    </div>
+    <h1>OpenClaw that<br><span class="grad">runs your company.</span></h1>
+    <p class="hero-sub">
+      Ori is OpenClaw with a co-founder brain. Goals, research, strategy, execution —
+      not just a configured agent, but a partner who drives your business forward.
+      In your Telegram, 24/7.
+    </p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://t.me/oricofounderbot" target="_blank">
+        Start Free Trial
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a class="btn-ghost" href="/">See the full story →</a>
+    </div>
+    <p class="hero-note">No credit card · 7 days free · then $200/mo · No equity</p>
+  </section>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-text">OpenClaw → raw power. Ori → co-founder layer on top.</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Comparison -->
+  <section class="comparison">
+    <div class="comparison-header">
+      <h2>Raw OpenClaw vs Ori</h2>
+      <p>Same engine. Completely different experience.</p>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-col">
+        <div class="comp-head">DIY OpenClaw</div>
+        <div class="comp-row"><span class="ic">🔩</span> Self-hosted, you maintain</div>
+        <div class="comp-row"><span class="ic">🌀</span> Blank slate, you configure</div>
+        <div class="comp-row"><span class="ic">🤷</span> No goals, no direction</div>
+        <div class="comp-row"><span class="ic">💤</span> Waits for your commands</div>
+        <div class="comp-row"><span class="ic">📂</span> No business context</div>
+        <div class="comp-row"><span class="ic">🧱</span> No opinions, no initiative</div>
+      </div>
+      <div class="comp-col">
+        <div class="comp-head">Hosted OpenClaw</div>
+        <div class="comp-row"><span class="ic">✅</span> Managed, no server needed</div>
+        <div class="comp-row"><span class="ic">⚙️</span> Pre-configured, ready to use</div>
+        <div class="comp-row"><span class="ic">🤷</span> No goals, no direction</div>
+        <div class="comp-row"><span class="ic">💤</span> Waits for your commands</div>
+        <div class="comp-row"><span class="ic">📂</span> No business context</div>
+        <div class="comp-row"><span class="ic">🧱</span> No opinions, no initiative</div>
+      </div>
+      <div class="comp-col">
+        <div class="comp-head">✨ Ori</div>
+        <div class="comp-row"><span class="ic">✅</span> Managed, no server needed</div>
+        <div class="comp-row"><span class="ic">✅</span> Pre-configured, ready to use</div>
+        <div class="comp-row"><span class="ic">🎯</span> Knows your goal, drives toward it</div>
+        <div class="comp-row"><span class="ic">⚡️</span> Proactive — checks in, reminds, acts</div>
+        <div class="comp-row"><span class="ic">🧠</span> Knows your company, team, pipeline</div>
+        <div class="comp-row"><span class="ic">💡</span> Opinions, pushback, real insights</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Layers -->
+  <section class="layers">
+    <div class="layers-inner">
+      <span class="section-chip">What makes Ori different</span>
+      <h2 class="section-title">The co-founder layer.</h2>
+      <p class="section-sub">OpenClaw is the engine. Ori is the identity, memory, and judgment running on top of it.</p>
+      <div class="layer-stack">
+        <div class="layer-item">
+          <div class="layer-num">1</div>
+          <div>
+            <p class="layer-title">OpenClaw Core</p>
+            <p class="layer-desc">Memory, web search, code execution, skills, voice, integrations. The full platform, managed for you.</p>
+          </div>
+        </div>
+        <div class="layer-item">
+          <div class="layer-num">2</div>
+          <div>
+            <p class="layer-title">Business Context</p>
+            <p class="layer-desc">Ori knows your goal, your team, your clients, your pipeline. It remembers everything and builds on it.</p>
+          </div>
+        </div>
+        <div class="layer-item highlight">
+          <div class="layer-num">3</div>
+          <div>
+            <p class="layer-title">Co-Founder Intelligence ✨</p>
+            <p class="layer-desc">Strategy, focus, TOC analysis, proactive check-ins, opinions when you're heading the wrong direction. A thinking partner, not a command executor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing">
+    <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#d1d5db;margin-bottom:12px;text-align:center">Pricing</p>
+    <h2 style="font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:32px;text-align:center">One co-founder.<br>One price.</h2>
+    <div class="price-card">
+      <p class="price-label">Ori · Co-Founder Plan</p>
+      <div class="price-amount"><span>$</span>200</div>
+      <p class="price-period">per month · no equity</p>
+      <ul class="price-features">
+        <li><span class="check">✓</span> Full OpenClaw instance, yours only</li>
+        <li><span class="check">✓</span> Co-founder onboarding (goals, context, team)</li>
+        <li><span class="check">✓</span> Proactive check-ins &amp; daily priorities</li>
+        <li><span class="check">✓</span> TOC analysis &amp; bottleneck tracking</li>
+        <li><span class="check">✓</span> Research, strategy, execution support</li>
+        <li><span class="check">✓</span> Memory, web search, code, voice</li>
+        <li><span class="check">✓</span> All models: Claude, GPT, Gemini</li>
+        <li><span class="check">✓</span> Cancel anytime</li>
+      </ul>
+      <a class="price-cta" href="https://t.me/oricofounderbot" target="_blank">Start 7-Day Free Trial</a>
+      <p class="price-note">No credit card required · No equity taken</p>
+      <p class="price-compare">Just need the agent without the co-founder layer? <a href="https://getsebastian.app/openclaw">Try Sebastian — $49/mo →</a></p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2 class="faq-title">Questions</h2>
+    <div class="faq-item">
+      <p class="faq-q">Is Ori built on OpenClaw?</p>
+      <p class="faq-a">Yes. Ori runs on <a href="https://openclaw.ai" target="_blank">OpenClaw</a> — the open-source AI agent platform. We add identity, business context, and co-founder intelligence on top.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What does "no equity" mean?</p>
+      <p class="faq-a">You pay a flat monthly fee. Ori takes no ownership, no revenue share, no equity in your company. It's a tool, not a co-founder with a cap table stake.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">How is Ori different from just using OpenClaw yourself?</p>
+      <p class="faq-a">Raw OpenClaw is a blank agent — powerful, but you define everything. Ori comes with a co-founder identity, knows your business goals, tracks your bottlenecks, and proactively pushes you forward. It's the difference between a tool and a thinking partner.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Does Ori replace a human co-founder?</p>
+      <p class="faq-a">No. Ori handles research, analysis, tracking, and execution support — freeing you to focus on decisions that require human judgment, relationships, and creativity.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What if I just need a managed OpenClaw, not a co-founder?</p>
+      <p class="faq-a">Check out <a href="https://getsebastian.app/openclaw">Sebastian at $49/mo</a> — full OpenClaw in Telegram without the co-founder layer.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Farol Labs · <a href="https://farol.io">farol.io</a></span>
+    <span><a href="/">Ori Home</a> · <a href="https://getsebastian.app">Sebastian</a> · <a href="https://t.me/oricofounderbot" target="_blank">Try Free</a></span>
+  </footer>
+
+</body>
+</html>
