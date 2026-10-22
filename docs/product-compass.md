@@ -2,7 +2,7 @@
 
 Agreed with the product owner on 2026-10-22. Apply this lens to every product, design, architecture, and engineering decision for cofounder. This is our interpretation of DHH’s product philosophy, informed by Omarchy; it does not claim his involvement or endorsement.
 
-cofounder is an opinionated AI harness delivered as a complete web product for builders. The builder supplies direction, taste, and judgment. The product owns the recurring choices and the integrated workflow.
+cofounder is an opinionated AI harness delivered as a complete web product for builders. The builder supplies inspiration, direction, taste, and judgment. That inspiration belongs to the builder; an agent cannot take it away. The product handles agent and harness setup so the builder can spend that energy on the product. It owns the recurring choices and the integrated workflow.
 
 ## Decision lens
 
