@@ -3,80 +3,283 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111310">
-  <title>cofounder — Your hosted AI development team</title>
-  <meta name="description" content="Build your product. Skip the agent setup. A hosted AI team for planning, design, code, and review. $39/month + tokens. Join early access.">
+  <meta name="theme-color" content="#07070d">
+  <title>cofounder.run — A ready-to-work technical cofounder for builders</title>
+  <meta name="description" content="Get a technical cofounder (CTO) who designs the architecture, writes the code, runs the checks, and ships releases. You stay the owner. $39/month + tokens. Join early access.">
   <link rel="canonical" href="https://cofounder.run/">
-  <meta property="og:title" content="cofounder — Build your product. Skip the agent setup.">
-  <meta property="og:description" content="Your hosted AI development team. $39/month + tokens. Join early access.">
+  <meta property="og:title" content="cofounder.run — A ready-to-work technical cofounder for builders">
+  <meta property="og:description" content="Your technical cofounder: plans, codes, checks, and ships. You review decisions. $39/month + tokens. Join early access.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cofounder.run/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@cofounder_run">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d3f68a'/%3E%3Cpath d='M28 20L16 32l12 12m8-24l12 12-12 12' fill='none' stroke='%23111310' stroke-width='5'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%238b7cff'/%3E%3Cpath d='M28 20L16 32l12 12m8-24l12 12-12 12' fill='none' stroke='%2307070d' stroke-width='5'/%3E%3C/svg%3E">
   <style>
-    :root { color-scheme: dark; --bg: #111310; --text: #f2f3eb; --muted: #b0b5a8; --accent: #d3f68a; }
+    :root {
+      color-scheme: dark;
+      --bg: #07070d; --bg-2: #0c0b16;
+      --panel: rgba(255,255,255,.035); --line: rgba(255,255,255,.09);
+      --text: #f4f3fb; --muted: #a3a0ba;
+      --accent: #8b7cff; --accent-2: #6ea8ff; --accent-ink: #14102b;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
-    .page { width: min(960px, calc(100% - 64px)); margin: auto; }
-    header { padding: 30px 0; font-size: 23px; font-weight: 600; letter-spacing: -.8px; }
-    header span { color: var(--accent); }
-    main { max-width: 740px; padding: 55px 0 40px; }
-    .category { color: var(--muted); font-size: 14px; margin: 0 0 21px; }
-    h1 { font-size: clamp(40px, 5.5vw, 66px); font-weight: 550; letter-spacing: -2.8px; line-height: 1.07; margin: 0 0 24px; }
-    h1 span { color: var(--accent); }
-    .description { max-width: 565px; color: var(--muted); font-size: 18px; line-height: 1.6; margin: 0; }
-    .price { margin: 29px 0 27px; font-size: 17px; color: var(--muted); }
-    .price strong { color: var(--text); font-size: 28px; font-weight: 550; letter-spacing: -.7px; }
-    .price span { display: block; font-size: 12px; margin-top: 6px; }
-    form { max-width: 540px; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { letter-spacing: -.04em; }
+    h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.1; margin-bottom: 1rem; }
+    h3 { font-size: 1.12rem; letter-spacing: -.015em; margin-bottom: .5rem; }
+    ::selection { color: var(--accent-ink); background: var(--accent); }
+    .wrap { max-width: 1160px; margin: auto; padding: 0 24px; }
+
+    /* top bar */
+    header.top { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(7,7,13,.72); backdrop-filter: blur(14px); }
+    .top-inner { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-size: 1.3rem; font-weight: 800; letter-spacing: -.05em; }
+    .brand span { color: var(--accent); }
+    .top-nav { display: flex; align-items: center; gap: 26px; font-size: .9rem; color: var(--muted); }
+    .top-nav a:hover { color: var(--text); }
+    .top-cta { padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--text); transition: border-color .2s, background .2s; }
+    .top-cta:hover { border-color: var(--accent); background: rgba(139,124,255,.08); }
+
+    /* hero */
+    .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .hero-glow { position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(640px 420px at 18% -8%, rgba(139,124,255,.28), transparent 62%),
+        radial-gradient(720px 480px at 85% 4%, rgba(110,168,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 50% 118%, rgba(139,124,255,.12), transparent 65%);
+    }
+    .hero-glow::after { content: ""; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+    }
+    .hero-inner { position: relative; max-width: 880px; margin: auto; padding: 104px 24px 96px; text-align: center; }
+    .eyebrow { display: inline-block; color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 1.3rem; padding: 7px 14px; border: 1px solid rgba(139,124,255,.35); border-radius: 999px; background: rgba(139,124,255,.07); }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.3rem); line-height: 1.05; font-weight: 800; margin-bottom: 1.4rem; }
+    .hero h1 em { font-style: normal; background: linear-gradient(92deg, var(--accent) 10%, var(--accent-2) 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lede { max-width: 620px; margin: 0 auto 2.2rem; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.18rem); }
+    .hero-points { display: flex; justify-content: center; gap: 26px; flex-wrap: wrap; list-style: none; margin: 2.6rem 0 0; padding: 0; color: var(--muted); font-size: .86rem; }
+    .hero-points li { display: flex; align-items: center; gap: 8px; }
+    .hero-points li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+    /* join form */
+    .join { max-width: 540px; margin: 0 auto; text-align: left; }
+    .price { margin: 0 0 18px; font-size: 15px; color: var(--muted); }
+    .price strong { color: var(--text); font-size: 26px; font-weight: 700; letter-spacing: -.5px; }
+    .price span { display: block; font-size: 12px; margin-top: 4px; }
     label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
     .fields { display: flex; gap: 10px; }
-    input, button { font: inherit; border-radius: 5px; min-height: 48px; }
-    input { flex: 1; min-width: 0; border: 1px solid #59604f; background: #191c17; color: var(--text); padding: 12px 14px; font-size: 16px; }
-    input::placeholder { color: #a3aa98; }
-    button { border: 1px solid var(--accent); background: var(--accent); color: #17210c; padding: 12px 21px; font-size: 14px; font-weight: 650; cursor: pointer; }
-    button:hover { background: #e1ffab; }
-    button:disabled { opacity: .7; cursor: default; }
-    input:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    input, button { font: inherit; border-radius: 12px; min-height: 50px; }
+    input { flex: 1; min-width: 0; border: 1px solid #4c4472; background: #131020; color: var(--text); padding: 12px 14px; font-size: 16px; }
+    input::placeholder { color: #77729a; }
+    input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    button { border: 1px solid transparent; background: linear-gradient(92deg, var(--accent), #7a5fff); color: var(--accent-ink); padding: 12px 21px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; box-shadow: 0 8px 30px rgba(139,124,255,.35); transition: transform .15s, box-shadow .2s; }
+    button:hover { transform: translateY(-1px); box-shadow: 0 12px 38px rgba(139,124,255,.45); }
+    button:disabled { opacity: .7; cursor: default; transform: none; }
+    button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
     .note { font-size: 12px; line-height: 1.5; color: var(--muted); margin: 11px 0 0; }
-    .status { max-width: 540px; min-height: 24px; font-size: 14px; line-height: 1.5; margin: 13px 0 0; }
+    .status { min-height: 24px; font-size: 14px; line-height: 1.5; margin: 13px 0 0; }
     .status[data-state="success"] { color: var(--accent); }
     .status[data-state="error"] { color: #ffb1a5; }
-    ::selection { color: #17210c; background: var(--accent); }
-    @media (max-width: 600px) {
-      .page { width: calc(100% - 40px); }
-      header { padding: 24px 0; font-size: 21px; }
-      main { padding: 25px 0 24px; }
-      .category { font-size: 12px; margin-bottom: 17px; }
-      h1 { font-size: clamp(34px, 8.5vw, 49px); letter-spacing: -1.5px; margin-bottom: 20px; }
-      .description { font-size: 16px; line-height: 1.6; }
-      .price { margin: 24px 0; }
+
+    /* strip */
+    .strip { border-bottom: 1px solid var(--line); background: var(--bg-2); }
+    .strip-inner { padding: 26px 24px; display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+    .strip-label { color: var(--muted); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+    .chips { display: flex; gap: 10px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+    .chips li { padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: .86rem; }
+
+    /* sections */
+    .section { border-bottom: 1px solid var(--line); }
+    .section-inner { padding: 96px 24px; }
+    .section-alt { background: var(--bg-2); }
+    .section-lede { color: var(--muted); max-width: 560px; margin-bottom: 3.2rem; }
+    .section .eyebrow { margin-bottom: 1rem; }
+
+    .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .feature { padding: 28px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); transition: border-color .2s, transform .2s; }
+    .feature:hover { border-color: rgba(139,124,255,.45); transform: translateY(-3px); }
+    .feature-num { display: block; color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .12em; margin-bottom: 1.1rem; }
+    .feature p { color: var(--muted); font-size: .93rem; margin: 0; }
+
+    .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 3rem 0 0; padding: 0; }
+    .step { padding: 30px 26px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, rgba(139,124,255,.07), rgba(255,255,255,.02)); }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--accent-ink); font-weight: 800; font-size: .95rem; margin-bottom: 1.2rem; }
+    .step p { color: var(--muted); font-size: .93rem; margin: 0; }
+
+    /* cta */
+    .cta { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .cta-glow { position: absolute; inset: 0; background: radial-gradient(700px 380px at 50% 120%, rgba(139,124,255,.3), transparent 65%); }
+    .cta-inner { position: relative; max-width: 760px; margin: auto; padding: 110px 24px; text-align: center; }
+    .cta p { color: var(--muted); max-width: 520px; margin: 0 auto 2.2rem; }
+    .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 15px 34px; border-radius: 13px; background: linear-gradient(92deg, var(--accent), #7a5fff); color: var(--accent-ink); font-size: 1.05rem; font-weight: 700; box-shadow: 0 8px 30px rgba(139,124,255,.35); transition: transform .15s, box-shadow .2s; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 38px rgba(139,124,255,.45); }
+
+    /* footer */
+    .footer { background: var(--bg-2); }
+    .footer-inner { padding: 34px 24px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .brand-sm { font-size: 1.05rem; }
+    .footer-tag { color: var(--muted); font-size: .84rem; }
+    .footer-link { color: var(--accent); font-size: .9rem; }
+    .footer-link:hover { text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .steps { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .top-nav { gap: 16px; font-size: .84rem; }
+      .hero-inner { padding: 72px 20px 64px; }
+      .section-inner { padding: 64px 20px; }
+      .features { grid-template-columns: 1fr; }
+      .strip-inner { gap: 16px; }
       .fields { flex-direction: column; }
       input, button { width: 100%; }
+      .footer-inner { justify-content: center; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>cofounder<span>.</span></header>
-    <main>
-      <p class="category">Your hosted AI development team</p>
-      <h1>Build your product.<br><span>Skip the agent setup.</span></h1>
-      <p class="description">You could wire up the agents yourself. cofounder gives you a team that plans, designs, codes, and reviews changes. Assign tasks and check results from your phone.</p>
-      <p class="price"><strong>$39</strong> / month + tokens<span>Hosting included. Model usage billed separately.</span></p>
-      <form id="waitlist">
-        <label for="contact">Email</label>
-        <div class="fields">
-          <input id="contact" name="email" type="email" autocomplete="email" placeholder="you@company.com" maxlength="254" required>
-          <button type="submit">Join early access</button>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="/">cofounder<span>.run</span></a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#join" class="top-cta">Early access</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="eyebrow">Technical cofounder as a service</p>
+        <h1>A ready-to-work <em>technical&nbsp;cofounder</em> for builders</h1>
+        <p class="lede">Describe the product — cofounder designs the architecture, writes the code, runs the scenario checks, and ships the release. You stay the owner: every important decision lands on your desk.</p>
+        <div class="join" id="join">
+          <p class="price"><strong>$39</strong> / month + tokens<span>Hosting included. Model usage billed separately.</span></p>
+          <form id="waitlist">
+            <label for="contact">Email</label>
+            <div class="fields">
+              <input id="contact" name="email" type="email" autocomplete="email" placeholder="you@company.com" maxlength="254" required>
+              <button type="submit">Get early access</button>
+            </div>
+          </form>
+          <p class="note">We’ll email you about access. No payment to join.</p>
+          <p id="msg" class="status" role="status" aria-live="polite"></p>
+          <noscript><p class="note">Enable JavaScript to join early access.</p></noscript>
         </div>
-      </form>
-      <p class="note">We’ll email you about access. No payment to join.</p>
-      <p id="msg" class="status" role="status" aria-live="polite"></p>
-      <noscript><p class="note">Enable JavaScript to join early access.</p></noscript>
-    </main>
-  </div>
+        <ul class="hero-points">
+          <li>5-minute product interview</li>
+          <li>First tasks on the board right away</li>
+          <li>No hiring, no onboarding</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="strip" aria-label="Stack">
+      <div class="wrap strip-inner">
+        <span class="strip-label">Builds alongside you</span>
+        <ul class="chips">
+          <li>Rails</li>
+          <li>Expo / iOS</li>
+          <li>GitHub</li>
+          <li>CI &amp; deploy</li>
+          <li>Scenario checks</li>
+          <li>Product memory</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="wrap section-inner">
+        <p class="eyebrow">Features</p>
+        <h2>One service instead of a starter team</h2>
+        <p class="section-lede">Everything a CTO would own at the first stage — in a single workspace.</p>
+        <div class="features">
+          <article class="feature">
+            <span class="feature-num">01</span>
+            <h3>Writes production code</h3>
+            <p>Features go from spec to merge: code, migrations, and tests — without you touching a keyboard.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-num">02</span>
+            <h3>Thinks like a CTO</h3>
+            <p>Proposes architecture for your goal and brings you a decision whenever there’s a fork in the road.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-num">03</span>
+            <h3>Checks the scenarios</h3>
+            <p>Runs user scenarios and reviews screenshots before every release.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-num">04</span>
+            <h3>Ships on its own</h3>
+            <p>Releases, CI, and post-release verification — the product moves while you run the product.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-num">05</span>
+            <h3>Remembers the context</h3>
+            <p>Product and process memory persists between tasks — each new one starts smarter.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-num">06</span>
+            <h3>You stay in charge</h3>
+            <p>Important decisions come to you for approval. Nothing reaches production unsigned.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="how">
+      <div class="wrap section-inner">
+        <p class="eyebrow">How it works</p>
+        <h2>From idea to release in three steps</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">01</span>
+            <h3>Describe your product</h3>
+            <p>A short interview: what we’re building, for whom, and which result matters. That’s all it takes to start.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">02</span>
+            <h3>Get a task plan</h3>
+            <p>Your cofounder breaks the goal into initiatives and moves them across the board — from spec to code to release.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">03</span>
+            <h3>Review the decisions</h3>
+            <p>At forks in the road you get a short decision request. The rest of the time, the product develops itself.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="cta-inner">
+        <h2>Your product shouldn’t wait for a CTO hire</h2>
+        <p>Join early access — start with the product interview, and the first tasks land on your board right after it.</p>
+        <a href="#join" class="cta-btn">Get early access</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand brand-sm">cofounder<span>.run</span></span>
+      <span class="footer-tag">Technical cofounder as a service</span>
+      <a href="#join" class="footer-link">Join early access</a>
+    </div>
+  </footer>
+
   <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5vAZ-trf_PnWZBCLPT8Woqt0meTefRB-cPBTDlJXpu44S6zq0vKsgTCgfkJC-w2YN/exec';
 const form = document.getElementById('waitlist');

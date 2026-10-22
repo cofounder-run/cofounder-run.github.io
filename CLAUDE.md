@@ -18,8 +18,8 @@ No build or test commands — open `index.html` in a browser to preview. To depl
 
 ## Design Conventions
 
-- Dark theme: black `#000` background, white `#fff` text, gray `#999`/`#666` accents
+- Dark theme: near-black `#07070d` background, white `#f4f3fb` text, muted `#a3a0ba`
+- Electric violet accent `#8b7cff` with a blue secondary `#6ea8ff` (gradient text/buttons, glow effects)
 - Fluid typography using `clamp()` for responsive sizing
 - System font stack (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`)
-- Flexbox layout, lightweight and minimal — no frameworks or libraries
-- Font-weight 300 (light) as the default text weight
+- Glass-style cards on a faint grid/glow background — no frameworks or libraries
