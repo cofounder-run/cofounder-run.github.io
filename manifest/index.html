@@ -34,6 +34,9 @@
     section { margin-top: 64px; }
     h2 { font-size: clamp(26px, 3vw, 32px); font-weight: 550; line-height: 1.25; letter-spacing: -.025em; margin: 0 0 24px; }
     .influences { margin-top: 72px; border-top: 1px solid var(--line); padding-top: 48px; }
+    summary { cursor: pointer; font-size: 22px; line-height: 1.5; padding: 8px 0; }
+    summary:focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
+    details[open] summary { margin-bottom: 24px; }
     ul { padding-left: 24px; }
     li { margin-bottom: 24px; font-size: 18px; }
     .closing { margin-top: 48px; }
@@ -50,58 +53,46 @@
       <article>
         <p class="eyebrow">The cofounder manifest</p>
         <h1>Built for builders.</h1>
-        <p class="lead">The power of a serious AI harness.<br>A product you can just use.</p>
-        <p>We’re building cofounder for people with something to make: founders, designers, operators, and developers who care about getting a useful product into someone’s hands.</p>
-        <p>You should be able to open your browser, explain what you want to achieve, and work with an AI team that carries it forward. You bring the judgment, the taste, and the ambition. We take responsibility for how the work gets done.</p>
-        <p>Our goal is to make the most capable, thoughtfully integrated AI harness available to builders. Its power should show up in the quality of your product and the time you get back.</p>
+        <p class="lead">The harness DHH would build.</p>
+        <p>That’s our guiding question for every decision: what would a powerful, opinionated AI harness look like if it were designed as one complete product for builders?</p>
+        <p>Our interpretation, inspired by DHH’s product philosophy and <a href="https://omarchy.org/">Omarchy</a>. You bring the idea, the taste, and the direction. We bring a ready-to-use AI team in your browser.</p>
 
         <section aria-labelledby="opinions">
-          <h2 id="opinions">1. Have an opinion.</h2>
-          <p>A product should make the recurring decisions for you. We choose the workflow, connect the pieces, and build in the standards. Planning, design, implementation, review, and verification belong in one coherent experience.</p>
-          <p>We take inspiration from DHH’s <a href="https://rubyonrails.org/doctrine">Rails Doctrine</a>: convention over configuration, a carefully chosen stack, and the value of integrated systems. Good defaults are part of the product. Every setting we add has to earn the attention it asks of you.</p>
+          <h2 id="opinions">Choose well. Make it work together.</h2>
+          <p>We choose the tools, connect the workflow, and build in the discipline. Planning, design, code, review, and release should feel like one product. Good defaults should get you straight to building.</p>
         </section>
-        <section aria-labelledby="builders">
-          <h2 id="builders">2. Respect the builder’s attention.</h2>
-          <p>You shouldn’t need to become a harness enthusiast to build with AI. Choosing agent roles, assembling prompts, and keeping tools connected are work we should absorb.</p>
-          <p>The interface should make the important things obvious: what we’re trying to achieve, what’s happening, what needs your judgment, and what you can try. Technical depth should be there when you need it. Everyday use should feel calm, on a laptop or a phone.</p>
-        </section>
-        <section aria-labelledby="intent">
-          <h2 id="intent">3. Understand the goal before writing the code.</h2>
-          <p>Clarify the uncertainties that could change the outcome. Agree on what the product must do before deciding how to build it. Keep the project’s principles explicit so each new task starts with the same understanding.</p>
-          <p>Define success through concrete scenarios: when someone takes an action, then a specific result should follow. Cover the agreed scope without gaps or duplicate work. Ask the builder about decisions that matter, and carry routine work forward.</p>
+        <section aria-labelledby="attention">
+          <h2 id="attention">Make room for the builder.</h2>
+          <p>Show what matters: the goal, the progress, the result, and the decisions that need you. Take care of routine work. Give every screen breathing room. Make the whole experience coherent, beautiful, and a pleasure to use.</p>
         </section>
         <section aria-labelledby="evidence">
-          <h2 id="evidence">4. Make “done” mean something.</h2>
-          <p>An agent’s confidence is never enough. A completed change needs evidence you can inspect: the behavior it satisfies, the checks that ran, and the result they produced.</p>
-          <p>Our engineering standard is to write a test that fails for the right reason, implement the behavior, and prove it passes. Review first checks whether the agreed requirement was met, then examines the quality of the implementation. A separate critic tries to refute the tests: would they catch a plausible broken implementation?</p>
-          <p>Claims must point to evidence. Missing checks and unresolved failures must stay visible. The interface can be simple while the work underneath it is rigorous.</p>
-        </section>
-        <section aria-labelledby="memory">
-          <h2 id="memory">5. Let the work accumulate.</h2>
-          <p>A product takes many sessions to build. Decisions, context, and lessons should survive every one of them. You should be able to return tomorrow and continue with a team that knows what happened.</p>
-          <p>Keep project learnings tied to their sources and the files they concern. Correct them when the evidence changes. Improve the process through observed results, with a clear history of what changed and why.</p>
+          <h2 id="evidence">Earn the word “done.”</h2>
+          <p>Clarify the goal. Define success through concrete scenarios. Test the behavior, challenge the implementation, and show the evidence. Keep failures visible and carry lessons into the next task.</p>
         </section>
         <section aria-labelledby="ownership">
-          <h2 id="ownership">6. Keep the builder in charge.</h2>
-          <p>You own the direction, the tradeoffs, and the decision to change course. The team should bring you a clear recommendation when your judgment is needed, along with enough context to decide.</p>
-          <p>We measure progress by useful changes reaching people and making their lives better. The point is to give more people the ability to build software they care about.</p>
+          <h2 id="ownership">Strong defaults. Real ownership.</h2>
+          <p>Omarchy’s omakase approach is our inspiration: a carefully assembled starting point that remains yours to change. Keep the builder in control of the direction, the code, and the decision to leave.</p>
+        </section>
+        <section aria-labelledby="progress">
+          <h2 id="progress">Keep the judgment. Evolve the tools.</h2>
+          <p>Choose languages, models, and architecture for the job. Revisit them when evidence changes. Put agents to work throughout the process. Every feature must earn its complexity through a better result for the builder.</p>
         </section>
 
-        <aside aria-labelledby="influences" class="influences">
-          <h2 id="influences">Ideas we build on</h2>
-          <p>Our approach combines studied methodologies with production experience. These are the influences behind our engineering standards:</p>
+        <details class="influences">
+          <summary>Ideas we build on</summary>
+          <p>Studied methodologies, adapted through production experience:</p>
           <ul>
-            <li><a href="https://github.com/github/spec-kit">github/spec-kit</a> — a project constitution, clarification before planning, and separation of WHAT from HOW.</li>
-            <li><a href="https://github.com/obra/superpowers">obra/superpowers</a> — two-stage review, evidence before claims, and the TDD iron law.</li>
-            <li><a href="https://github.com/garrytan/gstack">garrytan/gstack</a> — our quote-the-evidence verification gate and file-anchored project learnings adapt its review and learning mechanics.</li>
-            <li><a href="https://github.com/Fission-AI/OpenSpec">Fission-AI/OpenSpec</a> — numbered WHEN/THEN acceptance scenarios as the coverage contract for the TDD gate.</li>
-            <li>Barbara Minto’s <cite>The Pyramid Principle</cite> — MECE: split proposals and scenario lists must be mutually exclusive and collectively exhaustive.</li>
-            <li>An adversarial-critics TDD process — a test critic tasked with refuting coverage claims, plus mutation-resistance checks that test whether deliberate defects are caught.</li>
-            <li><a href="https://github.com/hyper-code-harness/hyper-code">hyper-code</a> — a persistent agent workspace with tools, conversations, and working artifacts together. We carry that inspiration into a ready-to-use product for builders.</li>
-            <li><a href="https://rubyonrails.org/doctrine">DHH and the Rails Doctrine</a> — strong opinions, thoughtful defaults, and an integrated product.</li>
+            <li><a href="https://rubyonrails.org/doctrine">DHH’s Rails Doctrine</a> and <a href="https://omarchy.org/doctrine/">Omarchy</a>: thoughtful defaults, integrated tools, craft, and ownership.</li>
+            <li><a href="https://github.com/github/spec-kit">spec-kit</a>: constitution, clarify before planning, separate WHAT from HOW.</li>
+            <li><a href="https://github.com/obra/superpowers">superpowers</a>: two-stage review, evidence before claims, TDD iron law.</li>
+            <li><a href="https://github.com/garrytan/gstack">gstack</a>: adapted quote-the-evidence verification and file-anchored learnings.</li>
+            <li><a href="https://github.com/Fission-AI/OpenSpec">OpenSpec</a>: numbered WHEN/THEN scenarios as the TDD coverage contract.</li>
+            <li>Minto’s <cite>The Pyramid Principle</cite>: MECE proposals and scenarios, without overlaps or gaps.</li>
+            <li>Adversarial-critics TDD: refute coverage claims and check that tests catch deliberate mutations.</li>
+            <li><a href="https://github.com/hyper-code-harness/hyper-code">hyper-code</a>: persistent agent workspaces, tools, and artifacts together.</li>
           </ul>
-        </aside>
-        <p class="closing">This is the standard we’re building toward. cofounder is in early development; this manifest sets the direction and the bar we hold ourselves to.</p>
+        </details>
+        <p class="closing">We’re in early development. This is the standard we’re building toward.</p>
         <a class="cta" href="/#waitlist">Join early access <span aria-hidden="true">↗</span></a>
       </article>
     </main>
