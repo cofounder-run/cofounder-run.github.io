@@ -18,8 +18,8 @@ No build or test commands — open `index.html` in a browser to preview. To depl
 
 ## Design Conventions
 
-- Dark theme: near-black `#07070d` background, white `#f4f3fb` text, muted `#a3a0ba`
-- Electric violet accent `#8b7cff` with a blue secondary `#6ea8ff` (gradient text/buttons, glow effects)
+- Dark theme: near-black `#0a0a10` background, white `#f2f2f7` text, muted `#9a97ab` gray-violet accents
+- Single electric violet accent `#8b7cff` — no gradients, no cards, no decorative sections
 - Fluid typography using `clamp()` for responsive sizing
 - System font stack (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`)
-- Glass-style cards on a faint grid/glow background — no frameworks or libraries
+- One screen = one offer: headline, description, price, one form. Minimal and quiet.
