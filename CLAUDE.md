@@ -18,8 +18,8 @@ No build or test commands — open `index.html` in a browser to preview. To depl
 
 ## Design Conventions
 
-- Dark theme: near-black `#0a0a10` background, white `#f2f2f7` text, muted `#9a97ab` gray-violet accents
-- Single electric violet accent `#8b7cff` — no gradients, no cards, no decorative sections
+- Strict monochrome: black `#050505` background, white `#f5f5f5` text, gray `#8f8f98` accents — no color hues anywhere
+- The accent is white itself: white button, white focus ring, white ::selection
 - Fluid typography using `clamp()` for responsive sizing
 - System font stack (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`)
-- One screen = one offer: headline, description, price, one form. Minimal and quiet.
+- One screen = one offer: headline, description, scannable facts, price, one form. Minimal and quiet.
