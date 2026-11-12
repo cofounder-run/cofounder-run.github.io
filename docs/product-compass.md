@@ -24,7 +24,7 @@ For a substantive decision, briefly record the founder benefit, the complexity o
 
 ## Omarchy as a product and visual reference
 
-Omarchy presents a curated, integrated environment with room for personal changes. Its doctrine emphasizes craft, enjoyment, ownership, and agent participation. We adapt those ideas to builders who should not need to administer an agent system.
+Omarchy presents a curated, integrated environment with room for personal changes. Its doctrine emphasizes craft, enjoyment, ownership, and agent participation. We adapt those ideas to founders who should not need to administer an agent system.
 
 Our visual direction: confident typography, generous spacing, a coherent palette, recognizable character, and precise interaction details. Keep body text comfortably readable on phones. Use monospace selectively when it aids identity or technical information. Keep the current monochrome landing as the baseline; future color or theme choices should serve the whole experience. Avoid turning everyday product work into a terminal interface or adding a settings catalog. User requests for simplicity and breathing room take precedence over superficial imitation of the reference.
 
