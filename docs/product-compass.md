@@ -2,19 +2,25 @@
 
 Agreed with the product owner on 2026-10-22. Apply this lens to every product, design, architecture, and engineering decision for cofounder. This is our interpretation of DHH’s product philosophy, informed by Omarchy; it does not claim his involvement or endorsement.
 
-cofounder is an opinionated AI harness delivered as a complete web product for builders. The builder supplies inspiration, direction, taste, and judgment. That inspiration belongs to the builder; an agent cannot take it away. The product handles agent and harness setup so the builder can spend that energy on the product. It owns the recurring choices and the integrated workflow.
+Product direction updated with the owner on 2026-11-12: **Build your company. The AI-native operating system for your company.**
+
+cofounder brings people and AI together to build and run a company. Its scope spans research, product, growth, customers, economics, and daily operations. The founder supplies ambition, direction, taste, and judgment. Company knowledge, sources, decisions, discussions, work, and results belong in one shared context. The product handles agent setup and integrated workflows so the founder can focus on the company.
+
+Software development is one company workflow. A research question should produce a sourced answer; an experiment should produce a proposal and then evidence; an operational task should produce the relevant completed work. Do not force non-code work through a development or release pipeline. Start from the company’s goal and the evidence needed to accept the result. New software projects still choose their stack for the job; there is no mandatory language or framework.
+
+The company is the primary workspace. It may contain multiple products and initiatives. Public positioning, onboarding, and navigation should reflect that scope. The manifesto describes direction, not a claim that every company function is already automated.
 
 ## Decision lens
 
 - **Choose a good default.** Resolve recurring choices in the product. Add configuration when a real user need justifies its cost.
-- **Make the whole work.** Planning, design, implementation, independent review, verification, and release form one understandable experience.
+- **Make the whole work.** Research, discussion, decisions, execution, verification, and learning form one understandable experience. Product delivery, growth, and operations share the company context.
 - **Protect attention.** Bring the owner meaningful decisions and clear recommendations. Handle routine work autonomously within the agreed authority.
 - **Care about craft.** Typography, spacing, feedback, and interaction details are product quality. Remove small frustrations and leave room for enjoyment.
-- **Preserve ownership.** Keep code, project knowledge, and decisions inspectable and portable. Defaults remain changeable.
-- **Follow evidence.** Choose languages, models, and architecture for the problem. This principle does not prescribe Ruby, Rust, or any permanent stack. Current Rails/Expo scope remains in force until a concrete decision changes it.
+- **Preserve ownership.** Keep code, company knowledge, sources, and decisions inspectable and portable. Defaults remain changeable.
+- **Follow evidence.** Choose languages, models, and architecture for the problem. This principle does not prescribe Ruby, Rust, or any permanent stack. On 2026-11-07 Leonid replaced fixed stack defaults with stack-free product work: start from the job and choose the platform for that project. New projects start from an empty workspace. Record the rationale, executable verification contract and actual resource limitations. No user stack picker or mandatory Rails/Expo template. See [technology choices](technology-choices.md).
 - **Prove the result.** Use relevant checks and independent scrutiny. Keep limitations visible; retain lessons with their evidence.
 
-For a substantive decision, briefly record the builder benefit, the complexity or recurring choice it removes, its tradeoff, and the evidence that would justify revisiting it. Scale this reasoning to the decision; routine reversible edits need no separate document or approval ceremony. The phrase “DHH would” is a question to sharpen our judgment, never evidence by itself.
+For a substantive decision, briefly record the founder benefit, the complexity or recurring choice it removes, its tradeoff, and the evidence that would justify revisiting it. Scale this reasoning to the decision; routine reversible edits need no separate document or approval ceremony. The phrase “DHH would” is a question to sharpen our judgment, never evidence by itself.
 
 ## Omarchy as a product and visual reference
 
