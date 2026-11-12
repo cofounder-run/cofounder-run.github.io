@@ -24,10 +24,9 @@
     header a:hover { color: var(--text); }
     a:focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
     main { max-width: 740px; padding: 72px 0 64px; }
-    h1 { font-size: clamp(34px, calc(5vw + 14px), 66px); font-weight: 600; letter-spacing: -.035em; line-height: 1.12; margin: 0 0 28px; }
-    .with-cofounder { display: block; margin-top: 16px; font-size: clamp(22px, 2.5vw, 30px); font-weight: 500; line-height: 1.35; letter-spacing: -.015em; }
-    .positioning { max-width: 540px; font-size: clamp(20px, 2vw, 24px); line-height: 1.45; letter-spacing: -.01em; margin: 0 0 16px; text-wrap: pretty; }
-    .description { max-width: 540px; color: var(--muted); font-size: 20px; line-height: 1.6; margin: 0; }
+    h1 { font-size: clamp(2rem, 10vw, 4rem); font-weight: 600; letter-spacing: -.04em; line-height: 1.1; margin: 0 0 28px; }
+    .with-cofounder { display: block; margin-top: 12px; font-size: clamp(1.25rem, 3.5vw, 1.75rem); font-weight: 400; line-height: 1.4; letter-spacing: -.015em; }
+    .positioning, .description { max-width: 540px; color: var(--muted); font-size: 1.25rem; line-height: 1.5; letter-spacing: 0; margin: 0; text-wrap: pretty; }
     form { max-width: 540px; margin-top: 32px; }
     label { display: block; font-size: 16px; color: var(--muted); margin-bottom: 12px; }
     .fields { display: flex; gap: 10px; }
@@ -49,8 +48,6 @@
       .page { width: calc(100% - 40px); }
       header { padding: 24px 0; font-size: 21px; }
       main { padding: 40px 0 40px; }
-      h1 { letter-spacing: -.03em; margin-bottom: 24px; }
-      .description { font-size: 20px; line-height: 1.6; }
       .fields { flex-direction: column; }
       input, button { width: 100%; }
     }
