@@ -2,9 +2,9 @@
 
 Agreed with the product owner on 2026-10-22. Apply this lens to every product, design, architecture, and engineering decision for cofounder. This is our interpretation of DHH’s product philosophy, informed by Omarchy; it does not claim his involvement or endorsement.
 
-Product direction updated with the owner on 2026-11-12: **Build your company. The AI-native operating system for your company.**
+Product direction updated with the owner on 2026-11-12: **Build your AI-native company. The AI-native operating system for your company.**
 
-cofounder brings people and AI together to build and run a company. Its scope spans research, product, growth, customers, economics, and daily operations. The founder supplies ambition, direction, taste, and judgment. Company knowledge, sources, decisions, discussions, work, and results belong in one shared context. The product handles agent setup and integrated workflows so the founder can focus on the company.
+cofounder helps founders build an AI-native company: people and AI work together from day one across research, decisions, execution, and learning. AI-native describes how the company operates, as well as the software it uses. Its scope spans research, product, growth, customers, economics, and daily operations. The founder supplies ambition, direction, taste, and judgment. Company knowledge, sources, decisions, discussions, work, and results belong in one shared context. The product handles agent setup and integrated workflows so the founder can focus on the company.
 
 Software development is one company workflow. A research question should produce a sourced answer; an experiment should produce a proposal and then evidence; an operational task should produce the relevant completed work. Do not force non-code work through a development or release pipeline. Start from the company’s goal and the evidence needed to accept the result. New software projects still choose their stack for the job; there is no mandatory language or framework.
 

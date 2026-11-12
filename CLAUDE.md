@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Landing page for **cofounder.run** — the AI-native operating system for building and running a company. The public headline is “Build your company.” Company scope includes research, product, growth, customers, and daily operations; software development is one workflow. Static site hosted on GitHub Pages with custom domain (`CNAME` → `cofounder.run`).
+Landing page for **cofounder.run** — the AI-native operating system for building and running a company. The public headline is “Build your AI-native company.” AI-native describes the company itself: people and AI work together from day one. Company scope includes research, product, growth, customers, and daily operations; software development is one workflow. Static site hosted on GitHub Pages with custom domain (`CNAME` → `cofounder.run`).
 
 ## Architecture
 
